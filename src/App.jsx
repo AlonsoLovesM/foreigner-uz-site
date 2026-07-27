@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import placesData from '../data/places.json';
 
 const highlightCards = [
   {
@@ -58,14 +59,21 @@ export default function App() {
   const [activeCard, setActiveCard] = useState(highlightCards[0].id);
   const [activeRoute, setActiveRoute] = useState(routes[0].id);
 
-  const selectedCard = useMemo(() => highlightCards.find((card) => card.id === activeCard), [activeCard]);
-  const selectedRoute = useMemo(() => routes.find((route) => route.id === activeRoute), [activeRoute]);
+  const selectedCard = useMemo(
+    () => highlightCards.find((card) => card.id === activeCard),
+    [activeCard],
+  );
+
+  const selectedRoute = useMemo(
+    () => routes.find((route) => route.id === activeRoute),
+    [activeRoute],
+  );
 
   return (
     <div className="page-shell">
-      <header className="hero">
-        <nav className="nav">
-          <div className="brand">Foreigner.uz</div>
+      <header className="hero" id="top">
+        <nav className="nav container">
+          <a href="#top" className="brand">Foreigner.uz</a>
           <div className="nav-links">
             <a href="#about">О продукте</a>
             <a href="#routes">Маршруты</a>
@@ -73,35 +81,36 @@ export default function App() {
           </div>
         </nav>
 
-        <div className="hero-grid">
-          <div>
+        <div className="hero-grid container">
+          <div className="hero-copy">
             <p className="eyebrow">Умный гид для туристов в Узбекистане</p>
-            <h1>Не просто места. А правильный день, который хочется пережить.</h1>
+            <h1>Не просто места. А готовый день, который хочется пережить.</h1>
             <p className="lead">
-              Foreigner.uz помогает туристу быстро понять, где погулять, где вкусно поесть и куда пойти вечером — без хаоса и бессмысленных поисков.
+              Foreigner.uz показывает туристу лучшие маршруты, интересные локации и уютные места для еды — чтобы каждый день был простым и ярким.
             </p>
             <div className="hero-actions">
-              <a href="#download" className="btn btn-primary">Открыть приложение</a>
-              <a href="#routes" className="btn btn-secondary">Смотреть маршруты</a>
+              <a href="#download" className="btn btn-primary">Начать</a>
+              <a href="mailto:acapelonso@gmail.com" className="btn btn-secondary">Связаться на почту</a>
+              <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Telegram @foreigneruz_bot</a>
             </div>
           </div>
 
           <div className="hero-panel">
             <h3>Сегодня для тебя</h3>
-            <p>Лучшие места рядом, рекомендации по настроению и готовые маршруты на день и вечер.</p>
-            <ul>
-              <li>Быстрый выбор без лишних действий</li>
-              <li>Рекомендации под настроение</li>
-              <li>Маршруты на день и вечер</li>
-            </ul>
+            <p>Готовые варианты для прогулки, обеда и вечера — всё в одном месте.</p>
+            <div className="hero-list">
+              <div>Быстрый выбор без лишних действий</div>
+              <div>Рекомендации под настроение</div>
+              <div>Маршруты на день и вечер</div>
+            </div>
           </div>
         </div>
       </header>
 
       <main>
-        <section id="about" className="section">
+        <section id="about" className="section container">
           <div className="section-title">
-            <p className="eyebrow">Почему это важно</p>
+            <p className="eyebrow">Что даёт сервис</p>
             <h2>Туристу нужен не просто список мест — ему нужен хороший опыт.</h2>
           </div>
 
@@ -109,6 +118,7 @@ export default function App() {
             {highlightCards.map((card) => (
               <button
                 key={card.id}
+                type="button"
                 className={`info-card ${activeCard === card.id ? 'active' : ''}`}
                 onClick={() => setActiveCard(card.id)}
               >
@@ -125,10 +135,29 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section section-alt">
+        <section className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">Лучшие места рядом</p>
-            <h2>Надёжные рекомендации, которые хочется попробовать прямо сейчас.</h2>
+            <p className="eyebrow">Места</p>
+            <h2>Отели, рестораны и кофейни — всё в одном месте.</h2>
+          </div>
+
+          <div className="places-grid">
+            {placesData.map((place) => (
+              <article key={place.id} className="place-card">
+                <span className="tag">{place.type}</span>
+                <h4>{place.name}</h4>
+                <p className="muted">{place.price_level} · ⭐ {place.rating}</p>
+                <p>{place.description}</p>
+                <p className="address">{place.address}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section container">
+          <div className="section-title">
+            <p className="eyebrow">Рекомендации</p>
+            <h2>Надёжные предложения, которые хочется попробовать прямо сейчас.</h2>
           </div>
 
           <div className="spot-grid">
@@ -142,7 +171,7 @@ export default function App() {
           </div>
         </section>
 
-        <section id="routes" className="section">
+        <section id="routes" className="section container">
           <div className="section-title">
             <p className="eyebrow">Маршруты</p>
             <h2>Готовые варианты для дня и вечера.</h2>
@@ -152,6 +181,7 @@ export default function App() {
             {routes.map((route) => (
               <button
                 key={route.id}
+                type="button"
                 className={`route-btn ${activeRoute === route.id ? 'active' : ''}`}
                 onClick={() => setActiveRoute(route.id)}
               >
@@ -171,15 +201,16 @@ export default function App() {
           </div>
         </section>
 
-        <section id="download" className="section cta-block">
+        <section id="download" className="section section-alt container cta-block">
           <div>
             <p className="eyebrow">Скоро в вашем телефоне</p>
             <h2>Откройте приложение и получите маршрут, который делает поездку проще и ярче.</h2>
-            <p>
-              Мы делаем продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.
-            </p>
+            <p>Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.</p>
           </div>
-          <a href="mailto:hello@foreigner.uz" className="btn btn-primary">Связаться с нами</a>
+          <div className="download-actions">
+            <a href="mailto:acapelonso@gmail.com" className="btn btn-primary">Написать на почту</a>
+            <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Telegram @foreigneruz_bot</a>
+          </div>
         </section>
       </main>
     </div>

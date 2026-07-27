@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 
 # In-memory map: forwarded_message_id (in owner chat) -> original_user_id
 forwarded_map = {}
+# store most recent forwarded user id so owner can reply without using Reply
+last_forwarded_user = None
 
 def format_user(user):
     if user.username:
@@ -40,7 +42,35 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def mappings_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    # Owner-only command to view current forwarded_map for debugging
+    if update.effective_user.id != OWNER_ID:
+        await update.message.reply_text("Нет доступа")
+        return
+    if not forwarded_map:
+        await update.message.reply_text("No mappings stored")
+        return
+    lines = [f"{k} -> {v}" for k, v in list(forwarded_map.items())[:50]]
+    await update.message.reply_text("\n".join(lines))
+
+
+async def last_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id != OWNER_ID:
+        await update.message.reply_text("Нет доступа")
+        return
+    if last_forwarded_user:
+        await update.message.reply_text(f"Last forwarded user_id: {last_forwarded_user}")
+    else:
+        await update.message.reply_text("No last forwarded user stored")
+
+
+async def debug_command_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    uid = update.effective_user.id if update.effective_user else None
+    await update.message.reply_text(f"Your user_id: {uid}. Configured OWNER_ID: {OWNER_ID}")
+
+
 async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    global last_forwarded_user
     message = update.message
     user = update.effective_user
     # Debug logging for incoming messages
@@ -55,6 +85,10 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
         if message.reply_to_message:
             # Owner replied to a forwarded message — find original user id
             replied_id = message.reply_to_message.message_id
+            logger.info("Owner replied: reply_msg_id=%s replied_to_id=%s text=%s",
+                        message.message_id,
+                        replied_id,
+                        message.text if message.text else None)
             target_id = forwarded_map.get(replied_id)
             text = message.text or ""
             if not text.strip():
@@ -73,9 +107,18 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
                     await message.reply_text(
                         "Не удалось найти пользователя для ответа. Перешли сообщение ещё раз.")
         else:
-            await message.reply_text(
-                "Чтобы ответить клиенту, ответь на пересланное сообщение пользователя в этом чате."
-            )
+            # fallback: if owner didn't use reply, send to last forwarded user
+            if last_forwarded_user:
+                text = message.text or ""
+                if not text.strip():
+                    await message.reply_text("Ответ должен содержать текст.")
+                else:
+                    await context.bot.send_message(chat_id=last_forwarded_user, text=text)
+                    await message.reply_text(f"Ответ отправлен клиенту (user_id: {last_forwarded_user}).")
+            else:
+                await message.reply_text(
+                    "Чтобы ответить клиенту, ответь на пересланное сообщение пользователя в этом чате."
+                )
     else:
         forwarded = await context.bot.forward_message(
             chat_id=OWNER_ID,
@@ -87,6 +130,11 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
             forwarded_map[forwarded.message_id] = user.id
         except Exception:
             logger.exception("Failed to store forwarded mapping")
+        # update last forwarded user for fallback replies
+        try:
+            last_forwarded_user = user.id
+        except Exception:
+            logger.exception("Failed to set last_forwarded_user")
 
         sender_info = format_user(user)
         info_msg = await context.bot.send_message(
@@ -114,8 +162,12 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE):
 
 def main():
     app = ApplicationBuilder().token(BOT_TOKEN).build()
+    logger.info("Configured OWNER_ID=%s", OWNER_ID)
 
     app.add_handler(CommandHandler("start", start_command))
+    app.add_handler(CommandHandler("mappings", mappings_command))
+    app.add_handler(CommandHandler("last", last_command))
+    app.add_handler(CommandHandler("debug", lambda update, context: debug_command_handler(update, context)))
     app.add_handler(
         MessageHandler((filters.ALL & ~filters.COMMAND), handle_user_message)
     )

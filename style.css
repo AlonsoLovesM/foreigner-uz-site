@@ -146,6 +146,20 @@ h1 {
   padding-left: 1rem;
 }
 
+.hero-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: #d9e6f2;
+}
+
+.hero-list div {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
 .section {
   padding: 2.5rem 0 3rem;
 }
@@ -309,19 +323,26 @@ h1 {
 /* Places grid */
 .places-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
 .place-card {
-  background: rgba(255,255,255,0.04);
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.06);
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.14);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.place-card h4 { margin: 0 0 6px 0; }
-.place-card .muted { color: #cbd8e6; font-size: 0.9rem; margin-bottom: 6px; }
-.place-card .address { font-size: 0.9rem; color: #b8c8d8; margin-top: 8px; }
+.place-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(91,209,255,0.3);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+}
+.place-card h4 { margin: 0 0 8px 0; }
+.place-card .muted { color: #cbd8e6; font-size: 0.95rem; margin-bottom: 10px; }
+.place-card .address { font-size: 0.9rem; color: #b8c8d8; margin-top: 10px; }
 
 @media (max-width: 900px) {
   .places-grid { grid-template-columns: 1fr 1fr; }
