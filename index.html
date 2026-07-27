@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Foreigner.uz — умный гид для туристов в Узбекистане. Лучшие места рядом, рекомендации и маршруты на день и вечер." />
+    <meta name="theme-color" content="#07111f" />
+    <meta property="og:title" content="Foreigner.uz — умный гид для туристов" />
+    <meta property="og:description" content="Проведи день ярко: где погулять, где вкусно и куда пойти вечером." />
+    <meta property="og:type" content="website" />
+    <title>Foreigner.uz — умный гид для туристов</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307111f'/%3E%3Cpath d='M18 20h28v8H18zM18 30h20v8H18zM18 40h24v8H18z' fill='%235bd1ff'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <nav class="nav container">
+          <a href="#top" class="brand">Foreigner.uz</a>
+          <div class="nav-links">
+            <a href="#features">Что даёт сервис</a>
+            <a href="#routes">Маршруты</a>
+            <a href="#download">Скачать</a>
+          </div>
+        </nav>
+
+        <div class="hero-grid container">
+          <div class="hero-copy">
+            <p class="eyebrow">Умный гид для туристов в Узбекистане</p>
+            <h1>Не просто места. А правильный день, который хочется пережить.</h1>
+            <p class="lead">
+              Foreigner.uz помогает туристу быстро понять, где погулять, где вкусно поесть и куда пойти вечером — без хаоса и бессмысленных поисков.
+            </p>
+            <div class="hero-actions">
+              <a href="#download" class="btn btn-primary">Скачать приложение</a>
+              <a href="https://t.me/foreigneruz" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Написать в Telegram</a>
+            </div>
+          </div>
+
+          <div class="hero-panel">
+            <h3>Сегодня для тебя</h3>
+            <p>Лучшие места рядом, рекомендации по настроению и готовые маршруты на день и вечер.</p>
+            <ul>
+              <li>Быстрый выбор без лишних действий</li>
+              <li>Рекомендации под настроение</li>
+              <li>Маршруты на день и вечер</li>
+            </ul>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section id="features" class="section container">
+          <div class="section-title">
+            <p class="eyebrow">Что даёт сервис</p>
+            <h2>Туристу нужен не просто список мест — ему нужен хороший опыт.</h2>
+          </div>
+
+          <div class="card-grid">
+            <button class="info-card active" data-target="places">
+              <span class="tag">Лучшие места рядом</span>
+              <h3>Где погулять</h3>
+              <p>Исторические улицы, красивые локации и скрытые точки, которые хочется увидеть вживую.</p>
+            </button>
+            <button class="info-card" data-target="food">
+              <span class="tag">Где вкусно</span>
+              <h3>Где вкусно поесть</h3>
+              <p>Уютные кафе, местная кухня и рестораны с атмосферой для настоящего отдыха.</p>
+            </button>
+            <button class="info-card" data-target="evening">
+              <span class="tag">Куда вечером</span>
+              <h3>Куда пойти вечером</h3>
+              <p>Подборка мест для яркого вечера: прогулка, десерт, музыка и живое настроение.</p>
+            </button>
+          </div>
+
+          <div class="detail-panel" id="detail-panel">
+            <h3>Лучшие места рядом</h3>
+            <p>Мы показываем места, которые действительно хочется увидеть, а не просто те, что просто есть в каталогах.</p>
+          </div>
+        </section>
+
+        <section class="section section-alt">
+          <div class="container">
+            <div class="section-title">
+              <p class="eyebrow">Рекомендации</p>
+              <h2>Надёжные предложения, которые хочется попробовать прямо сейчас.</h2>
+            </div>
+
+            <div class="spot-grid">
+              <article class="spot-card">
+                <span class="tag">История</span>
+                <h3>Старый город</h3>
+                <p>Тёплая атмосфера, узкие улицы, красивые виды и ощущение настоящего путешествия.</p>
+              </article>
+              <article class="spot-card">
+                <span class="tag">Еда</span>
+                <h3>Кофейня в сердце района</h3>
+                <p>Идеально для перерыва, десерта и хорошего начала дня.</p>
+              </article>
+              <article class="spot-card">
+                <span class="tag">Вечер</span>
+                <h3>Ночной обзорный маршрут</h3>
+                <p>Город в свете, красивый маршрут и настроение, которое хочется сохранить.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="routes" class="section container">
+          <div class="section-title">
+            <p class="eyebrow">Маршруты</p>
+            <h2>Готовые варианты для дня и вечера.</h2>
+          </div>
+
+          <div class="route-buttons">
+            <button class="route-btn active" data-route="day">Маршрут на день</button>
+            <button class="route-btn" data-route="evening">Маршрут на вечер</button>
+          </div>
+
+          <div class="route-card" id="route-card">
+            <h3>Маршрут на день</h3>
+            <p>От прогулки до вкусного обеда.</p>
+            <ul>
+              <li>Утро — кофе и уютная прогулка</li>
+              <li>День — культурные точки и фотолокации</li>
+              <li>Вечер — ужин и спокойный маршрут</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section section-alt">
+          <div class="container app-preview">
+            <div>
+              <p class="eyebrow">Что будет в приложении</p>
+              <h2>Пользователь получает не просто список, а готовый комфортный план дня.</h2>
+            </div>
+            <div class="preview-card-grid">
+              <article class="preview-card">
+                <h3>Быстро</h3>
+                <p>За несколько секунд — где сегодня интересно.</p>
+              </article>
+              <article class="preview-card">
+                <h3>Удобно</h3>
+                <p>Маршруты по времени, районам и настроению.</p>
+              </article>
+              <article class="preview-card">
+                <h3>Вдохновляет</h3>
+                <p>Путешествие становится живым и ярким.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section container">
+          <div class="benefit-banner">
+            <div>
+              <p class="eyebrow">Почему туристы выбирают нас</p>
+              <h2>Получите готовый маршрут за минуты — без хаоса, лишних поисков и потери времени.</h2>
+            </div>
+            <div class="benefit-list">
+              <div>• Подборка по настроению</div>
+              <div>• Маршруты на день и вечер</div>
+              <div>• Идеи для еды, прогулок и фото</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="download" class="section container">
+          <div class="cta-block">
+            <div>
+              <p class="eyebrow">Скоро в вашем телефоне</p>
+              <h2>Откройте приложение и получите маршрут, который делает поездку проще и ярче.</h2>
+              <p>Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск. Напишите нам на почту или в Telegram — и мы расскажем, как начать пользоваться сервисом.</p>
+            </div>
+            <div class="contact-actions">
+              <a href="mailto:hello@foreigner.uz" class="btn btn-primary">Написать на почту</a>
+              <a href="https://t.me/foreigneruz" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">Telegram</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

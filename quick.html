@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foreigner.uz — быстрый старт</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #07111f, #16304d);
+        color: white;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+      .hero {
+        padding: 50px 0;
+      }
+      h1 { font-size: 42px; margin-bottom: 15px; }
+      p { font-size: 18px; line-height: 1.6; color: #dce6f2; }
+      .btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 13px 22px;
+        background: #4dd3a8;
+        color: #04111f;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 999px;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 30px;
+      }
+      .card {
+        background: rgba(255,255,255,0.08);
+        padding: 20px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.12);
+      }
+      @media (max-width: 768px) {
+        .cards { grid-template-columns: 1fr; }
+        h1 { font-size: 30px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <section class="hero">
+        <h1>Foreigner.uz</h1>
+        <p>Умный гид для туристов в Узбекистане. Где погулять, где вкусно поесть и куда пойти вечером — всё в одном месте.</p>
+        <a class="btn" href="mailto:hello@foreigner.uz">Связаться с нами</a>
+      </section>
+
+      <section class="cards">
+        <div class="card">
+          <h3>Лучшие места рядом</h3>
+          <p>Рекомендации по самым интересным точкам для прогулки и фотографий.</p>
+        </div>
+        <div class="card">
+          <h3>Где вкусно</h3>
+          <p>Точки с хорошей кухней, уютом и атмосферой для отдыха.</p>
+        </div>
+        <div class="card">
+          <h3>Маршруты на вечер</h3>
+          <p>План для комфортного вечера: прогулка, еда и впечатления.</p>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
