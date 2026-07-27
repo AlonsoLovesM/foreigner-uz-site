@@ -89,7 +89,7 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
             logger.exception("Failed to store forwarded mapping")
 
         sender_info = format_user(user)
-        await context.bot.send_message(
+        info_msg = await context.bot.send_message(
             chat_id=OWNER_ID,
             text=(
                 f"Новое сообщение от {sender_info}\n"
@@ -98,6 +98,11 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
             ),
             reply_to_message_id=forwarded.message_id,
         )
+        # also map the informational message id so owner can reply to it
+        try:
+            forwarded_map[info_msg.message_id] = user.id
+        except Exception:
+            logger.exception("Failed to store mapping for info message")
         await message.reply_text(
             "Спасибо! Ваше сообщение доставлено. Мы ответим вам в ближайшее время."
         )
