@@ -305,3 +305,27 @@ h1 {
     flex-wrap: wrap;
   }
 }
+
+/* Places grid */
+.places-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.place-card {
+  background: rgba(255,255,255,0.04);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.place-card h4 { margin: 0 0 6px 0; }
+.place-card .muted { color: #cbd8e6; font-size: 0.9rem; margin-bottom: 6px; }
+.place-card .address { font-size: 0.9rem; color: #b8c8d8; margin-top: 8px; }
+
+@media (max-width: 900px) {
+  .places-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .places-grid { grid-template-columns: 1fr; }
+}

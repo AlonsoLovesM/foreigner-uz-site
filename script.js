@@ -60,3 +60,29 @@ routeButtons.forEach((button) => {
     }
   });
 });
+
+// Load places (hotels, restaurants, cafes) from JSON and render
+async function loadPlaces() {
+  try {
+    const res = await fetch('data/places.json');
+    if (!res.ok) throw new Error('Failed to load places');
+    const places = await res.json();
+    const container = document.getElementById('places-list');
+    if (!container) return;
+    container.innerHTML = places.map(p => (
+      `<article class="place-card">
+         <h4>${p.name}</h4>
+         <p class="muted">${p.type.toUpperCase()} · ${p.price_level} · ⭐ ${p.rating}</p>
+         <p>${p.description}</p>
+         <p class="address">${p.address}</p>
+       </article>`
+    )).join('');
+  } catch (e) {
+    console.error('Error loading places', e);
+  }
+}
+
+// Run on load
+document.addEventListener('DOMContentLoaded', () => {
+  loadPlaces();
+});

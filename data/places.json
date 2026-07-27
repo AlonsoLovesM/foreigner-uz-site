@@ -1,0 +1,29 @@
+[
+  {
+    "id": "hotel-1",
+    "type": "hotel",
+    "name": "Grand Central Hotel",
+    "rating": 4.6,
+    "description": "Удобное расположение в центре, комфортные номера и завтрак.",
+    "address": "ул. Центр, 12",
+    "price_level": "$$$"
+  },
+  {
+    "id": "rest-1",
+    "type": "restaurant",
+    "name": "Старый Дворик",
+    "rating": 4.4,
+    "description": "Традиционная кухня и уютный дворик для ужина.",
+    "address": "ул. Рест, 5",
+    "price_level": "$$"
+  },
+  {
+    "id": "cafe-1",
+    "type": "cafe",
+    "name": "Coffee Corner",
+    "rating": 4.2,
+    "description": "Крафтовый кофе и атмосферное место для работы или встреч.",
+    "address": "ул. Кофе, 3",
+    "price_level": "$"
+  }
+]
