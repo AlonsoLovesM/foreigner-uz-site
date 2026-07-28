@@ -204,19 +204,40 @@ h1 {
 }
 
 .place-card {
-  padding: 1rem;
-  min-height: 220px;
+  padding: 1.25rem;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .muted {
   color: #abc0d7;
-  margin: 0.35rem 0;
+  margin: 0.45rem 0;
 }
 
 .address {
   color: #d7e1f0;
   font-size: 0.95rem;
   margin-top: 0.85rem;
+}
+
+.map-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  color: #5bd1ff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.map-link::before {
+  content: '🌍';
+}
+
+.map-link:hover {
+  text-decoration: underline;
 }
 
 .spot-grid {
@@ -261,6 +282,106 @@ h1 {
   padding-left: 1.2rem;
 }
 
+.category-buttons,
+.rate-panel,
+.must-visit-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.category-buttons {
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  margin-bottom: 1rem;
+}
+
+.category-btn,
+.route-btn,
+.lang-toggle,
+.small {
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  color: #f6f7fb;
+  border: 1px solid rgba(255,255,255,0.12);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.category-btn.active,
+.route-btn.active,
+.lang-toggle:hover,
+.small:hover {
+  background: linear-gradient(90deg, #5bd1ff, #4de3a8);
+  color: #03111f;
+  border-color: transparent;
+  transform: translateY(-1px);
+}
+
+.lang-toggle {
+  border: none;
+  background: rgba(255,255,255,0.08);
+}
+
+.rate-panel {
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
+}
+
+.rate-card,
+.sight-card,
+.place-card {
+  padding: 1.2rem;
+}
+
+.rate-card {
+  min-height: 140px;
+}
+
+.map-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #5bd1ff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+
+.badge,
+.badge-secondary {
+  display: inline-flex;
+  margin-bottom: 0.8rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badge {
+  background: rgba(91, 209, 255, 0.15);
+  color: #5bd1ff;
+}
+
+.badge-secondary {
+  background: rgba(255,255,255,0.08);
+  color: #d7e1f0;
+}
+
+.must-visit-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.sight-card {
+  min-height: 220px;
+}
+
+.rate-value {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  margin: 0.5rem 0 0;
+}
+
 .cta-block {
   padding: 1.4rem;
   display: flex;
@@ -279,7 +400,10 @@ h1 {
 @media (max-width: 900px) {
   .hero-grid,
   .card-grid,
-  .spot-grid {
+  .spot-grid,
+  .rate-panel,
+  .must-visit-grid,
+  .category-buttons {
     grid-template-columns: 1fr;
   }
 

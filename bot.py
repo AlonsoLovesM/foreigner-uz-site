@@ -1,11 +1,13 @@
 import logging
 import os
+import random
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 OWNER_ID = os.environ.get("OWNER_ID")
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 if not BOT_TOKEN:
     raise RuntimeError("Set BOT_TOKEN environment variable with your Telegram bot token.")
@@ -13,6 +15,9 @@ if not OWNER_ID:
     raise RuntimeError("Set OWNER_ID environment variable with your Telegram user id.")
 
 OWNER_ID = int(OWNER_ID)
+
+if not OPENAI_API_KEY:
+    raise RuntimeError("Set OPENAI_API_KEY environment variable with your OpenAI API key.")
 
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -40,6 +45,37 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
             "Привет! Ваше сообщение получено. Скоро с вами свяжется оператор."
         )
+
+
+def format_ai_prompt(user_text: str) -> str:
+    return (
+        "Ты помощник туриста в Ташкенте. "
+        "Отвечай кратко, по-русски, полезно и вежливо. "
+        "Если пользователь спрашивает о курсах валют, обмене, отелях, кафе, рынках, достопримечательностях или клиниках, "
+        "дай актуальный совет и порекомендуй посетить проверенные места. "
+        "Отвечай так, будто ты локальный гид. "
+        f"Вопрос: {user_text}"
+    )
+
+
+async def ask_ai(question: str) -> str:
+    import openai
+
+    openai.api_key = OPENAI_API_KEY
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a traveler assistant for Tashkent, Uzbekistan."},
+                {"role": "user", "content": format_ai_prompt(question)},
+            ],
+            temperature=0.7,
+            max_tokens=250,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as exc:
+        logger.error("OpenAI request failed: %s", exc)
+        return "Извините, сейчас временно недоступна помощь через ИИ. Попробуйте позже."
 
 
 async def mappings_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -120,6 +156,13 @@ async def handle_user_message(update: Update, context: ContextTypes.DEFAULT_TYPE
                     "Чтобы ответить клиенту, ответь на пересланное сообщение пользователя в этом чате."
                 )
     else:
+        user_text = message.text or ""
+        if user_text.strip():
+            # Answer with AI if user asked a question or wants advice
+            ai_response = await ask_ai(user_text)
+            await message.reply_text(ai_response)
+            return
+
         forwarded = await context.bot.forward_message(
             chat_id=OWNER_ID,
             from_chat_id=message.chat_id,

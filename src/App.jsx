@@ -1,73 +1,202 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import placesData from '../data/places.json';
 
-const highlightCards = [
-  {
-    id: 'places',
-    title: 'Лучшие места рядом',
-    description: 'Исторические улицы, красивые локации и скрытые точки, которые хочется увидеть вживую.',
-    accent: 'Погулять',
+const translations = {
+  ru: {
+    nav: { about: 'О продукте', places: 'Места', rates: 'Курс', language: 'EN' },
+    hero: {
+      headline: 'Полезный путеводитель по Ташкенту: где жить, что посмотреть и где обменять деньги.',
+      description: 'Foreigner.uz собирает лучшие отели, рестораны, рынки, клиники, АЗС и достопримечательности в одном приложении.',
+      action: 'Посмотреть места',
+      contact: 'Написать на почту',
+      telegram: 'Telegram @foreigneruz_bot',
+    },
+    about: {
+      title: 'Что нового',
+      subtitle: 'Полный набор справочной информации для любого туриста в Ташкенте.',
+    },
+    cards: {
+      places: { title: 'Лучшие точки в Ташкенте', description: 'Найди отели, рынки, рестораны, обменные пункты и полезные сервисы рядом с тобой.', accent: 'Места' },
+      currency: { title: 'Курс доллара', description: 'Актуальный курс USD → UZS обновляется каждый день автоматически.', accent: 'Курс' },
+      bot: { title: 'Помощник в Telegram', description: 'Бот поможет ответить на вопросы и даст подсказку по Ташкенту в реальном времени.', accent: 'Бот' },
+    },
+    rate: { title: 'Курс валют', subtitle: 'Актуальный курс доллара в узбекских сумах.', loaded: 'Обновлено', tip: 'Лучше обменивать деньги в проверенных пунктах или банкоматах, чтобы получить выгодный курс.', refresh: 'Обновить курс', error: 'Не удалось загрузить курс. Попробуйте позже.' },
+    places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Показать на Google Maps', location: 'Адрес' },
+    mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
+    routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
+    download: { pre: 'Скоро в вашем телефоне', title: 'Откройте приложение и получите маршрут, который делает поездку проще и ярче.', text: 'Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.' },
   },
-  {
-    id: 'food',
-    title: 'Где вкусно поесть',
-    description: 'Уютные кафе, местная кухня и рестораны с атмосферой для настоящего отдыха.',
-    accent: 'Поесть',
+  en: {
+    nav: { about: 'About', places: 'Places', rates: 'Rate', language: 'RU' },
+    hero: {
+      headline: 'Handy travel guide for Tashkent: where to stay, what to see and where to exchange money.',
+      description: 'Foreigner.uz collects top hotels, restaurants, markets, clinics, gas stations and attractions in one place.',
+      action: 'Browse places',
+      contact: 'Send email',
+      telegram: 'Telegram @foreigneruz_bot',
+    },
+    about: {
+      title: 'What’s new',
+      subtitle: 'A complete reference for every tourist in Tashkent.',
+    },
+    cards: {
+      places: { title: 'Best spots in Tashkent', description: 'Find hotels, markets, restaurants, exchange offices and useful services near you.', accent: 'Places' },
+      currency: { title: 'Dollar rate', description: 'The USD → UZS rate is updated daily automatically.', accent: 'Rate' },
+      bot: { title: 'Telegram assistant', description: 'The bot helps answer questions and gives tips about Tashkent in real time.', accent: 'Bot' },
+    },
+    rate: { title: 'Exchange rate', subtitle: 'The current dollar rate in Uzbek soums.', loaded: 'Updated', tip: 'It is better to exchange money at trusted offices or ATMs for a good rate.', refresh: 'Refresh rate', error: 'Failed to load the rate. Please try again later.' },
+    places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Open in Google Maps', location: 'Address' },
+    mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
+    routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
+    download: { pre: 'Soon on your phone', title: 'Open the app and get a route that makes your trip easier and brighter.', text: 'We are building the product for those who want to see more without wasting time on chaotic search.' },
   },
-  {
-    id: 'evening',
-    title: 'Куда пойти вечером',
-    description: 'Подборка мест для яркого вечера: прогулка, десерт, музыка и живое настроение.',
-    accent: 'Вечером',
-  },
-];
+};
 
-const citySpots = [
-  {
-    title: 'Старый город',
-    tag: 'История',
-    text: 'Тёплая атмосфера, узкие улицы, красивые виды и ощущение настоящего путешествия.',
-  },
-  {
-    title: 'Кофейня в сердце района',
-    tag: 'Еда',
-    text: 'Идеально для перерыва, десерта и хорошего начала дня.',
-  },
-  {
-    title: 'Ночной обзорный маршрут',
-    tag: 'Вечер',
-    text: 'Город в свете, красивый маршрут и настроение, которое хочется сохранить.',
-  },
-];
-
-const routes = [
+const routeCards = [
   {
     id: 'day',
-    title: 'Маршрут на день',
-    subtitle: 'От прогулки до вкусного обеда',
-    items: ['Утро — кофе и уютная прогулка', 'День — культурные точки и фотолокации', 'Вечер — ужин и спокойный маршрут'],
+    title: { ru: 'Дневной маршрут', en: 'Day route' },
+    subtitle: { ru: 'Прогулка, рынок и вкусный обед.', en: 'Walk, market and a tasty lunch.' },
+    items: [
+      { ru: 'Утро: Чорсу и местные завтраки', en: 'Morning: Chorsu and local breakfast' },
+      { ru: 'День: Tashkent City Mall и шопинг', en: 'Day: Tashkent City Mall and shopping' },
+      { ru: 'Вечер: ужин в ресторане с видом', en: 'Evening: dinner with a view' },
+    ],
   },
   {
     id: 'evening',
-    title: 'Маршрут на вечер',
-    subtitle: 'Лёгкий, атмосферный и яркий',
-    items: ['Светлые улицы и прогулка', 'Десерт или чай', 'Тёплая атмосфера в любимом месте'],
+    title: { ru: 'Вечерний маршрут', en: 'Evening route' },
+    subtitle: { ru: 'Атмосфера, подсветка и лёгкие развлечения.', en: 'Atmosphere, lights and easy entertainment.' },
+    items: [
+      { ru: 'Ночной Magic City в огнях', en: 'Magic City at night with lights' },
+      { ru: 'Коктейли в уютном баре', en: 'Cocktails in a cozy bar' },
+      { ru: 'Панорамный вид с телебашни', en: 'Panoramic view from the TV tower' },
+    ],
   },
 ];
 
+const categoryFilters = [
+  { key: 'all', label: { ru: 'Всё', en: 'All' } },
+  { key: 'hotels', label: { ru: 'Отели', en: 'Hotels' } },
+  { key: 'food', label: { ru: 'Еда', en: 'Food' } },
+  { key: 'finance', label: { ru: 'Банки & обмен', en: 'Banks & exchange' } },
+  { key: 'health', label: { ru: 'Медицина', en: 'Health' } },
+  { key: 'shopping', label: { ru: 'Шопинг', en: 'Shopping' } },
+  { key: 'gas', label: { ru: 'АЗС', en: 'Gas stations' } },
+  { key: 'sights', label: { ru: 'Достопримечательности', en: 'Sights' } },
+];
+
+const categoryGroups = {
+  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'gas', 'sight'],
+  hotels: ['hotel'],
+  food: ['restaurant', 'cafe'],
+  finance: ['bank', 'exchange'],
+  health: ['clinic', 'pharmacy'],
+  shopping: ['market', 'mall'],
+  gas: ['gas'],
+  sights: ['sight'],
+};
+
+const typeLabels = {
+  hotel: { ru: 'Отель', en: 'Hotel' },
+  restaurant: { ru: 'Ресторан', en: 'Restaurant' },
+  cafe: { ru: 'Кафе', en: 'Cafe' },
+  exchange: { ru: 'Обмен', en: 'Exchange' },
+  bank: { ru: 'Банк / банкомат', en: 'Bank / ATM' },
+  clinic: { ru: 'Клиника', en: 'Clinic' },
+  pharmacy: { ru: 'Аптека', en: 'Pharmacy' },
+  market: { ru: 'Рынок', en: 'Market' },
+  mall: { ru: 'ТЦ / торговый центр', en: 'Mall' },
+  gas: { ru: 'АЗС', en: 'Gas Station' },
+  sight: { ru: 'Достопримечательность', en: 'Sight' },
+};
+
+function formatRate(value, language) {
+  if (!value && value !== 0) return '—';
+  const numeric = Number(value);
+  if (Number.isNaN(numeric)) return '—';
+  return Math.round(numeric).toLocaleString(language === 'ru' ? 'ru-RU' : 'en-US');
+}
+
+function getTranslatedText(text, language) {
+  if (!text) return '';
+  if (typeof text === 'object') {
+    return text[language] || text.ru || '';
+  }
+  return text;
+}
+
+function getPlaceField(place, field, language) {
+  return place[`${field}_${language}`] || place[field] || '';
+}
+
+function getTypeLabel(place, language) {
+  const typeKey = place.type || place.type_en?.toLowerCase();
+  return typeLabels[typeKey]?.[language] || place[`${typeKey}_${language}`] || place.type_en || place.type || '';
+}
+
+function mapsUrl(place, language) {
+  const queryValue = place.maps_query || `${getPlaceField(place, 'name', language)} ${getPlaceField(place, 'address', language)}`;
+  const query = encodeURIComponent(queryValue.trim());
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+}
+
 export default function App() {
-  const [activeCard, setActiveCard] = useState(highlightCards[0].id);
-  const [activeRoute, setActiveRoute] = useState(routes[0].id);
+  const [language, setLanguage] = useState('ru');
+  const [activeCard, setActiveCard] = useState('places');
+  const [activeRoute, setActiveRoute] = useState(routeCards[0].id);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [exchangeRate, setExchangeRate] = useState(null);
+  const [rateUpdated, setRateUpdated] = useState('');
+  const [rateError, setRateError] = useState(false);
+
+  const t = (path) => {
+    return path.split('.').reduce((acc, key) => acc?.[key], translations[language]) || path;
+  };
 
   const selectedCard = useMemo(
-    () => highlightCards.find((card) => card.id === activeCard),
-    [activeCard],
+    () => translations[language].cards[activeCard],
+    [activeCard, language],
   );
 
   const selectedRoute = useMemo(
-    () => routes.find((route) => route.id === activeRoute),
+    () => routeCards.find((route) => route.id === activeRoute),
     [activeRoute],
   );
+
+  const filteredPlaces = useMemo(() => {
+    const types = categoryGroups[activeCategory] || categoryGroups.all;
+    return placesData.filter((place) => types.includes(place.type));
+  }, [activeCategory]);
+
+  const mustVisitPlaces = useMemo(
+    () => placesData.filter((place) => place.type === 'sight' || place.type === 'mall'),
+    [],
+  );
+
+  const fetchRate = async () => {
+    setRateError(false);
+    try {
+      const response = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=UZS');
+      const result = await response.json();
+      if (result?.rates?.UZS) {
+        setExchangeRate(result.rates.UZS);
+        setRateUpdated(result.date);
+        setRateError(false);
+      } else {
+        setRateError(true);
+      }
+    } catch (error) {
+      console.error('Failed to fetch exchange rate', error);
+      setRateError(true);
+    }
+  };
+
+  useEffect(() => {
+    fetchRate();
+  }, []);
+
+  const routeItems = selectedRoute?.items || [];
 
   return (
     <div className="page-shell">
@@ -75,33 +204,34 @@ export default function App() {
         <nav className="nav container">
           <a href="#top" className="brand">Foreigner.uz</a>
           <div className="nav-links">
-            <a href="#about">О продукте</a>
-            <a href="#routes">Маршруты</a>
-            <a href="#download">Скачать</a>
+            <a href="#about">{t('nav.about')}</a>
+            <a href="#places">{t('nav.places')}</a>
+            <a href="#rates">{t('nav.rates')}</a>
+            <button type="button" className="lang-toggle" onClick={() => setLanguage(language === 'ru' ? 'en' : 'ru')}>
+              {t('nav.language')}
+            </button>
           </div>
         </nav>
 
         <div className="hero-grid container">
           <div className="hero-copy">
-            <p className="eyebrow">Умный гид для туристов в Узбекистане</p>
-            <h1>Не просто места. А готовый день, который хочется пережить.</h1>
-            <p className="lead">
-              Foreigner.uz показывает туристу лучшие маршруты, интересные локации и уютные места для еды — чтобы каждый день был простым и ярким.
-            </p>
+            <p className="eyebrow">{getTranslatedText(selectedCard.accent, language)}</p>
+            <h1>{t('hero.headline')}</h1>
+            <p className="lead">{t('hero.description')}</p>
             <div className="hero-actions">
-              <a href="#download" className="btn btn-primary">Начать</a>
-              <a href="mailto:acapelonso@gmail.com" className="btn btn-secondary">Связаться на почту</a>
-              <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Telegram @foreigneruz_bot</a>
+              <a href="#places" className="btn btn-primary">{t('hero.action')}</a>
+              <a href="mailto:acapelonso@gmail.com" className="btn btn-secondary">{t('hero.contact')}</a>
+              <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t('hero.telegram')}</a>
             </div>
           </div>
 
           <div className="hero-panel">
-            <h3>Сегодня для тебя</h3>
-            <p>Готовые варианты для прогулки, обеда и вечера — всё в одном месте.</p>
+            <h3>{t('about.title')}</h3>
+            <p>{t('about.subtitle')}</p>
             <div className="hero-list">
-              <div>Быстрый выбор без лишних действий</div>
-              <div>Рекомендации под настроение</div>
-              <div>Маршруты на день и вечер</div>
+              <div>{language === 'ru' ? 'Сервисы и советы для туристов' : 'Services and tips for tourists'}</div>
+              <div>{language === 'ru' ? 'Актуальный курс доллара' : 'Live dollar rate'}</div>
+              <div>{language === 'ru' ? 'План маршрута на день и вечер' : 'Day and evening routes'}</div>
             </div>
           </div>
         </div>
@@ -110,17 +240,17 @@ export default function App() {
       <main>
         <section id="about" className="section container">
           <div className="section-title">
-            <p className="eyebrow">Что даёт сервис</p>
-            <h2>Туристу нужен не просто список мест — ему нужен хороший опыт.</h2>
+            <p className="eyebrow">{t('about.title')}</p>
+            <h2>{t('about.subtitle')}</h2>
           </div>
 
           <div className="card-grid">
-            {highlightCards.map((card) => (
+            {Object.entries(translations[language].cards).map(([key, card]) => (
               <button
-                key={card.id}
+                key={key}
                 type="button"
-                className={`info-card ${activeCard === card.id ? 'active' : ''}`}
-                onClick={() => setActiveCard(card.id)}
+                className={`info-card ${activeCard === key ? 'active' : ''}`}
+                onClick={() => setActiveCard(key)}
               >
                 <span className="tag">{card.accent}</span>
                 <h3>{card.title}</h3>
@@ -135,37 +265,74 @@ export default function App() {
           </div>
         </section>
 
-        <section className="section section-alt container">
+        <section id="rates" className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">Места</p>
-            <h2>Отели, рестораны и кофейни — всё в одном месте.</h2>
+            <p className="eyebrow">{t('rate.title')}</p>
+            <h2>{t('rate.subtitle')}</h2>
+          </div>
+          <div className="rate-panel">
+            <div className="rate-card">
+              <span className="eyebrow">USD → UZS</span>
+              <h3 className="rate-value">
+                {exchangeRate ? `${formatRate(exchangeRate, language)} ${language === 'ru' ? 'сум' : 'UZS'}` : rateError ? t('rate.error') : '...'}
+              </h3>
+              <p>{rateError ? '' : `${t('rate.loaded')}: ${rateUpdated ? new Date(rateUpdated).toLocaleDateString(language === 'ru' ? 'ru-RU' : 'en-US') : t('rate.loaded')}`}</p>
+              <button type="button" className="btn btn-secondary small" onClick={fetchRate}>{t('rate.refresh')}</button>
+            </div>
+            <div className="rate-card">
+              <span className="eyebrow">{language === 'ru' ? 'Совет' : 'Tip'}</span>
+              <p>{t('rate.tip')}</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="places" className="section container">
+          <div className="section-title">
+            <p className="eyebrow">{t('places.title')}</p>
+            <h2>{t('places.subtitle')}</h2>
+          </div>
+
+          <div className="category-buttons">
+            {categoryFilters.map((category) => (
+              <button
+                key={category.key}
+                type="button"
+                className={`category-btn ${activeCategory === category.key ? 'active' : ''}`}
+                onClick={() => setActiveCategory(category.key)}
+              >
+                {getTranslatedText(category.label, language)}
+              </button>
+            ))}
           </div>
 
           <div className="places-grid">
-            {placesData.map((place) => (
+            {filteredPlaces.map((place) => (
               <article key={place.id} className="place-card">
-                <span className="tag">{place.type}</span>
-                <h4>{place.name}</h4>
-                <p className="muted">{place.price_level} · ⭐ {place.rating}</p>
-                <p>{place.description}</p>
-                <p className="address">{place.address}</p>
+                <span className="badge">{getTypeLabel(place, language)}</span>
+                <h4>{getPlaceField(place, 'name', language)}</h4>
+                <p className="muted">{(place.average_check || place.price_level) ? `${place.average_check || place.price_level} · ` : ''}⭐ {place.rating}</p>
+                <p>{getPlaceField(place, 'description', language)}</p>
+                <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
+                <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="map-link">{t('places.google')}</a>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="section container">
+        <section className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">Рекомендации</p>
-            <h2>Надёжные предложения, которые хочется попробовать прямо сейчас.</h2>
+            <p className="eyebrow">{t('mustVisit.title')}</p>
+            <h2>{t('mustVisit.subtitle')}</h2>
           </div>
 
-          <div className="spot-grid">
-            {citySpots.map((spot) => (
-              <article key={spot.title} className="spot-card">
-                <span className="tag">{spot.tag}</span>
-                <h3>{spot.title}</h3>
-                <p>{spot.text}</p>
+          <div className="must-visit-grid">
+            {mustVisitPlaces.map((place) => (
+              <article key={place.id} className="spot-card sight-card">
+                <span className="badge-secondary">{getTypeLabel(place, language)}</span>
+                <h3>{getPlaceField(place, 'name', language)}</h3>
+                <p>{getPlaceField(place, 'description', language)}</p>
+                <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
+                <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="map-link">{t('places.google')}</a>
               </article>
             ))}
           </div>
@@ -173,29 +340,29 @@ export default function App() {
 
         <section id="routes" className="section container">
           <div className="section-title">
-            <p className="eyebrow">Маршруты</p>
-            <h2>Готовые варианты для дня и вечера.</h2>
+            <p className="eyebrow">{t('routes.title')}</p>
+            <h2>{t('routes.subtitle')}</h2>
           </div>
 
           <div className="route-buttons">
-            {routes.map((route) => (
+            {routeCards.map((route) => (
               <button
                 key={route.id}
                 type="button"
                 className={`route-btn ${activeRoute === route.id ? 'active' : ''}`}
                 onClick={() => setActiveRoute(route.id)}
               >
-                {route.title}
+                {getTranslatedText(route.title, language)}
               </button>
             ))}
           </div>
 
           <div className="route-card">
-            <h3>{selectedRoute.title}</h3>
-            <p>{selectedRoute.subtitle}</p>
+            <h3>{getTranslatedText(selectedRoute.title, language)}</h3>
+            <p>{getTranslatedText(selectedRoute.subtitle, language)}</p>
             <ul>
-              {selectedRoute.items.map((item) => (
-                <li key={item}>{item}</li>
+              {routeItems.map((item) => (
+                <li key={item[language]}>{getTranslatedText(item, language)}</li>
               ))}
             </ul>
           </div>
@@ -203,13 +370,13 @@ export default function App() {
 
         <section id="download" className="section section-alt container cta-block">
           <div>
-            <p className="eyebrow">Скоро в вашем телефоне</p>
-            <h2>Откройте приложение и получите маршрут, который делает поездку проще и ярче.</h2>
-            <p>Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.</p>
+            <p className="eyebrow">{t('download.pre')}</p>
+            <h2>{t('download.title')}</h2>
+            <p>{t('download.text')}</p>
           </div>
           <div className="download-actions">
-            <a href="mailto:acapelonso@gmail.com" className="btn btn-primary">Написать на почту</a>
-            <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">Telegram @foreigneruz_bot</a>
+            <a href="mailto:acapelonso@gmail.com" className="btn btn-primary">{t('hero.contact')}</a>
+            <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t('hero.telegram')}</a>
           </div>
         </section>
       </main>
