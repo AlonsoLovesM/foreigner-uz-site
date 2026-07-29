@@ -478,3 +478,14 @@
     "category_en": "Banks & Exchange"
   }
 ]
+[
+  {
+    "name": "Besh Qozon (Центр Плова)",
+    "type": "restaurant",
+    "price_level": "$$",
+    "rating": "4.8",
+    "description": "Самый знаменитый центр плова в Ташкенте с огромными казанами.",
+    "address": "ул. Ифтихор, 1",
+    "map_url": "https://maps.google.com/?q=Besh+Qozon+Tashkent"
+  }
+]

@@ -1,6 +1,9 @@
-import logging
 import os
+import logging
 import random
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
@@ -64,9 +67,9 @@ async def ask_ai(question: str) -> str:
     openai.api_key = OPENAI_API_KEY
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o-mini",
             messages=[
-                {"role": "system", "content": "You are a traveler assistant for Tashkent, Uzbekistan."},
+                {"role": "system", "content": "Ты — виртуальный помощник для туристов. Если пользователь просит личные контакты, хочет связаться с администратором или человеком, отправляй его к владельцу: @acapelonso. Не отказывай, а давай этот контакт."},
                 {"role": "user", "content": format_ai_prompt(question)},
             ],
             temperature=0.7,
