@@ -176,24 +176,43 @@ export default function App() {
 
   const fetchRate = async () => {
     setRateError(false);
-    try {
-      const response = await fetch('https://api.exchangerate.host/latest?base=USD&symbols=UZS');
-      const result = await response.json();
-      if (result?.rates?.UZS) {
-        setExchangeRate(result.rates.UZS);
-        setRateUpdated(result.date);
-        setRateError(false);
-      } else {
-        setRateError(true);
+
+    const sources = [
+      'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json',
+      'https://latest.currency-api.pages.dev/v1/currencies/usd.json',
+      'https://open.er-api.com/v6/latest/USD',
+    ];
+
+    for (const url of sources) {
+      try {
+        const response = await fetch(url);
+        const result = await response.json();
+
+        if (result?.usd?.uzs) {
+          setExchangeRate(result.usd.uzs);
+          setRateUpdated(result.date || new Date().toISOString());
+          setRateError(false);
+          return;
+        }
+
+        if (result?.rates?.UZS) {
+          setExchangeRate(result.rates.UZS);
+          setRateUpdated(result.time_last_update_utc || new Date().toISOString());
+          setRateError(false);
+          return;
+        }
+      } catch (error) {
+        console.warn(`Не удалось получить курс из ${url}`, error);
       }
-    } catch (error) {
-      console.error('Failed to fetch exchange rate', error);
-      setRateError(true);
     }
+
+    setRateError(true);
   };
 
   useEffect(() => {
     fetchRate();
+    const interval = setInterval(fetchRate, 6 * 60 * 60 * 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const routeItems = selectedRoute?.items || [];
@@ -309,11 +328,20 @@ export default function App() {
             {filteredPlaces.map((place) => (
               <article key={place.id} className="place-card">
                 <span className="badge">{getTypeLabel(place, language)}</span>
-                <h4>{getPlaceField(place, 'name', language)}</h4>
+                <h4>
+                  
+                    href={mapsUrl(place, language)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="place-name-link"
+                    title={t('places.google')}
+                  >
+                    {getPlaceField(place, 'name', language)}
+                  </a>
+                </h4>
                 <p className="muted">{(place.average_check || place.price_level) ? `${place.average_check || place.price_level} · ` : ''}⭐ {place.rating}</p>
                 <p>{getPlaceField(place, 'description', language)}</p>
                 <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
-                <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="map-link">{t('places.google')}</a>
               </article>
             ))}
           </div>
@@ -329,10 +357,19 @@ export default function App() {
             {mustVisitPlaces.map((place) => (
               <article key={place.id} className="spot-card sight-card">
                 <span className="badge-secondary">{getTypeLabel(place, language)}</span>
-                <h3>{getPlaceField(place, 'name', language)}</h3>
+                <h3>
+                  
+                    href={mapsUrl(place, language)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="place-name-link"
+                    title={t('places.google')}
+                  >
+                    {getPlaceField(place, 'name', language)}
+                  </a>
+                </h3>
                 <p>{getPlaceField(place, 'description', language)}</p>
                 <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
-                <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="map-link">{t('places.google')}</a>
               </article>
             ))}
           </div>
