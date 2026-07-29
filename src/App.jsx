@@ -330,6 +330,7 @@ export default function App() {
                 <span className="badge">{getTypeLabel(place, language)}</span>
                 <h4>
                   
+                    <a
                     href={mapsUrl(place, language)}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -359,6 +360,7 @@ export default function App() {
                 <span className="badge-secondary">{getTypeLabel(place, language)}</span>
                 <h3>
                   
+                    <a
                     href={mapsUrl(place, language)}
                     target="_blank"
                     rel="noopener noreferrer"
