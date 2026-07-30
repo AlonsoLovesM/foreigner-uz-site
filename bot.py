@@ -52,12 +52,14 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def format_ai_prompt(user_text: str) -> str:
     return (
-        "Ты помощник туриста в Ташкенте. "
-        "Отвечай кратко, по-русски, полезно и вежливо. "
-        "Если пользователь спрашивает о курсах валют, обмене, отелях, кафе, рынках, достопримечательностях или клиниках, "
-        "дай актуальный совет и порекомендуй посетить проверенные места. "
-        "Отвечай так, будто ты локальный гид. "
-        f"Вопрос: {user_text}"
+        "Ты виртуальный гид и помощник туриста в Ташкенте (Foreigner.uz).\n"
+        "ВАЖНОЕ ПРАВИЛО ЯЗЫКА:\n"
+        "- Определи язык, на котором написал пользователь.\n"
+        "- Отвечай СТРОГО на том же языке (English, Русский, O'zbekcha и т.д.).\n"
+        "- Если пользователь пишет на английском — отвечай только по-английски.\n\n"
+        "Отвечай кратко, полезно, вежливо и локанично. Давай актуальные советы "
+        "по отелям, ресторанам, местам и курсу валют.\n"
+        f"Вопрос пользователя: {user_text}"
     )
 
 
@@ -68,10 +70,16 @@ async def ask_ai(question: str) -> str:
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "Ты — виртуальный помощник для туристов. Если пользователь просит личные контакты, хочет связаться с администратором или человеком, отправляй его к владельцу: @acapelonso. Не отказывай, а давай этот контакт."},
-                {"role": "user", "content": format_ai_prompt(question)},
-            ],
+           messages=[
+    {
+        "role": "system", 
+        "content": "You are Foreigner.uz AI Assistant. Always detect the user's language and respond in the EXACT same language (English, Russian, or Uzbek). Keep answers helpful and clear."
+    },
+    {
+        "role": "user", 
+        "content": question
+    }
+]
             temperature=0.7,
             max_tokens=250,
         )
