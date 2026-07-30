@@ -21,7 +21,7 @@ const translations = {
       bot: { title: 'Помощник в Telegram', description: 'Бот поможет ответить на вопросы и даст подсказку по Ташкенту в реальном времени.', accent: 'Бот' },
     },
     rate: { title: 'Курсы валют ЦБ РУз', subtitle: 'Актуальный курс доллара и евро в узбекских сумах.', loaded: 'Обновлено', tip: 'Лучше обменивать деньги в проверенных банках или банкоматах, чтобы получить выгодный курс.', refresh: 'Обновить курс', error: 'Не удалось загрузить курс. Попробуйте позже.' },
-    places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Google Maps', taxi: 'Такси', location: 'Адрес' },
+    places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Google Maps', taxi: 'Яндекс Go', location: 'Адрес' },
     mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
     download: { pre: 'Скоро в вашем телефоне', title: 'Откройте приложение и получите маршрут, который делает поездку проще и ярче.', text: 'Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.' },
@@ -34,8 +34,10 @@ const translations = {
       restDesc: 'В большинстве ресторанов в чек автоматически добавляется 10–15% за обслуживание (Service Charge). Дополнительные чаевые оставлять не обязательно.',
     },
     metro: {
-      title: 'Станции метро',
-      subtitle: 'Главные пересадочные и интересные станции:',
+      title: '🚇 Схема и Линии Метро Ташкента',
+      subtitle: 'Интерактивная карта, пересадочные узлы и обозначения',
+      legendTitle: '📌 Условные обозначения на карте:',
+      linesTitle: '🔴 Линии метрополитена:',
     }
   },
   en: {
@@ -57,7 +59,7 @@ const translations = {
       bot: { title: 'Telegram assistant', description: 'The bot helps answer questions and gives tips about Tashkent in real time.', accent: 'Bot' },
     },
     rate: { title: 'CBU Exchange rates', subtitle: 'The current dollar and euro rates in Uzbek soums.', loaded: 'Updated', tip: 'It is better to exchange money at trusted banks or ATMs for a good rate.', refresh: 'Refresh rate', error: 'Failed to load rates. Please try again later.' },
-    places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Google Maps', taxi: 'Taxi', location: 'Address' },
+    places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Address' },
     mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
     download: { pre: 'Soon on your phone', title: 'Open the app and get a route that makes your trip easier and brighter.', text: 'We are building the product for those who want to see more without wasting time on chaotic search.' },
@@ -70,8 +72,10 @@ const translations = {
       restDesc: 'Most restaurants include a 10–15% service charge directly in the bill. Extra tipping is optional.',
     },
     metro: {
-      title: 'Metro Stations Guide',
-      subtitle: 'Key transfer and iconic stations:',
+      title: '🚇 Tashkent Metro Map & Lines',
+      subtitle: 'Interactive map, transfer hubs and legend',
+      legendTitle: '📌 Map Legend & Symbols:',
+      linesTitle: '🔴 Metro Lines:',
     }
   },
   uz: {
@@ -93,7 +97,7 @@ const translations = {
       bot: { title: 'Telegram yordamchi', description: 'Bot savollarga javob beradi va real vaqt rejimida Toshkent bo‘yicha maslahat beradi.', accent: 'Bot' },
     },
     rate: { title: 'MB Valyuta kurslari', subtitle: 'AQSh dollari va Yevro kursi so‘mda.', loaded: 'Yangilandi', tip: 'Valyutani qulay kursda almashtirish uchun ishonchli banklar va bankomatlardan foydalaning.', refresh: 'Kursni yangilash', error: 'Kursni yuklab bo‘lmadi. Keyinroq urinib ko‘ring.' },
-    places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Taksi', location: 'Manzil' },
+    places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Manzil' },
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
     routes: { title: 'Yo‘nalishlar', subtitle: 'Künduzgi va kechki tayyor yo‘nalishlar.' },
     download: { pre: 'Tez orada telefoningizda', title: 'Ilovani oching va safaringizni yorqinroq qiladigan marshrutni oling.', text: 'Biz vaqtingizni bekorga sarflamasdan ko‘proq narsani ko‘rishingiz uchun mahsulot yaratmoqdamiz.' },
@@ -106,8 +110,10 @@ const translations = {
       restDesc: 'Aksariyat restoranlarda hisob-kitobga 10–15% xizmat haqi avtomatik qo‘shiladi. Qo‘shimcha choypuli qoldirish ixtiyoriy.',
     },
     metro: {
-      title: 'Metro bekatlari',
-      subtitle: 'Asosiy almashtirish va diqqatga sazovor bekatlar:',
+      title: '🚇 Toshkent Metropoliteni Xaritasi',
+      subtitle: 'Interaktiv xarita, o‘tish bekatlari va belgilashlar',
+      legendTitle: '📌 Xaritasidagi shartli belgilar:',
+      linesTitle: '🔴 Metro yo‘nalishlari:',
     }
   },
 };
@@ -172,29 +178,6 @@ const typeLabels = {
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy' },
 };
 
-const metroStationsData = [
-  {
-    name: { ru: 'Чорсу', en: 'Chorsu', uz: 'Chorsu' },
-    desc: { ru: 'Выход к базару Чорсу, уличной еде (обжорный ряд) и старому городу.', en: 'Exit to Chorsu Market, food court & Old City.', uz: 'Chorsu bozori, ovqatlanish qatori va eski shaharga chiqish.' }
-  },
-  {
-    name: { ru: 'Космонавтов', en: 'Kosmonavtlar', uz: 'Kosmonavtlar' },
-    desc: { ru: 'Красивая станция. Выход к МВД, парку Голубые Купола и Государственному музею.', en: 'Iconic space design. Exit to Blue Domes Park and History Museum.', uz: 'Mog‘izali bekat. Moviy gumbazlar bog‘i va muzeyga chiqish.' }
-  },
-  {
-    name: { ru: 'Пахтакор / Алишер Навои', en: 'Pakhtakor / Alisher Navoi', uz: 'Paxtakor / Alisher Navoiy' },
-    desc: { ru: 'Пересадочная станция. Рядом парк Мустакиллик, стадион и ГАБТ им. Навои.', en: 'Transfer hub. Close to Independence Square and Navoi Theater.', uz: 'O‘tish bekati. Mustaqillik maydoni va teatr yaqinida.' }
-  },
-  {
-    name: { ru: 'Амир Тимур Хиёбони', en: 'Amir Timur Square', uz: 'Amir Temur Xiyoboni' },
-    desc: { ru: 'Центр города: Сквер Амира Тимура, Отель Узбекистан, Бродвей (Сайилгох).', en: 'City heart: Amir Timur Square, Hotel Uzbekistan, Broadway street.', uz: 'Shahar markazi: Amir Temur xiyoboni, O‘zbekiston mehmonxonasi.' }
-  },
-  {
-    name: { ru: 'Ташкент (Северный Вокзал)', en: 'Tashkent (North Railway Station)', uz: 'Toshkent Shimoliy Vokzal' },
-    desc: { ru: 'Выход к ж/д вокзалу (поезда Afrosiyob в Самарканд и Бухару).', en: 'Exit to High-Speed trains (Afrosiyob to Samarkand/Bukhara).', uz: 'Afrosiyob tezurar poyezdlari vokzaliga chiqish.' }
-  }
-];
-
 function formatRate(value, language) {
   if (!value && value !== 0) return '—';
   const numeric = Number(value);
@@ -225,11 +208,12 @@ function mapsUrl(place, language) {
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
+// Безопасная официальная ссылка Яндекс Maps / Yandex Go
 function yandexTaxiUrl(place, language) {
-  const name = getPlaceField(place, 'name', language) || 'Tashkent';
+  const name = getPlaceField(place, 'name', language) || 'Ташкент';
   const address = getPlaceField(place, 'address', language) || '';
-  const destination = encodeURIComponent(`Ташкент, ${name} ${address}`);
-  return `https://3.redirect.app.link/route?end-title=${destination}&app=yandexgo`;
+  const searchStr = encodeURIComponent(`Ташкент ${name} ${address}`);
+  return `https://yandex.ru/maps/?text=${searchStr}`;
 }
 
 export default function App() {
@@ -243,7 +227,7 @@ export default function App() {
   const [rateUpdated, setRateUpdated] = useState('');
   const [rateError, setRateError] = useState(false);
 
-  // Храним Избранное в localStorage
+  // Избранное
   const [favorites, setFavorites] = useState(() => {
     try {
       const saved = localStorage.getItem('foreigner_favorites');
@@ -397,7 +381,7 @@ export default function App() {
       </header>
 
       <main>
-        {/* TOURIST FAQ & METRO GUIDE SECTION */}
+        {/* TOURIST FAQ SECTION */}
         <section className="section container">
           <div className="section-title">
             <p className="eyebrow">💡 Foreigner.uz Survival Kit</p>
@@ -414,18 +398,62 @@ export default function App() {
               <p style={{ color: '#ccc', fontSize: '0.95rem' }}>{t('faq.restDesc')}</p>
             </div>
           </div>
+        </section>
 
-          <div className="detail-panel" style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid rgba(255, 255, 255, 0.08)', padding: '20px', borderRadius: '16px' }}>
-            <h3 style={{ color: '#60a5fa', marginTop: 0 }}>{t('metro.title')}</h3>
-            <p style={{ color: '#888', marginBottom: '16px' }}>{t('metro.subtitle')}</p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
-              {metroStationsData.map((st, i) => (
-                <div key={i} style={{ background: 'rgba(0,0,0,0.4)', padding: '12px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <strong style={{ color: '#fff', display: 'block', marginBottom: '4px' }}>🚇 {getTranslatedText(st.name, language)}</strong>
-                  <span style={{ color: '#aaa', fontSize: '0.85rem' }}>{getTranslatedText(st.desc, language)}</span>
-                </div>
-              ))}
+        {/* FULL TASHKENT METRO MAP SECTION */}
+        <section className="section section-alt container">
+          <div className="section-title">
+            <p className="eyebrow">🚇 METRO GUIDE</p>
+            <h2>{t('metro.title')}</h2>
+            <p style={{ color: '#aaa', marginTop: '8px' }}>{t('metro.subtitle')}</p>
+          </div>
+
+          <div className="detail-panel" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)', padding: '24px', borderRadius: '24px' }}>
+            
+            {/* FULL MAP IMAGE */}
+            <div style={{ width: '100%', overflowX: 'auto', borderRadius: '16px', marginBottom: '24px', background: '#111', padding: '10px' }}>
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tashkent_Metro_Map_ru.svg/1280px-Tashkent_Metro_Map_ru.svg.png" 
+                alt="Схема Ташкентского Метрополитена" 
+                style={{ width: '100%', minWidth: '600px', height: 'auto', display: 'block', borderRadius: '12px' }}
+              />
             </div>
+
+            {/* LINES & INTERCHANGES LEGEND */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '20px' }}>
+              
+              {/* LINES */}
+              <div>
+                <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.linesTitle')}</h4>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
+                  <li style={{ color: '#ef4444', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
+                    🔴 <b>Чиланзарская (Chilonzor)</b> — Центр, Сквер, Базар Чиланзар
+                  </li>
+                  <li style={{ color: '#3b82f6', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
+                    🔵 <b>Узбекистанская (O‘zbekiston)</b> — Базар Чорсу, Вокзал, Космонавтов
+                  </li>
+                  <li style={{ color: '#10b981', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
+                    🟢 <b>Юнусабадская (Yunusobod)</b> — Телебашня, Шахристани, ТРЦ
+                  </li>
+                  <li style={{ color: '#eab308', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
+                    🟡 <b>30-летия Независимости (Yerusti halqa)</b> — Наземное кольцо
+                  </li>
+                </ul>
+              </div>
+
+              {/* INTERCHANGES & SYMBOLS */}
+              <div>
+                <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.legendTitle')}</h4>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: '#ccc' }}>
+                  <li>🔄 <b>Пересадочный узел:</b> Станции соединяются подземными переходами (например: <i>Пахтакор ↔ Алишер Навои</i>, <i>Амир Тимур ↔ Юнус Раджаби</i>, <i>Ойбек ↔ Мингурик</i>).</li>
+                  <li>🚆 <b>Вокзал (Railway Station):</b> Станция «Ташкент» (Северный) и «Жанубий» (Южный).</li>
+                  <li>✈️ <b>Аэропорт (Airport):</b> Ближайшие станции метро — «Ташкент» или наземное кольцо.</li>
+                  <li>🎫 <b>Стоимость проезда:</b> 1 700 UZS (оплата любой картой/QR).</li>
+                </ul>
+              </div>
+
+            </div>
+
           </div>
         </section>
 
@@ -541,7 +569,7 @@ export default function App() {
                     <p>{getPlaceField(place, 'description', language)}</p>
                     <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
 
-                    {/* ACTION BUTTONS: GOOGLE MAPS + YANDEX TAXI */}
+                    {/* ACTION BUTTONS: GOOGLE MAPS + YANDEX GO */}
                     <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
                       <a
                         href={mapsUrl(place, language)}
