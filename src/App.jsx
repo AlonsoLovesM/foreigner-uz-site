@@ -20,7 +20,19 @@ const translations = {
       currency: { title: 'Курс валют', description: 'Актуальный курс USD и EUR обновляется каждый день автоматически.', accent: 'Курс' },
       bot: { title: 'Помощник в Telegram', description: 'Бот поможет ответить на вопросы и даст подсказку по Ташкенту в реальном времени.', accent: 'Бот' },
     },
-    rate: { title: 'Курсы валют ЦБ РУз', subtitle: 'Актуальный курс доллара и евро в узбекских сумах.', loaded: 'Обновлено', tip: 'Лучше обменивать деньги в проверенных банках или банкоматах, чтобы получить выгодный курс.', refresh: 'Обновить курс', error: 'Не удалось загрузить курс. Попробуйте позже.' },
+    rate: {
+      title: 'Курсы валют ЦБ РУз & Калькулятор',
+      subtitle: 'Актуальный курс и мгновенный конвертер UZS, USD и EUR.',
+      loaded: 'Обновлено',
+      tip: 'Лучше обменивать деньги в проверенных банках или банкоматах, чтобы получить выгодный курс.',
+      refresh: 'Обновить курс',
+      error: 'Не удалось загрузить курс. Попробуйте позже.',
+      calcTitle: '🧮 Конвертер валют',
+      amountLabel: 'Сумма:',
+      fromLabel: 'Из:',
+      toLabel: 'В:',
+      resultLabel: 'Итого:',
+    },
     places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Google Maps', taxi: 'Яндекс Go', location: 'Адрес' },
     mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
@@ -58,7 +70,19 @@ const translations = {
       currency: { title: 'Exchange rates', description: 'The USD and EUR rates are updated daily automatically.', accent: 'Rate' },
       bot: { title: 'Telegram assistant', description: 'The bot helps answer questions and gives tips about Tashkent in real time.', accent: 'Bot' },
     },
-    rate: { title: 'CBU Exchange rates', subtitle: 'The current dollar and euro rates in Uzbek soums.', loaded: 'Updated', tip: 'It is better to exchange money at trusted banks or ATMs for a good rate.', refresh: 'Refresh rate', error: 'Failed to load rates. Please try again later.' },
+    rate: {
+      title: 'CBU Exchange Rates & Converter',
+      subtitle: 'Live rates and instant converter for UZS, USD and EUR.',
+      loaded: 'Updated',
+      tip: 'It is better to exchange money at trusted banks or ATMs for a good rate.',
+      refresh: 'Refresh rate',
+      error: 'Failed to load rates. Please try again later.',
+      calcTitle: '🧮 Currency Converter',
+      amountLabel: 'Amount:',
+      fromLabel: 'From:',
+      toLabel: 'To:',
+      resultLabel: 'Result:',
+    },
     places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Address' },
     mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
@@ -96,7 +120,19 @@ const translations = {
       currency: { title: 'Valyuta kursi', description: 'AQSh dollari va Yevro kursi har kuni avtomatik yangilanadi.', accent: 'Kurs' },
       bot: { title: 'Telegram yordamchi', description: 'Bot savollarga javob beradi va real vaqt rejimida Toshkent bo‘yicha maslahat beradi.', accent: 'Bot' },
     },
-    rate: { title: 'MB Valyuta kurslari', subtitle: 'AQSh dollari va Yevro kursi so‘mda.', loaded: 'Yangilandi', tip: 'Valyutani qulay kursda almashtirish uchun ishonchli banklar va bankomatlardan foydalaning.', refresh: 'Kursni yangilash', error: 'Kursni yuklab bo‘lmadi. Keyinroq urinib ko‘ring.' },
+    rate: {
+      title: 'MB Valyuta kurslari & Kalkulyator',
+      subtitle: 'Jonli kurslar va UZS, USD hamda EUR tekor kalkulyatori.',
+      loaded: 'Yangilandi',
+      tip: 'Valyutani qulay kursda almashtirish uchun ishonchli banklar va bankomatlardan foydalaning.',
+      refresh: 'Kursni yangilash',
+      error: 'Kursni yuklab bo‘lmadi. Keyinroq urinib ko‘ring.',
+      calcTitle: '🧮 Valyuta kalkulyatori',
+      amountLabel: 'Miqdor:',
+      fromLabel: 'Dan:',
+      toLabel: 'Ga:',
+      resultLabel: 'Natija:',
+    },
     places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Manzil' },
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
     routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
@@ -215,7 +251,6 @@ function yandexTaxiUrl(place, language) {
   return `https://yandex.ru/maps/?text=${searchStr}`;
 }
 
-// Прямая ссылка на загруженную тобой четкую схему метро Ташкента
 const METRO_MAP_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tashkent_Metro_Map_ru.svg/1280px-Tashkent_Metro_Map_ru.svg.png";
 
 export default function App() {
@@ -229,8 +264,22 @@ export default function App() {
   const [rateUpdated, setRateUpdated] = useState('');
   const [rateError, setRateError] = useState(false);
 
-  // Состояние полноэкранного просмотра карты метро (Telegram Lightbox)
+  // Калькулятор Валют
+  const [calcAmount, setCalcAmount] = useState(100);
+  const [calcFrom, setCalcFrom] = useState('USD');
+  const [calcTo, setCalcTo] = useState('UZS');
+
+  // Окно карты метро
   const [isMetroModalOpen, setIsMetroModalOpen] = useState(false);
+
+  // Закрытие модалки по клавише ESC
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setIsMetroModalOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   // Избранное
   const [favorites, setFavorites] = useState(() => {
@@ -330,6 +379,25 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Вычисление результата калькулятора
+  const calculatedResult = useMemo(() => {
+    if (!usdRate || !eurRate || !calcAmount || Number.isNaN(Number(calcAmount))) return '—';
+
+    // Базовые коэффициенты к UZS
+    const ratesInUzs = {
+      UZS: 1,
+      USD: usdRate,
+      EUR: eurRate,
+    };
+
+    const amountInUzs = calcAmount * ratesInUzs[calcFrom];
+    const result = amountInUzs / ratesInUzs[calcTo];
+
+    return calcTo === 'UZS' 
+      ? Math.round(result).toLocaleString('ru-RU') 
+      : result.toFixed(2).toLocaleString('en-US');
+  }, [calcAmount, calcFrom, calcTo, usdRate, eurRate]);
+
   const routeItems = selectedRoute?.items || [];
 
   return (
@@ -338,7 +406,6 @@ export default function App() {
         <nav className="nav container">
           <a href="#top" className="brand">Foreigner.uz</a>
           
-          {/* SOS BUTTONS BANNER */}
           <div className="sos-bar" style={{ display: 'flex', gap: '8px', fontSize: '0.8rem' }}>
             <a href="tel:1173" style={{ background: '#ef444422', color: '#f87171', border: '1px solid #ef444444', padding: '4px 10px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
               👮 1173
@@ -405,7 +472,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* FULL TASHKENT METRO MAP SECTION */}
+        {/* METRO SECTION */}
         <section className="section section-alt container">
           <div className="section-title">
             <p className="eyebrow">🚇 METRO GUIDE</p>
@@ -414,30 +481,26 @@ export default function App() {
           </div>
 
           <div className="detail-panel" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)', padding: '24px', borderRadius: '24px' }}>
-            
-            {/* CLICKABLE MAP WITH HOVER & ZOOM ICON */}
             <div 
               onClick={() => setIsMetroModalOpen(true)}
               style={{ 
                 width: '100%', 
-                cursor: 'zoom-in', 
+                cursor: 'pointer', 
                 borderRadius: '16px', 
                 marginBottom: '24px', 
                 background: '#fff', 
                 padding: '16px',
                 position: 'relative',
                 boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-                transition: 'transform 0.2s ease',
               }}
-              className="metro-img-container"
             >
               <span style={{
                 position: 'absolute',
                 top: '24px',
                 right: '24px',
-                background: 'rgba(0,0,0,0.75)',
+                background: 'rgba(0,0,0,0.85)',
                 color: '#fff',
-                padding: '6px 14px',
+                padding: '8px 16px',
                 borderRadius: '20px',
                 fontSize: '0.85rem',
                 fontWeight: 'bold',
@@ -445,7 +508,7 @@ export default function App() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
-                zIndex: 2
+                zIndex: 5
               }}>
                 🔍 Нажмите для увеличения
               </span>
@@ -456,7 +519,6 @@ export default function App() {
               />
             </div>
 
-            {/* LINES & INTERCHANGES LEGEND */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '20px' }}>
               <div>
                 <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.linesTitle')}</h4>
@@ -485,11 +547,10 @@ export default function App() {
                 </ul>
               </div>
             </div>
-
           </div>
         </section>
 
-        {/* MODAL FULLSCREEN METRO LIGHTBOX (TELEGRAM STYLE) */}
+        {/* FULLSCREEN LIGHTBOX FOR METRO MAP */}
         {isMetroModalOpen && (
           <div 
             onClick={() => setIsMetroModalOpen(false)}
@@ -499,14 +560,14 @@ export default function App() {
               left: 0,
               width: '100vw',
               height: '100vh',
-              backgroundColor: 'rgba(0, 0, 0, 0.92)',
-              backdropFilter: 'blur(8px)',
+              backgroundColor: 'rgba(0, 0, 0, 0.95)',
+              backdropFilter: 'blur(10px)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              zIndex: 99999,
-              padding: '20px',
-              cursor: 'zoom-out'
+              zIndex: 1000000,
+              padding: '16px',
+              boxSizing: 'border-box'
             }}
           >
             <button
@@ -519,15 +580,15 @@ export default function App() {
                 background: 'rgba(255,255,255,0.2)',
                 border: 'none',
                 color: '#fff',
-                fontSize: '24px',
+                fontSize: '28px',
                 borderRadius: '50%',
-                width: '44px',
-                height: '44px',
+                width: '50px',
+                height: '50px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                zIndex: 100000
+                zIndex: 1000001
               }}
             >
               ✕
@@ -535,16 +596,14 @@ export default function App() {
             <img 
               src={METRO_MAP_URL}
               alt="Схема Метро Ташкента во весь экран" 
-              onClick={(e) => e.stopPropagation()} // Чтобы клик по самой картинке не закрывал её случайно
+              onClick={(e) => e.stopPropagation()} 
               style={{
-                maxWidth: '95%',
-                maxHeight: '90vh',
+                maxWidth: '98%',
+                maxHeight: '92vh',
                 objectFit: 'contain',
                 borderRadius: '12px',
-                boxShadow: '0 0 40px rgba(0,0,0,0.8)',
-                cursor: 'default',
                 background: '#fff',
-                padding: '8px'
+                padding: '6px'
               }}
             />
           </div>
@@ -577,24 +636,106 @@ export default function App() {
           </div>
         </section>
 
+        {/* RATES & CURRENCY CONVERTER CALCULATOR */}
         <section id="rates" className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">{t('rate.title')}</p>
-            <h2>{t('rate.subtitle')}</h2>
+            <p className="eyebrow">💰 CURRENCY & CONVERTER</p>
+            <h2>{t('rate.title')}</h2>
+            <p style={{ color: '#aaa', marginTop: '4px' }}>{t('rate.subtitle')}</p>
           </div>
-          <div className="rate-panel">
+          
+          <div className="rate-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            {/* LIVE RATES CARD */}
             <div className="rate-card">
               <span className="eyebrow">USD & EUR → UZS</span>
-              <h3 className="rate-value" style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '1.4rem', margin: '12px 0' }}>
+              <h3 className="rate-value" style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '1.4rem', margin: '16px 0' }}>
                 <div>💵 <b>USD:</b> {usdRate ? `${formatRate(usdRate, language)} sum` : rateError ? t('rate.error') : '...'}</div>
                 <div>💶 <b>EUR:</b> {eurRate ? `${formatRate(eurRate, language)} sum` : rateError ? t('rate.error') : '...'}</div>
               </h3>
               <p>{rateError ? '' : `${t('rate.loaded')}: ${rateUpdated}`}</p>
-              <button type="button" className="btn btn-secondary small" onClick={fetchRates}>{t('rate.refresh')}</button>
+              <button type="button" className="btn btn-secondary small" onClick={fetchRates} style={{ marginTop: '12px' }}>
+                {t('rate.refresh')}
+              </button>
             </div>
-            <div className="rate-card">
-              <span className="eyebrow">{language === 'uz' ? 'Maslahat' : language === 'ru' ? 'Совет' : 'Tip'}</span>
-              <p>{t('rate.tip')}</p>
+
+            {/* CURRENCY CALCULATOR CARD */}
+            <div className="rate-card" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.15)', padding: '24px', borderRadius: '16px' }}>
+              <h3 style={{ marginTop: 0, marginBottom: '16px', fontSize: '1.2rem', color: '#fbbf24' }}>{t('rate.calcTitle')}</h3>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.amountLabel')}</label>
+                  <input 
+                    type="number" 
+                    value={calcAmount} 
+                    onChange={(e) => setCalcAmount(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '10px 14px',
+                      borderRadius: '8px',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(0,0,0,0.4)',
+                      color: '#fff',
+                      fontSize: '1.1rem',
+                      outline: 'none',
+                      boxSizing: 'border-box'
+                    }}
+                  />
+                </div>
+
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <div style={{ flex: 1 }}>
+                    <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.fromLabel')}</label>
+                    <select 
+                      value={calcFrom} 
+                      onChange={(e) => setCalcFrom(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        background: '#222',
+                        color: '#fff',
+                        fontSize: '1rem',
+                        outline: 'none'
+                      }}
+                    >
+                      <option value="USD">💵 USD</option>
+                      <option value="EUR">💶 EUR</option>
+                      <option value="UZS">🇺🇿 UZS</option>
+                    </select>
+                  </div>
+
+                  <div style={{ flex: 1 }}>
+                    <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.toLabel')}</label>
+                    <select 
+                      value={calcTo} 
+                      onChange={(e) => setCalcTo(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '10px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(255,255,255,0.2)',
+                        background: '#222',
+                        color: '#fff',
+                        fontSize: '1rem',
+                        outline: 'none'
+                      }}
+                    >
+                      <option value="UZS">🇺🇿 UZS</option>
+                      <option value="USD">💵 USD</option>
+                      <option value="EUR">💶 EUR</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '10px', background: 'rgba(0,0,0,0.5)', padding: '14px', borderRadius: '10px', border: '1px dashed rgba(251, 191, 36, 0.4)' }}>
+                  <span style={{ fontSize: '0.85rem', color: '#aaa', display: 'block' }}>{t('rate.resultLabel')}</span>
+                  <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981', marginTop: '4px' }}>
+                    {calculatedResult} {calcTo}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
