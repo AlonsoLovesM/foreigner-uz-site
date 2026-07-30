@@ -50,6 +50,8 @@ const translations = {
       subtitle: 'Нажмите на любую станцию или пересадочный узел на схеме!',
       legendTitle: '📌 Пересадочные узлы:',
       linesTitle: '🔴 Линии метрополитена:',
+      stationLabel: '🚇 Станция:',
+      transferLabel: '🔄 Пересадка на станцию',
     }
   },
   en: {
@@ -100,6 +102,8 @@ const translations = {
       subtitle: 'Click any station or transfer hub on the map below!',
       legendTitle: '📌 Transfer Hubs:',
       linesTitle: '🔴 Metro Lines:',
+      stationLabel: '🚇 Station:',
+      transferLabel: '🔄 Transfer to station',
     }
   },
   uz: {
@@ -150,6 +154,8 @@ const translations = {
       subtitle: 'Tafsilotlar uchun istalgan bekat yoki o‘tish joyini bosing!',
       legendTitle: '📌 O‘tish tugunlari:',
       linesTitle: '🔴 Metro yo‘nalishlari:',
+      stationLabel: '🚇 Bekat:',
+      transferLabel: '🔄 O‘tish bekati:',
     }
   },
 };
@@ -214,48 +220,426 @@ const typeLabels = {
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy' },
 };
 
-// ПОЛНАЯ БАЗА СТАНЦИЙ МЕТРО ТАШКЕНТА (ПОДЗЕМКА + НАДЗЕМКА + ПЕРЕСАДКИ)
+// ПОЛНАЯ БАЗА СТАНЦИЙ МЕТРО С ПОДДЕРЖКОЙ RU / EN / UZ
 const FULL_METRO_STATIONS = [
-  // 🔴 Чиланзарская линия (Красная)
-  { id: 'chinar', name: 'Чинар (14-Бекат)', line: '🔴 Чиланзарская (Сергели)', x: 100, y: 390, isInterchange: false, info: 'Конечная Сергелийской надземной ветки.' },
-  { id: 'olmazor', name: 'Олмазор', line: '🔴 Чиланзарская', x: 180, y: 340, isInterchange: true, interchangeWith: 'Кипчак', info: '🔄 Пересадка на Кольцевую надземную линию (Станция Кипчак).' },
-  { id: 'chilonzor', name: 'Чиланзар', line: '🔴 Чиланзарская', x: 230, y: 310, isInterchange: false, info: 'Крупный жилой массив, торговые ряды и кафе.' },
-  { id: 'mirzo_ulugbek', name: 'Мирзо Улугбек', line: '🔴 Чиланзарская', x: 280, y: 280, isInterchange: false, info: 'Стадион Бунёдкор и парк Гафура Гуляма.' },
-  { id: 'novza', name: 'Новза', line: '🔴 Чиланзарская', x: 330, y: 250, isInterchange: false, info: 'Мечеть Новза и торговые комплексы.' },
-  { id: 'milliy_bog', name: 'Миллий Бог', line: '🔴 Чиланзарская', x: 370, y: 230, isInterchange: false, info: 'Национальный парк Узбекистана, Magic City.' },
-  { id: 'pakhtakor', name: 'Пахтакор', line: '🔴 Чиланзарская', x: 410, y: 210, isInterchange: true, interchangeWith: 'Алишер Навои', info: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию! Рядом Tashkent City Mall и стадион.' },
-  { id: 'amir_timur', name: 'Амир Тимур Хиёбони', line: '🔴 Чиланзарская', x: 470, y: 210, isInterchange: true, interchangeWith: 'Юнус Раджаби', info: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию! Центр города, Сквер, Отель Узбекистан.' },
-  { id: 'khamid_olimjon', name: 'Хамид Олимджан', line: '🔴 Чиланзарская', x: 530, y: 210, isInterchange: false, info: 'Площадь Х.Олимджана, жилые высотки.' },
-  { id: 'pushkin', name: 'Пушкин', line: '🔴 Чиланзарская', x: 580, y: 210, isInterchange: false, info: 'Старый город, парковые зоны.' },
-  { id: 'buyuk_ipak_yuli', name: 'Буюк Ипак Йули', line: '🔴 Чиланзарская', x: 640, y: 210, isInterchange: false, info: 'Конечная красной линии, выезд на Чирчик и Газалкент.' },
+  // 🔴 Чиланзарская линия
+  {
+    id: 'chinar',
+    name: { ru: 'Чинар (14-Бекат)', en: 'Chinar (Station 14)', uz: 'Chinor (14-Bekat)' },
+    line: { ru: '🔴 Чиланзарская (Сергели)', en: '🔴 Chilanzar Line (Sergeli)', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 100, y: 390, isInterchange: false,
+    info: {
+      ru: 'Конечная Сергелийской надземной ветки.',
+      en: 'Terminus of the Sergeli elevated section.',
+      uz: 'Sergeli yerusti yo‘nalishining oxirgi bekati.'
+    }
+  },
+  {
+    id: 'olmazor',
+    name: { ru: 'Олмазор', en: 'Olmazor', uz: 'Olmazor' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 180, y: 340, isInterchange: true, interchangeWith: 'Кипчак / Kipchak',
+    info: {
+      ru: '🔄 Пересадка на Кольцевую надземную линию (Станция Кипчак).',
+      en: '🔄 Transfer to Circle Elevated Line (Kipchak Station).',
+      uz: '🔄 Yerusti Halqa yo‘nalishiga o‘tish bekati (Qipchoq bekati).'
+    }
+  },
+  {
+    id: 'chilonzor',
+    name: { ru: 'Чиланзар', en: 'Chilanzar', uz: 'Chilonzor' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 230, y: 310, isInterchange: false,
+    info: {
+      ru: 'Крупный жилой массив, торговые ряды и кафе.',
+      en: 'Large residential neighborhood, retail areas and cafes.',
+      uz: 'Yirik turar-joy massivi, savdo qatorlari va kafelar.'
+    }
+  },
+  {
+    id: 'mirzo_ulugbek',
+    name: { ru: 'Мирзо Улугбек', en: 'Mirzo Ulugbek', uz: 'Mirzo Ulug‘bek' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 280, y: 280, isInterchange: false,
+    info: {
+      ru: 'Стадион Бунёдкор и парк Гафура Гуляма.',
+      en: 'Bunyodkor Stadium and Gafur Gulyam Park.',
+      uz: 'Bunyodkor stadioni va G‘afur G‘ulom bog‘i.'
+    }
+  },
+  {
+    id: 'novza',
+    name: { ru: 'Новза', en: 'Novza', uz: 'Novza' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 330, y: 250, isInterchange: false,
+    info: {
+      ru: 'Мечеть Новза и торговые комплексы.',
+      en: 'Novza Mosque and shopping centers.',
+      uz: 'Novza masjidi va savdo majmualari.'
+    }
+  },
+  {
+    id: 'milliy_bog',
+    name: { ru: 'Миллий Бог', en: 'Milliy Bog', uz: 'Milliy Bog‘' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 370, y: 230, isInterchange: false,
+    info: {
+      ru: 'Национальный парк Узбекистана, Magic City.',
+      en: 'National Park of Uzbekistan, Magic City theme park.',
+      uz: 'O‘zbekiston Milliy bog‘i va Magic City.'
+    }
+  },
+  {
+    id: 'pakhtakor',
+    name: { ru: 'Пахтакор', en: 'Pakhtakor', uz: 'Paxtakor' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 410, y: 210, isInterchange: true, interchangeWith: 'Алишер Навои / Alisher Navoi',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию! Рядом Tashkent City Mall.',
+      en: '🔄 TRANSFER to Uzbekistan (Blue) Line! Next to Tashkent City Mall.',
+      uz: '🔄 O‘zbekiston (ko‘k) yo‘nalishiga O‘TISH! Tashkent City Mall yonida.'
+    }
+  },
+  {
+    id: 'amir_timur',
+    name: { ru: 'Амир Тимур Хиёбони', en: 'Amir Timur Square', uz: 'Amir Temur Xiyoboni' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 470, y: 210, isInterchange: true, interchangeWith: 'Юнус Раджаби / Yunus Rajabi',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию! Центр города, Сквер, Отель Узбекистан.',
+      en: '🔄 TRANSFER to Yunusabad (Green) Line! City center, Square, Hotel Uzbekistan.',
+      uz: '🔄 Yunusobod (yashil) yo‘nalishiga O‘TISH! Shahar markazi, Amir Temur xiyoboni.'
+    }
+  },
+  {
+    id: 'khamid_olimjon',
+    name: { ru: 'Хамид Олимджан', en: 'Khamid Olimjan', uz: 'Hamid Olimjon' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 530, y: 210, isInterchange: false,
+    info: {
+      ru: 'Площадь Х.Олимджана, жилые высотки.',
+      en: 'Kh. Olimjan Square and residential towers.',
+      uz: 'H.Olimjon maydoni va baland turar-joylar.'
+    }
+  },
+  {
+    id: 'pushkin',
+    name: { ru: 'Пушкин', en: 'Pushkin', uz: 'Pushkin' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 580, y: 210, isInterchange: false,
+    info: {
+      ru: 'Старый город, парковые зоны.',
+      en: 'Historic district and park spaces.',
+      uz: 'Eski shahar, bog‘lar zonalari.'
+    }
+  },
+  {
+    id: 'buyuk_ipak_yuli',
+    name: { ru: 'Буюк Ипак Йули', en: 'Buyuk Ipak Yuli', uz: 'Buyuk Ipak Yo‘li' },
+    line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' },
+    x: 640, y: 210, isInterchange: false,
+    info: {
+      ru: 'Конечная красной линии, выезд на Чирчик и Газалкент.',
+      en: 'Terminus of the Red Line, exit towards Chirchik and Gazalkent.',
+      uz: 'Qizil yo‘nalishning oxirgi bekati, Chirchiq va G‘azalkentga chiqish.'
+    }
+  },
 
-  // 🔵 Узбекистанская линия (Синяя)
-  { id: 'beruni', name: 'Беруни', line: '🔵 Узбекистанская', x: 250, y: 110, isInterchange: false, info: 'ВУЗгородок, Национальный Университет (НУУз).' },
-  { id: 'tinchlik', name: 'Тинчлик', line: '🔵 Узбекистанская', x: 300, y: 130, isInterchange: false, info: 'Тихий жилой район, автосалоны.' },
-  { id: 'chorsu', name: 'Чорсу', line: '🔵 Узбекистанская', x: 350, y: 160, isInterchange: false, info: '🛒 Знаменитый Базар Чорсу, старый город, сувениры, восточные сладости.' },
-  { id: 'gofur_gulom', name: 'Гафур Гулям', line: '🔵 Узбекистанская', x: 380, y: 180, isInterchange: false, info: 'Цирк, типография.' },
-  { id: 'navoi', name: 'Алишер Навои', line: '🔵 Узбекистанская', x: 410, y: 190, isInterchange: true, interchangeWith: 'Пахтакор', info: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая красивая резная станция.' },
-  { id: 'kosmonavtlar', name: 'Космонавтов', line: '🔵 Узбекистанская', x: 470, y: 270, isInterchange: false, info: 'Интерьер в стиле космоса, МВД, Интерпол, парк Голубые купола.' },
-  { id: 'oybek', name: 'Ойбек', line: '🔵 Узбекистанская', x: 510, y: 310, isInterchange: true, interchangeWith: 'Мингурик', info: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию (Мингурик). ФармИнститут.' },
-  { id: 'tashkent', name: 'Ташкент (Вокзал)', line: '🔵 Узбекистанская', x: 560, y: 340, isInterchange: false, info: '🚆 Главный Северный Железнодорожный Вокзал (Скоростные поезда Афрасиаб).' },
-  { id: 'mashinasozlar', name: 'Машиностроителей', line: '🔵 Узбекистанская', x: 620, y: 340, isInterchange: false, info: 'Заводской район, электроаппарат.' },
-  { id: 'dustlik', name: 'Дустлик', line: '🔵 Узбекистанская', x: 680, y: 340, isInterchange: true, interchangeWith: 'Технопарк', info: '🔄 ПЕРЕСАДКА на Надземную Кольцевую линию (Станция Технопарк).' },
+  // 🔵 Узбекистанская линия
+  {
+    id: 'beruni',
+    name: { ru: 'Беруни', en: 'Beruni', uz: 'Beruniy' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 250, y: 110, isInterchange: false,
+    info: {
+      ru: 'ВУЗгородок, Национальный Университет (НУУз).',
+      en: 'University Campus, National University (NUUz).',
+      uz: 'Talabalar shaharchasi, O‘zbekiston Milliy Universiteti.'
+    }
+  },
+  {
+    id: 'tinchlik',
+    name: { ru: 'Тинчлик', en: 'Tinchlik', uz: 'Tinchlik' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 300, y: 130, isInterchange: false,
+    info: {
+      ru: 'Тихий жилой район, автосалоны.',
+      en: 'Quiet residential neighborhood, car dealerships.',
+      uz: 'Sokin turar-joy hududi, avtosalonlar.'
+    }
+  },
+  {
+    id: 'chorsu',
+    name: { ru: 'Чорсу', en: 'Chorsu', uz: 'Chorsu' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 350, y: 160, isInterchange: false,
+    info: {
+      ru: '🛒 Знаменитый Базар Чорсу, старый город, сувениры и восточные сладости.',
+      en: '🛒 Famous Chorsu Bazaar, Old City, souvenirs and oriental sweets.',
+      uz: '🛒 Mashhur Chorsu bozori, eski shahar, esdalik sovg‘alari va shirinliklar.'
+    }
+  },
+  {
+    id: 'gofur_gulom',
+    name: { ru: 'Гафур Гулям', en: 'Gafur Gulyam', uz: 'G‘afur G‘ulom' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 380, y: 180, isInterchange: false,
+    info: {
+      ru: 'Ташкентский Цирк, полиграфический комплекс.',
+      en: 'Tashkent Circus, publishing complexes.',
+      uz: 'Toshkent sirk, matbaa majmuasi.'
+    }
+  },
+  {
+    id: 'navoi',
+    name: { ru: 'Алишер Навои', en: 'Alisher Navoi', uz: 'Alisher Navoiy' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 410, y: 190, isInterchange: true, interchangeWith: 'Пахтакор / Pakhtakor',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая красивая резная станция.',
+      en: '🔄 TRANSFER to Chilanzar (Red) Line! Highly decorated carving interior.',
+      uz: '🔄 Chilonzor (qizil) yo‘nalishiga O‘TISH! Eng go‘zal o‘ykor bekat.'
+    }
+  },
+  {
+    id: 'kosmonavtlar',
+    name: { ru: 'Космонавтов', en: 'Kosmonavtlar', uz: 'Kosmonavtlar' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 470, y: 270, isInterchange: false,
+    info: {
+      ru: 'Интерьер в стиле космоса, МВД, парк Голубые купола.',
+      en: 'Space-themed interior, Ministry of Internal Affairs, Blue Domes Park.',
+      uz: 'Kosmik uslubdagi interyer, Ichki ishlar vazirligi, Moviy gumbazlar bog‘i.'
+    }
+  },
+  {
+    id: 'oybek',
+    name: { ru: 'Ойбек', en: 'Oybek', uz: 'Oybek' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 510, y: 310, isInterchange: true, interchangeWith: 'Мингурик / Mingurik',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию (Мингурик). ФармИнститут.',
+      en: '🔄 TRANSFER to Yunusabad (Green) Line (Mingurik station). Pharmaceutical Institute.',
+      uz: '🔄 Yunusobod (yashil) yo‘nalishiga O‘TISH (Ming o‘rik). Farmatsevtika instituti.'
+    }
+  },
+  {
+    id: 'tashkent',
+    name: { ru: 'Ташкент (Вокзал)', en: 'Tashkent (Railway Station)', uz: 'Toshkent (Vokzal)' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 560, y: 340, isInterchange: false,
+    info: {
+      ru: '🚆 Главный Северный Железнодорожный Вокзал (Скоростные поезда Афрасиаб).',
+      en: '🚆 Main Northern Railway Station (Afrasiyab High-Speed Trains to Samarkand).',
+      uz: '🚆 Asosiy Shimoliy Temir Yo‘l Vokzali (Afrosiyob tezurar poyezdlari).'
+    }
+  },
+  {
+    id: 'mashinasozlar',
+    name: { ru: 'Машиностроителей', en: 'Mashinosozlar', uz: 'Mashinasozlar' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 620, y: 340, isInterchange: false,
+    info: {
+      ru: 'Промышленная зона, электроаппарат.',
+      en: 'Industrial zone and electrical equipment sector.',
+      uz: 'Sanoat zonasi, elektr apparat zavodi.'
+    }
+  },
+  {
+    id: 'dustlik',
+    name: { ru: 'Дустлик', en: 'Dustlik', uz: 'Do‘stlik' },
+    line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' },
+    x: 680, y: 340, isInterchange: true, interchangeWith: 'Технопарк / Technopark',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Надземную Кольцевую линию (Станция Технопарк).',
+      en: '🔄 TRANSFER to Circle Elevated Line (Technopark Station).',
+      uz: '🔄 Yerusti Halqa yo‘nalishiga O‘TISH (Texnopark bekati).'
+    }
+  },
 
-  // 🟢 Юнусабадская линия (Зелёная)
-  { id: 'turkiston', name: 'Туркистон', line: '🟢 Юнусабадская', x: 470, y: 50, isInterchange: false, info: 'Север Юнусабада, ТРЦ Mega Planet.' },
-  { id: 'yunusobod', name: 'Юнусабад', line: '🟢 Юнусабадская', x: 470, y: 90, isInterchange: false, info: 'Юнусабадский базар и теннисный корт.' },
-  { id: 'shahriston', name: 'Шахристан', line: '🟢 Юнусабадская', x: 470, y: 120, isInterchange: false, info: 'Река Бозсу, выезд на обводную.' },
-  { id: 'bodomzor', name: 'Бодомзор', line: '🟢 Юнусабадская', x: 470, y: 150, isInterchange: false, info: '📺 Ташкентская Телебашня, Узэкспоцентр, Аквапарк.' },
-  { id: 'minor', name: 'Минор', line: '🟢 Юнусабадская', x: 470, y: 175, isInterchange: false, info: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.' },
-  { id: 'yunus_rajabi', name: 'Юнус Раджаби', line: '🟢 Юнусабадская', x: 470, y: 195, isInterchange: true, interchangeWith: 'Амир Тимур', info: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая глубокая станция.' },
-  { id: 'mingurik', name: 'Мингурик', line: '🟢 Юнусабадская', x: 510, y: 330, isInterchange: true, interchangeWith: 'Ойбек', info: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию (Ойбек). Рядом Северный Вокзал.' },
+  // 🟢 Юнусабадская линия
+  {
+    id: 'turkiston',
+    name: { ru: 'Туркистон', en: 'Turkiston', uz: 'Turkiston' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 50, isInterchange: false,
+    info: {
+      ru: 'Север Юнусабада, ТРЦ Mega Planet.',
+      en: 'North Yunusabad district, Mega Planet Mall.',
+      uz: 'Yunusobod shimoli, Mega Planet KO‘M.'
+    }
+  },
+  {
+    id: 'yunusobod',
+    name: { ru: 'Юнусабад', en: 'Yunusobod', uz: 'Yunusobod' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 90, isInterchange: false,
+    info: {
+      ru: 'Юнусабадский базар и теннисный комплекс.',
+      en: 'Yunusabad Bazaar and tennis complex.',
+      uz: 'Yunusobod bozori va tennis majmuasi.'
+    }
+  },
+  {
+    id: 'shahriston',
+    name: { ru: 'Шахристан', en: 'Shahriston', uz: 'Shahriston' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 120, isInterchange: false,
+    info: {
+      ru: 'Набережная реки Бозсу, транспортная развязка.',
+      en: 'Bozsu River embankment, transit hub.',
+      uz: 'Bozsuv daryosi bo‘yi, yo‘l o‘tkazgich.'
+    }
+  },
+  {
+    id: 'bodomzor',
+    name: { ru: 'Бодомзор', en: 'Bodomzor', uz: 'Bodomzor' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 150, isInterchange: false,
+    info: {
+      ru: '📺 Ташкентская Телебашня, Узэкспоцентр, Аквапарк.',
+      en: '📺 Tashkent TV Tower, Uzexpocentre, Aquapark.',
+      uz: '📺 Toshkent Teleminorasi, O‘zekspomarkaz, Akvapark.'
+    }
+  },
+  {
+    id: 'minor',
+    name: { ru: 'Минор', en: 'Minor', uz: 'Minor' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 175, isInterchange: false,
+    info: {
+      ru: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.',
+      en: '🕌 White Minor Mosque and Anhor Canal promenade.',
+      uz: '🕌 Oppoq Minor masjidi va Anhor kanali bo‘yi.'
+    }
+  },
+  {
+    id: 'yunus_rajabi',
+    name: { ru: 'Юнус Раджаби', en: 'Yunus Rajabi', uz: 'Yunus Rajabiy' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 470, y: 195, isInterchange: true, interchangeWith: 'Амир Тимур / Amir Timur',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая глубокая станция.',
+      en: '🔄 TRANSFER to Chilanzar (Red) Line! Deepest station in Tashkent.',
+      uz: '🔄 Chilonzor (qizil) yo‘nalishiga O‘TISH! Eng chuqur bekat.'
+    }
+  },
+  {
+    id: 'mingurik',
+    name: { ru: 'Мингурик', en: 'Mingurik', uz: 'Ming O‘rik' },
+    line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' },
+    x: 510, y: 330, isInterchange: true, interchangeWith: 'Ойбек / Oybek',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию (Ойбек). Рядом Северный Вокзал.',
+      en: '🔄 TRANSFER to Uzbekistan (Blue) Line (Oybek). Near Northern Station.',
+      uz: '🔄 O‘zbekiston (ko‘k) yo‘nalishiga O‘TISH (Oybek). Shimoliy Vokzal yonida.'
+    }
+  },
 
-  // 🩵 Кольцевая Надземная линия (Голубая / 30-летия Независимости)
-  { id: 'technopark', name: 'Технопарк (1-Бекат)', line: '🩵 Кольцевая Надземная', x: 700, y: 340, isInterchange: true, interchangeWith: 'Дустлик', info: '🔄 ПЕРЕСАДКА на синюю линию (Дустлик). Начало надземного кольца.' },
-  { id: 'yashnobod', name: 'Яшнабад (2-Бекат)', line: '🩵 Кольцевая Надземная', x: 700, y: 390, isInterchange: false, info: 'Яшнабадский район, эстакадный пролёт.' },
-  { id: 'tuzel', name: 'Тузель (3-Бекат)', line: '🩵 Кольцевая Надземная', x: 670, y: 430, isInterchange: false, info: 'Массив Тузель, рынок.' },
-  { id: 'quyliq', name: 'Куйлюк (7-Бекат)', line: '🩵 Кольцевая Надземная', x: 500, y: 440, isInterchange: false, info: '🛒 Крупный вещевой и продуктовый рынок Куйлюк, ТРЦ Compass.' },
-  { id: 'kipchak', name: 'Кипчак (12-Бекат)', line: '🩵 Кольцевая Надземная', x: 180, y: 365, isInterchange: true, interchangeWith: 'Олмазор', info: '🔄 ПЕРЕСАДКА на красную ветку (Олмазор). Соединение с Сергели.' },
+  // 🩵 Все 14 станций Кольцевой Надземной Линии
+  {
+    id: 'technopark',
+    name: { ru: 'Технопарк (1-Бекат)', en: 'Technopark (Station 1)', uz: 'Texnopark (1-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 700, y: 340, isInterchange: true, interchangeWith: 'Дустлик / Dustlik',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на синюю линию (Дустлик). Начало надземного кольца.',
+      en: '🔄 TRANSFER to Blue Line (Dustlik). Start of elevated circle.',
+      uz: '🔄 Ko‘k yo‘nalishga O‘TISH (Do‘stlik). Yerusti halqasi boshi.'
+    }
+  },
+  {
+    id: 'yashnobod',
+    name: { ru: 'Яшнабад (2-Бекат)', en: 'Yashnabad (Station 2)', uz: 'Yashnobod (2-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 700, y: 370, isInterchange: false,
+    info: { ru: 'Эстакада над Яшнабадским районом.', en: 'Elevated viaduct over Yashnabad district.', uz: 'Yashnobod tumani yerusti ko‘prigi.' }
+  },
+  {
+    id: 'tuzel',
+    name: { ru: 'Тузель (3-Бекат)', en: 'Tuzel (Station 3)', uz: 'Tuzel (3-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 690, y: 400, isInterchange: false,
+    info: { ru: 'Массив Тузель, локальный рынок.', en: 'Tuzel neighborhood, local market.', uz: 'Tuzel massivi, mahalliy bozor.' }
+  },
+  {
+    id: 'olmos',
+    name: { ru: 'Олмос (4-Бекат)', en: 'Olmos (Station 4)', uz: 'Olmos (4-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 660, y: 425, isInterchange: false,
+    info: { ru: 'Жилой квартал Олмос.', en: 'Olmos residential area.', uz: 'Olmos turar-joy dahasi.' }
+  },
+  {
+    id: 'rohat',
+    name: { ru: 'Рохат (5-Бекат)', en: 'Rohat (Station 5)', uz: 'Rohat (5-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 620, y: 440, isInterchange: false,
+    info: { ru: 'Круг Рохат, Ахангаранское шоссе.', en: 'Rohat roundabout, Akhangaran highway.', uz: 'Rohat aylanasi, Ohangaron yo‘li.' }
+  },
+  {
+    id: 'yangiabad',
+    name: { ru: 'Янгиабад (6-Бекат)', en: 'Yangiabad (Station 6)', uz: 'Yangiabod (6-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 570, y: 440, isInterchange: false,
+    info: { ru: 'Рынок Янгиабад.', en: 'Yangiabad market area.', uz: 'Yangiabod bozori dahasi.' }
+  },
+  {
+    id: 'quyliq',
+    name: { ru: 'Куйлюк (7-Бекат)', en: 'Kuyluk (Station 7)', uz: 'Qo‘yliq (7-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 510, y: 440, isInterchange: false,
+    info: {
+      ru: '🛒 Вещевой и продуктовый рынок Куйлюк, ТРЦ Compass.',
+      en: '🛒 Kuyluk bazaar, produce market, Compass Shopping Mall.',
+      uz: '🛒 Qo‘yliq kiyim va oziq-ovqat bozori, Compass KO‘M.'
+    }
+  },
+  {
+    id: 'matonat',
+    name: { ru: 'Матонат (8-Бекат)', en: 'Matonat (Station 8)', uz: 'Matonat (8-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 440, y: 440, isInterchange: false,
+    info: { ru: 'Массив Сергели-2, жилая застройка.', en: 'Sergeli-2 neighborhood.', uz: 'Sergeli-2 massivi, turar-joylar.' }
+  },
+  {
+    id: 'qiyot',
+    name: { ru: 'Кыйот (9-Бекат)', en: 'Kiyot (Station 9)', uz: 'Qiyot (9-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 380, y: 430, isInterchange: false,
+    info: { ru: 'Район Кыёт, Сергели.', en: 'Kiyot sector in Sergeli district.', uz: 'Sergelidagi Qiyot hududi.' }
+  },
+  {
+    id: 'toshkent_halqa',
+    name: { ru: 'Тошкент Халка Йули (10-Бекат)', en: 'Tashkent Ring Road (Station 10)', uz: 'Toshkent Halqa Yo‘li (10-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 320, y: 415, isInterchange: false,
+    info: { ru: 'Ташкентская кольцевая автомобильная дорога.', en: 'Tashkent ring motorway interchange.', uz: 'Toshkent halqa avtomobil yo‘li.' }
+  },
+  {
+    id: 'quruvchilar',
+    name: { ru: 'Курувчилар (11-Бекат)', en: 'Kuruvchilar (Station 11)', uz: 'Quruvchilar (11-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 250, y: 395, isInterchange: false,
+    info: { ru: 'Массив Строителей (Курувчилар).', en: 'Kuruvchilar residential sector.', uz: 'Quruvchilar massivi.' }
+  },
+  {
+    id: 'turan',
+    name: { ru: 'Турон (12-Бекат)', en: 'Turan (Station 12)', uz: 'Turon (12-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 210, y: 380, isInterchange: false,
+    info: { ru: 'Район Турон.', en: 'Turan sub-district.', uz: 'Turon dahasi.' }
+  },
+  {
+    id: 'kipchak',
+    name: { ru: 'Кипчак (13-Бекат)', en: 'Kipchak (Station 13)', uz: 'Qipchoq (13-Bekat)' },
+    line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' },
+    x: 180, y: 365, isInterchange: true, interchangeWith: 'Олмазор / Olmazor',
+    info: {
+      ru: '🔄 ПЕРЕСАДКА на красную ветку (Олмазор). Соединение с Сергели.',
+      en: '🔄 TRANSFER to Red Line (Olmazor). Linking Sergeli section.',
+      uz: '🔄 Qizil yo‘nalishga O‘TISH (Olmazor). Sergeli bilan bog‘lanish.'
+    }
+  },
 ];
 
 function formatRate(value, language) {
@@ -498,7 +882,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* FULL VECTOR METRO MAP SECTION */}
+        {/* FULL MULTILINGUAL VECTOR METRO MAP */}
         <section className="section section-alt container">
           <div className="section-title">
             <p className="eyebrow">🚇 FULL INTERACTIVE METRO</p>
@@ -521,32 +905,26 @@ export default function App() {
                 {/* Green Line */}
                 <path d="M 470 50 L 470 210 L 510 330" fill="none" stroke="#10b981" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
                 
-                {/* Ring Line (Elevated) */}
-                <path d="M 680 340 L 700 340 L 700 390 L 670 430 L 500 440 L 180 365" fill="none" stroke="#38bdf8" strokeWidth="6" strokeDasharray="8,4" strokeLinecap="round" strokeLinejoin="round" />
+                {/* Ring Line (Elevated) - ALL STATIONS CONNECTED */}
+                <path d="M 680 340 L 700 340 L 700 370 L 690 400 L 660 425 L 620 440 L 570 440 L 510 440 L 440 440 L 380 430 L 320 415 L 250 395 L 210 380 L 180 365" fill="none" stroke="#38bdf8" strokeWidth="6" strokeDasharray="8,4" strokeLinecap="round" strokeLinejoin="round" />
 
                 {/* TRANSFER CONNECTOR DASHES */}
-                {/* Pakhtakor ↔ Navoi */}
                 <line x1="410" y1="210" x2="410" y2="190" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
-                {/* Amir Timur ↔ Yunus Rajabi */}
                 <line x1="470" y1="210" x2="470" y2="195" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
-                {/* Oybek ↔ Mingurik */}
                 <line x1="510" y1="310" x2="510" y2="330" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
-                {/* Olmazor ↔ Kipchak */}
                 <line x1="180" y1="340" x2="180" y2="365" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
-                {/* Dustlik ↔ Technopark */}
                 <line x1="680" y1="340" x2="700" y2="340" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
 
                 {/* STATIONS CIRCLES & LABELS */}
                 {FULL_METRO_STATIONS.map((st) => {
                   const isSelected = selectedMetroStation?.id === st.id;
+                  const stationName = getTranslatedText(st.name, language);
                   return (
                     <g key={st.id} onClick={() => setSelectedMetroStation(st)} style={{ cursor: 'pointer' }}>
-                      {/* Outer Golden Ring for Interchange */}
                       {st.isInterchange && (
                         <circle cx={st.x} cy={st.y} r={isSelected ? 13 : 10} fill="none" stroke="#fbbf24" strokeWidth="3" />
                       )}
                       
-                      {/* Station Dot */}
                       <circle
                         cx={st.x}
                         cy={st.y}
@@ -556,7 +934,6 @@ export default function App() {
                         strokeWidth="2"
                       />
                       
-                      {/* Station Name Label */}
                       <text
                         x={st.x}
                         y={st.y - (st.isInterchange ? 14 : 10)}
@@ -565,7 +942,7 @@ export default function App() {
                         fontWeight={isSelected || st.isInterchange ? 'bold' : 'normal'}
                         textAnchor="middle"
                       >
-                        {st.name}
+                        {stationName}
                       </text>
                     </g>
                   );
@@ -574,11 +951,11 @@ export default function App() {
 
               {/* MAP LEGEND */}
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '16px', padding: '12px', background: 'rgba(0,0,0,0.4)', borderRadius: '12px', fontSize: '0.85rem' }}>
-                <span style={{ color: '#ef4444', fontWeight: 'bold' }}>🔴 Чиланзарская</span>
-                <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>🔵 Узбекистанская</span>
-                <span style={{ color: '#10b981', fontWeight: 'bold' }}>🟢 Юнусабадская</span>
-                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>🩵 Кольцевая Надземная</span>
-                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>🟡 Двойной круг = Пересадка</span>
+                <span style={{ color: '#ef4444', fontWeight: 'bold' }}>🔴 {language === 'en' ? 'Chilanzar' : language === 'uz' ? 'Chilonzor' : 'Чиланзарская'}</span>
+                <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>🔵 {language === 'en' ? 'Uzbekistan' : language === 'uz' ? 'O‘zbekiston' : 'Узбекистанская'}</span>
+                <span style={{ color: '#10b981', fontWeight: 'bold' }}>🟢 {language === 'en' ? 'Yunusabad' : language === 'uz' ? 'Yunusobod' : 'Юнусабадская'}</span>
+                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>🩵 {language === 'en' ? 'Elevated Circle' : language === 'uz' ? 'Yerusti Halqa' : 'Кольцевая Надземная'}</span>
+                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>🟡 {language === 'en' ? 'Double Ring = Interchange' : language === 'uz' ? 'Ikki halqa = O‘tish bekati' : 'Двойной круг = Пересадка'}</span>
               </div>
             </div>
 
@@ -587,20 +964,20 @@ export default function App() {
               <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(251, 191, 36, 0.6)', padding: '20px', borderRadius: '16px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
                   <h3 style={{ margin: 0, color: '#fbbf24', fontSize: '1.3rem' }}>
-                    🚇 Станция: {selectedMetroStation.name}
+                    {t('metro.stationLabel')} {getTranslatedText(selectedMetroStation.name, language)}
                   </h3>
                   <span style={{ background: '#ffffff22', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', color: '#fff' }}>
-                    {selectedMetroStation.line}
+                    {getTranslatedText(selectedMetroStation.line, language)}
                   </span>
                 </div>
                 
                 <p style={{ color: '#e2e8f0', fontSize: '1rem', marginTop: '10px', lineHeight: '1.5' }}>
-                  {selectedMetroStation.info}
+                  {getTranslatedText(selectedMetroStation.info, language)}
                 </p>
 
                 {selectedMetroStation.isInterchange && (
                   <div style={{ marginTop: '12px', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b98144', padding: '10px 14px', borderRadius: '10px', color: '#34d399', fontWeight: 'bold', fontSize: '0.9rem' }}>
-                    🔄 Пересадочный узел на станцию «{selectedMetroStation.interchangeWith}»
+                    {t('metro.transferLabel')} «{selectedMetroStation.interchangeWith}»
                   </div>
                 )}
               </div>
