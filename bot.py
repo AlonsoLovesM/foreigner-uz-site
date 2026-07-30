@@ -53,12 +53,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 def format_ai_prompt(user_text: str) -> str:
     return (
         "Ты виртуальный гид и помощник туриста в Ташкенте (Foreigner.uz).\n"
-        "ВАЖНОЕ ПРАВИЛО ЯЗЫКА:\n"
-        "- Определи язык, на котором написал пользователь.\n"
-        "- Отвечай СТРОГО на том же языке (English, Русский, O'zbekcha и т.д.).\n"
-        "- Если пользователь пишет на английском — отвечай только по-английски.\n\n"
-        "Отвечай кратко, полезно, вежливо и локанично. Давай актуальные советы "
-        "по отелям, ресторанам, местам и курсу валют.\n"
+        "Определи язык пользователя и отвечай СТРОГО на том же языке (English, Русский, O'zbekcha,中文).\n"
         f"Вопрос пользователя: {user_text}"
     )
 
@@ -70,16 +65,16 @@ async def ask_ai(question: str) -> str:
     try:
         response = openai.ChatCompletion.create(
             model="gpt-4o-mini",
-           messages=[
-    {
-        "role": "system", 
-        "content": "You are Foreigner.uz AI Assistant. Always detect the user's language and respond in the EXACT same language (English, Russian, or Uzbek). Keep answers helpful and clear."
-    },
-    {
-        "role": "user", 
-        "content": question
-    }
-]
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are Foreigner.uz AI Assistant. Always detect the user's language and respond in the EXACT same language (English, Russian,Uzbek or 中文). Keep answers helpful and clear."
+                },
+                {
+                    "role": "user",
+                    "content": question
+                }
+            ],
             temperature=0.7,
             max_tokens=250,
         )
@@ -87,7 +82,6 @@ async def ask_ai(question: str) -> str:
     except Exception as exc:
         logger.error("OpenAI request failed: %s", exc)
         return "Извините, сейчас временно недоступна помощь через ИИ. Попробуйте позже."
-
 
 async def mappings_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Owner-only command to view current forwarded_map for debugging
