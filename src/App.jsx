@@ -47,7 +47,7 @@ const translations = {
     },
     metro: {
       title: '🚇 Интерактивная Карта Метро Ташкента',
-      subtitle: 'Нажмите на любую станцию или пересадку, чтобы узнать детали и маршрут!',
+      subtitle: 'Нажмите на любую станцию или пересадочный узел на схеме!',
       legendTitle: '📌 Пересадочные узлы:',
       linesTitle: '🔴 Линии метрополитена:',
     }
@@ -97,7 +97,7 @@ const translations = {
     },
     metro: {
       title: '🚇 Tashkent Interactive Metro Map',
-      subtitle: 'Click any station or interchange to see route details!',
+      subtitle: 'Click any station or transfer hub on the map below!',
       legendTitle: '📌 Transfer Hubs:',
       linesTitle: '🔴 Metro Lines:',
     }
@@ -214,18 +214,48 @@ const typeLabels = {
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy' },
 };
 
-// БАЗА ДАННЫХ ИНТЕРАКТИВНЫХ СТАНЦИЙ МЕТРО
-const METRO_STATIONS = [
-  { id: 'chorsu', name: 'Чорсу', line: '🔵 Узбекистанская', x: 180, y: 140, isInterchange: false, info: '🛒 Рынок Чорсу, старый город, сувениры и узбекский плов.' },
-  { id: 'pakhtakor', name: 'Пахтакор', line: '🔴 Чиланзарская', x: 260, y: 220, isInterchange: true, interchangeWith: 'Алишер Навои', info: '🔄 Пересадка на Узбекистанскую (синюю) линию! Рядом стадион Пахтакор и Tashkent City.' },
-  { id: 'navoi', name: 'Алишер Навои', line: '🔵 Узбекистанская', x: 280, y: 200, isInterchange: true, interchangeWith: 'Пахтакор', info: '🔄 Пересадка на Чиланзарскую (красную) линию! Самая красивая станция.' },
-  { id: 'amir_timur', name: 'Амир Тимур Хиёбони', line: '🔴 Чиланзарская', x: 420, y: 220, isInterchange: true, interchangeWith: 'Юнус Раджаби', info: '🔄 Пересадка на Юнусабадскую (зеленую) линию! Центр города, Сквер Амира Тимура, Отель Узбекистан.' },
-  { id: 'yunus_rajabi', name: 'Юнус Раджаби', line: '🟢 Юнусабадская', x: 420, y: 190, isInterchange: true, interchangeWith: 'Амир Тимур', info: '🔄 Пересадка на Чиланзарскую (красную) линию! Самая глубокая станция.' },
-  { id: 'oybek', name: 'Ойбек', line: '🔵 Узбекистанская', x: 420, y: 320, isInterchange: true, interchangeWith: 'Мингурик', info: '🔄 Пересадка на Мингурик (зеленая линия). Выход к фармацевтическому институту.' },
-  { id: 'mingurik', name: 'Мингурик', line: '🟢 Юнусабадская', x: 440, y: 340, isInterchange: true, interchangeWith: 'Ойбек', info: '🔄 Пересадка на Ойбек (синяя линия). Рядом Северный Вокзал.' },
-  { id: 'tashkent', name: 'Ташкент (Вокзал)', line: '🔵 Узбекистанская', x: 480, y: 360, isInterchange: false, info: '🚆 Главный Северный Железнодорожный Вокзал (поезда Афрасиаб в Самарканд/Бухару).' },
-  { id: 'minor', name: 'Минор', line: '🟢 Юнусабадская', x: 420, y: 110, isInterchange: false, info: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.' },
-  { id: 'bodomzor', name: 'Бодомзор', line: '🟢 Юнусабадская', x: 420, y: 60, isInterchange: false, info: '📺 Ташкентская Телебашня и Узэкспоцентр.' },
+// ПОЛНАЯ БАЗА СТАНЦИЙ МЕТРО ТАШКЕНТА (ПОДЗЕМКА + НАДЗЕМКА + ПЕРЕСАДКИ)
+const FULL_METRO_STATIONS = [
+  // 🔴 Чиланзарская линия (Красная)
+  { id: 'chinar', name: 'Чинар (14-Бекат)', line: '🔴 Чиланзарская (Сергели)', x: 100, y: 390, isInterchange: false, info: 'Конечная Сергелийской надземной ветки.' },
+  { id: 'olmazor', name: 'Олмазор', line: '🔴 Чиланзарская', x: 180, y: 340, isInterchange: true, interchangeWith: 'Кипчак', info: '🔄 Пересадка на Кольцевую надземную линию (Станция Кипчак).' },
+  { id: 'chilonzor', name: 'Чиланзар', line: '🔴 Чиланзарская', x: 230, y: 310, isInterchange: false, info: 'Крупный жилой массив, торговые ряды и кафе.' },
+  { id: 'mirzo_ulugbek', name: 'Мирзо Улугбек', line: '🔴 Чиланзарская', x: 280, y: 280, isInterchange: false, info: 'Стадион Бунёдкор и парк Гафура Гуляма.' },
+  { id: 'novza', name: 'Новза', line: '🔴 Чиланзарская', x: 330, y: 250, isInterchange: false, info: 'Мечеть Новза и торговые комплексы.' },
+  { id: 'milliy_bog', name: 'Миллий Бог', line: '🔴 Чиланзарская', x: 370, y: 230, isInterchange: false, info: 'Национальный парк Узбекистана, Magic City.' },
+  { id: 'pakhtakor', name: 'Пахтакор', line: '🔴 Чиланзарская', x: 410, y: 210, isInterchange: true, interchangeWith: 'Алишер Навои', info: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию! Рядом Tashkent City Mall и стадион.' },
+  { id: 'amir_timur', name: 'Амир Тимур Хиёбони', line: '🔴 Чиланзарская', x: 470, y: 210, isInterchange: true, interchangeWith: 'Юнус Раджаби', info: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию! Центр города, Сквер, Отель Узбекистан.' },
+  { id: 'khamid_olimjon', name: 'Хамид Олимджан', line: '🔴 Чиланзарская', x: 530, y: 210, isInterchange: false, info: 'Площадь Х.Олимджана, жилые высотки.' },
+  { id: 'pushkin', name: 'Пушкин', line: '🔴 Чиланзарская', x: 580, y: 210, isInterchange: false, info: 'Старый город, парковые зоны.' },
+  { id: 'buyuk_ipak_yuli', name: 'Буюк Ипак Йули', line: '🔴 Чиланзарская', x: 640, y: 210, isInterchange: false, info: 'Конечная красной линии, выезд на Чирчик и Газалкент.' },
+
+  // 🔵 Узбекистанская линия (Синяя)
+  { id: 'beruni', name: 'Беруни', line: '🔵 Узбекистанская', x: 250, y: 110, isInterchange: false, info: 'ВУЗгородок, Национальный Университет (НУУз).' },
+  { id: 'tinchlik', name: 'Тинчлик', line: '🔵 Узбекистанская', x: 300, y: 130, isInterchange: false, info: 'Тихий жилой район, автосалоны.' },
+  { id: 'chorsu', name: 'Чорсу', line: '🔵 Узбекистанская', x: 350, y: 160, isInterchange: false, info: '🛒 Знаменитый Базар Чорсу, старый город, сувениры, восточные сладости.' },
+  { id: 'gofur_gulom', name: 'Гафур Гулям', line: '🔵 Узбекистанская', x: 380, y: 180, isInterchange: false, info: 'Цирк, типография.' },
+  { id: 'navoi', name: 'Алишер Навои', line: '🔵 Узбекистанская', x: 410, y: 190, isInterchange: true, interchangeWith: 'Пахтакор', info: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая красивая резная станция.' },
+  { id: 'kosmonavtlar', name: 'Космонавтов', line: '🔵 Узбекистанская', x: 470, y: 270, isInterchange: false, info: 'Интерьер в стиле космоса, МВД, Интерпол, парк Голубые купола.' },
+  { id: 'oybek', name: 'Ойбек', line: '🔵 Узбекистанская', x: 510, y: 310, isInterchange: true, interchangeWith: 'Мингурик', info: '🔄 ПЕРЕСАДКА на Юнусабадскую (зелёную) линию (Мингурик). ФармИнститут.' },
+  { id: 'tashkent', name: 'Ташкент (Вокзал)', line: '🔵 Узбекистанская', x: 560, y: 340, isInterchange: false, info: '🚆 Главный Северный Железнодорожный Вокзал (Скоростные поезда Афрасиаб).' },
+  { id: 'mashinasozlar', name: 'Машиностроителей', line: '🔵 Узбекистанская', x: 620, y: 340, isInterchange: false, info: 'Заводской район, электроаппарат.' },
+  { id: 'dustlik', name: 'Дустлик', line: '🔵 Узбекистанская', x: 680, y: 340, isInterchange: true, interchangeWith: 'Технопарк', info: '🔄 ПЕРЕСАДКА на Надземную Кольцевую линию (Станция Технопарк).' },
+
+  // 🟢 Юнусабадская линия (Зелёная)
+  { id: 'turkiston', name: 'Туркистон', line: '🟢 Юнусабадская', x: 470, y: 50, isInterchange: false, info: 'Север Юнусабада, ТРЦ Mega Planet.' },
+  { id: 'yunusobod', name: 'Юнусабад', line: '🟢 Юнусабадская', x: 470, y: 90, isInterchange: false, info: 'Юнусабадский базар и теннисный корт.' },
+  { id: 'shahriston', name: 'Шахристан', line: '🟢 Юнусабадская', x: 470, y: 120, isInterchange: false, info: 'Река Бозсу, выезд на обводную.' },
+  { id: 'bodomzor', name: 'Бодомзор', line: '🟢 Юнусабадская', x: 470, y: 150, isInterchange: false, info: '📺 Ташкентская Телебашня, Узэкспоцентр, Аквапарк.' },
+  { id: 'minor', name: 'Минор', line: '🟢 Юнусабадская', x: 470, y: 175, isInterchange: false, info: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.' },
+  { id: 'yunus_rajabi', name: 'Юнус Раджаби', line: '🟢 Юнусабадская', x: 470, y: 195, isInterchange: true, interchangeWith: 'Амир Тимур', info: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая глубокая станция.' },
+  { id: 'mingurik', name: 'Мингурик', line: '🟢 Юнусабадская', x: 510, y: 330, isInterchange: true, interchangeWith: 'Ойбек', info: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию (Ойбек). Рядом Северный Вокзал.' },
+
+  // 🩵 Кольцевая Надземная линия (Голубая / 30-летия Независимости)
+  { id: 'technopark', name: 'Технопарк (1-Бекат)', line: '🩵 Кольцевая Надземная', x: 700, y: 340, isInterchange: true, interchangeWith: 'Дустлик', info: '🔄 ПЕРЕСАДКА на синюю линию (Дустлик). Начало надземного кольца.' },
+  { id: 'yashnobod', name: 'Яшнабад (2-Бекат)', line: '🩵 Кольцевая Надземная', x: 700, y: 390, isInterchange: false, info: 'Яшнабадский район, эстакадный пролёт.' },
+  { id: 'tuzel', name: 'Тузель (3-Бекат)', line: '🩵 Кольцевая Надземная', x: 670, y: 430, isInterchange: false, info: 'Массив Тузель, рынок.' },
+  { id: 'quyliq', name: 'Куйлюк (7-Бекат)', line: '🩵 Кольцевая Надземная', x: 500, y: 440, isInterchange: false, info: '🛒 Крупный вещевой и продуктовый рынок Куйлюк, ТРЦ Compass.' },
+  { id: 'kipchak', name: 'Кипчак (12-Бекат)', line: '🩵 Кольцевая Надземная', x: 180, y: 365, isInterchange: true, interchangeWith: 'Олмазор', info: '🔄 ПЕРЕСАДКА на красную ветку (Олмазор). Соединение с Сергели.' },
 ];
 
 function formatRate(value, language) {
@@ -265,8 +295,6 @@ function yandexTaxiUrl(place, language) {
   return `https://yandex.ru/maps/?text=${searchStr}`;
 }
 
-const METRO_MAP_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tashkent_Metro_Map_ru.svg/1280px-Tashkent_Metro_Map_ru.svg.png";
-
 export default function App() {
   const [language, setLanguage] = useState('ru');
   const [activeCard, setActiveCard] = useState('places');
@@ -283,17 +311,8 @@ export default function App() {
   const [calcFrom, setCalcFrom] = useState('USD');
   const [calcTo, setCalcTo] = useState('UZS');
 
-  // Выбранная станция на схеме Метро
-  const [selectedMetroStation, setSelectedMetroStation] = useState(METRO_STATIONS[1]); // по умолчанию Пахтакор
-  const [isMetroModalOpen, setIsMetroModalOpen] = useState(false);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') setIsMetroModalOpen(false);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Выбранная станция на схеме Метро (по умолчанию Пахтакор)
+  const [selectedMetroStation, setSelectedMetroStation] = useState(FULL_METRO_STATIONS[6]);
 
   // Избранное
   const [favorites, setFavorites] = useState(() => {
@@ -479,89 +498,109 @@ export default function App() {
           </div>
         </section>
 
-        {/* INTERACTIVE VECTOR METRO SECTION */}
+        {/* FULL VECTOR METRO MAP SECTION */}
         <section className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">🚇 INTERACTIVE METRO</p>
+            <p className="eyebrow">🚇 FULL INTERACTIVE METRO</p>
             <h2>{t('metro.title')}</h2>
             <p style={{ color: '#aaa', marginTop: '8px' }}>{t('metro.subtitle')}</p>
           </div>
 
-          <div className="detail-panel" style={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.15)', padding: '24px', borderRadius: '24px' }}>
+          <div className="detail-panel" style={{ background: 'rgba(15,23,42,0.85)', border: '1px solid rgba(255,255,255,0.15)', padding: '24px', borderRadius: '24px' }}>
             
-            {/* SVG INTERACTIVE MAP */}
-            <div style={{ position: 'relative', overflowX: 'auto', background: '#0b1329', padding: '20px', borderRadius: '16px', border: '1px solid #ffffff11' }}>
-              <button 
-                type="button" 
-                onClick={() => setIsMetroModalOpen(true)}
-                style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.15)', color: '#fff', border: 'none', padding: '6px 14px', borderRadius: '20px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold' }}
-              >
-                🔍 Открыть фото-схему
-              </button>
-
-              <svg viewBox="0 0 600 420" style={{ width: '100%', minWidth: '500px', height: 'auto' }}>
-                {/* LINETRACKS */}
+            {/* SVG MAP CONTAINER */}
+            <div style={{ position: 'relative', overflowX: 'auto', background: '#070d1e', padding: '24px', borderRadius: '16px', border: '1px solid #ffffff15' }}>
+              <svg viewBox="0 0 780 480" style={{ width: '100%', minWidth: '680px', height: 'auto' }}>
+                {/* LINE PATHS */}
                 {/* Red Line */}
-                <line x1="80" y1="220" x2="520" y2="220" stroke="#ef4444" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 100 390 L 180 340 L 410 210 L 640 210" fill="none" stroke="#ef4444" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+                
                 {/* Blue Line */}
-                <path d="M 120 100 L 280 200 L 480 360" fill="none" stroke="#3b82f6" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 250 110 L 410 190 L 470 270 L 560 340 L 680 340" fill="none" stroke="#3b82f6" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+                
                 {/* Green Line */}
-                <line x1="420" y1="40" x2="420" y2="380" stroke="#10b981" strokeWidth="6" strokeLinecap="round" />
+                <path d="M 470 50 L 470 210 L 510 330" fill="none" stroke="#10b981" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+                
+                {/* Ring Line (Elevated) */}
+                <path d="M 680 340 L 700 340 L 700 390 L 670 430 L 500 440 L 180 365" fill="none" stroke="#38bdf8" strokeWidth="6" strokeDasharray="8,4" strokeLinecap="round" strokeLinejoin="round" />
 
-                {/* INTERCHANGE CONNECTORS */}
-                {/* Pakhtakor - Navoi */}
-                <line x1="260" y1="220" x2="280" y2="200" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
-                {/* Amir Timur - Yunus Rajabi */}
-                <line x1="420" y1="220" x2="420" y2="190" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
-                {/* Oybek - Mingurik */}
-                <line x1="420" y1="320" x2="440" y2="340" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
+                {/* TRANSFER CONNECTOR DASHES */}
+                {/* Pakhtakor ↔ Navoi */}
+                <line x1="410" y1="210" x2="410" y2="190" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
+                {/* Amir Timur ↔ Yunus Rajabi */}
+                <line x1="470" y1="210" x2="470" y2="195" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
+                {/* Oybek ↔ Mingurik */}
+                <line x1="510" y1="310" x2="510" y2="330" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
+                {/* Olmazor ↔ Kipchak */}
+                <line x1="180" y1="340" x2="180" y2="365" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
+                {/* Dustlik ↔ Technopark */}
+                <line x1="680" y1="340" x2="700" y2="340" stroke="#fbbf24" strokeWidth="4" strokeDasharray="3,3" />
 
-                {/* STATIONS DOTS */}
-                {METRO_STATIONS.map((station) => {
-                  const isSelected = selectedMetroStation?.id === station.id;
+                {/* STATIONS CIRCLES & LABELS */}
+                {FULL_METRO_STATIONS.map((st) => {
+                  const isSelected = selectedMetroStation?.id === st.id;
                   return (
-                    <g key={station.id} onClick={() => setSelectedMetroStation(station)} style={{ cursor: 'pointer' }}>
+                    <g key={st.id} onClick={() => setSelectedMetroStation(st)} style={{ cursor: 'pointer' }}>
+                      {/* Outer Golden Ring for Interchange */}
+                      {st.isInterchange && (
+                        <circle cx={st.x} cy={st.y} r={isSelected ? 13 : 10} fill="none" stroke="#fbbf24" strokeWidth="3" />
+                      )}
+                      
+                      {/* Station Dot */}
                       <circle
-                        cx={station.x}
-                        cy={station.y}
-                        r={isSelected ? 10 : 7}
-                        fill={station.isInterchange ? '#fbbf24' : '#ffffff'}
-                        stroke={isSelected ? '#10b981' : '#000000'}
-                        strokeWidth={isSelected ? '4' : '2'}
+                        cx={st.x}
+                        cy={st.y}
+                        r={isSelected ? 8 : (st.isInterchange ? 6 : 5)}
+                        fill={isSelected ? '#10b981' : '#ffffff'}
+                        stroke="#000000"
+                        strokeWidth="2"
                       />
+                      
+                      {/* Station Name Label */}
                       <text
-                        x={station.x}
-                        y={station.y - 14}
-                        fill={isSelected ? '#10b981' : '#e2e8f0'}
-                        fontSize={isSelected ? '13' : '11'}
-                        fontWeight={isSelected ? 'bold' : 'normal'}
+                        x={st.x}
+                        y={st.y - (st.isInterchange ? 14 : 10)}
+                        fill={isSelected ? '#10b981' : '#f8fafc'}
+                        fontSize={isSelected ? '12' : '10'}
+                        fontWeight={isSelected || st.isInterchange ? 'bold' : 'normal'}
                         textAnchor="middle"
                       >
-                        {station.name}
+                        {st.name}
                       </text>
                     </g>
                   );
                 })}
               </svg>
+
+              {/* MAP LEGEND */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginTop: '16px', padding: '12px', background: 'rgba(0,0,0,0.4)', borderRadius: '12px', fontSize: '0.85rem' }}>
+                <span style={{ color: '#ef4444', fontWeight: 'bold' }}>🔴 Чиланзарская</span>
+                <span style={{ color: '#3b82f6', fontWeight: 'bold' }}>🔵 Узбекистанская</span>
+                <span style={{ color: '#10b981', fontWeight: 'bold' }}>🟢 Юнусабадская</span>
+                <span style={{ color: '#38bdf8', fontWeight: 'bold' }}>🩵 Кольцевая Надземная</span>
+                <span style={{ color: '#fbbf24', fontWeight: 'bold' }}>🟡 Двойной круг = Пересадка</span>
+              </div>
             </div>
 
-            {/* DYNAMIC INFORMATION CARD FOR SELECTED STATION */}
+            {/* DYNAMIC CARD FOR SELECTED STATION */}
             {selectedMetroStation && (
-              <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(251, 191, 36, 0.5)', padding: '20px', borderRadius: '16px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(251, 191, 36, 0.6)', padding: '20px', borderRadius: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
                   <h3 style={{ margin: 0, color: '#fbbf24', fontSize: '1.3rem' }}>
                     🚇 Станция: {selectedMetroStation.name}
                   </h3>
-                  <span style={{ background: '#ffffff22', padding: '4px 10px', borderRadius: '12px', fontSize: '0.85rem' }}>
+                  <span style={{ background: '#ffffff22', padding: '4px 12px', borderRadius: '12px', fontSize: '0.85rem', color: '#fff' }}>
                     {selectedMetroStation.line}
                   </span>
                 </div>
-                <p style={{ color: '#fff', fontSize: '1rem', margin: '8px 0 0' }}>
+                
+                <p style={{ color: '#e2e8f0', fontSize: '1rem', marginTop: '10px', lineHeight: '1.5' }}>
                   {selectedMetroStation.info}
                 </p>
+
                 {selectedMetroStation.isInterchange && (
-                  <div style={{ marginTop: '10px', color: '#10b981', fontWeight: 'bold', fontSize: '0.9rem' }}>
-                    🔄 Узел пересадки на станцию «{selectedMetroStation.interchangeWith}»
+                  <div style={{ marginTop: '12px', background: 'rgba(16, 185, 129, 0.15)', border: '1px solid #10b98144', padding: '10px 14px', borderRadius: '10px', color: '#34d399', fontWeight: 'bold', fontSize: '0.9rem' }}>
+                    🔄 Пересадочный узел на станцию «{selectedMetroStation.interchangeWith}»
                   </div>
                 )}
               </div>
@@ -569,65 +608,6 @@ export default function App() {
 
           </div>
         </section>
-
-        {/* FULLSCREEN LIGHTBOX FOR ORIGINAL MAP PHOTO */}
-        {isMetroModalOpen && (
-          <div 
-            onClick={() => setIsMetroModalOpen(false)}
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              backgroundColor: 'rgba(0, 0, 0, 0.95)',
-              backdropFilter: 'blur(10px)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              zIndex: 1000000,
-              padding: '16px',
-              boxSizing: 'border-box'
-            }}
-          >
-            <button
-              type="button"
-              onClick={() => setIsMetroModalOpen(false)}
-              style={{
-                position: 'absolute',
-                top: '20px',
-                right: '25px',
-                background: 'rgba(255,255,255,0.2)',
-                border: 'none',
-                color: '#fff',
-                fontSize: '28px',
-                borderRadius: '50%',
-                width: '50px',
-                height: '50px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                zIndex: 1000001
-              }}
-            >
-              ✕
-            </button>
-            <img 
-              src={METRO_MAP_URL}
-              alt="Схема Метро Ташкента во весь экран" 
-              onClick={(e) => e.stopPropagation()} 
-              style={{
-                maxWidth: '98%',
-                maxHeight: '92vh',
-                objectFit: 'contain',
-                borderRadius: '12px',
-                background: '#fff',
-                padding: '6px'
-              }}
-            />
-          </div>
-        )}
 
         <section id="about" className="section container">
           <div className="section-title">
