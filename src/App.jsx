@@ -46,9 +46,9 @@ const translations = {
       restDesc: 'В большинстве ресторанов в чек автоматически добавляется 10–15% за обслуживание (Service Charge). Дополнительные чаевые оставлять не обязательно.',
     },
     metro: {
-      title: '🚇 Схема и Линии Метро Ташкента',
-      subtitle: 'Нажмите на карту, чтобы открыть во весь экран (как в Telegram)',
-      legendTitle: '📌 Условные обозначения на карте:',
+      title: '🚇 Интерактивная Карта Метро Ташкента',
+      subtitle: 'Нажмите на любую станцию или пересадку, чтобы узнать детали и маршрут!',
+      legendTitle: '📌 Пересадочные узлы:',
       linesTitle: '🔴 Линии метрополитена:',
     }
   },
@@ -96,9 +96,9 @@ const translations = {
       restDesc: 'Most restaurants include a 10–15% service charge directly in the bill. Extra tipping is optional.',
     },
     metro: {
-      title: '🚇 Tashkent Metro Map & Lines',
-      subtitle: 'Click the map to view in full screen (like Telegram)',
-      legendTitle: '📌 Map Legend & Symbols:',
+      title: '🚇 Tashkent Interactive Metro Map',
+      subtitle: 'Click any station or interchange to see route details!',
+      legendTitle: '📌 Transfer Hubs:',
       linesTitle: '🔴 Metro Lines:',
     }
   },
@@ -146,9 +146,9 @@ const translations = {
       restDesc: 'Aksariyat restoranlarda hisob-kitobga 10–15% xizmat haqi avtomatik qo‘shiladi. Qo‘shimcha choypuli qoldirish ixtiyoriy.',
     },
     metro: {
-      title: '🚇 Toshkent Metropoliteni Xaritasi',
-      subtitle: 'To‘liq ekranda ochish uchun xaritaga bosing (Telegram kabi)',
-      legendTitle: '📌 Xaritasidagi shartli belgilar:',
+      title: '🚇 Toshkent Metropoliteni Interaktiv Xaritasi',
+      subtitle: 'Tafsilotlar uchun istalgan bekat yoki o‘tish joyini bosing!',
+      legendTitle: '📌 O‘tish tugunlari:',
       linesTitle: '🔴 Metro yo‘nalishlari:',
     }
   },
@@ -214,6 +214,20 @@ const typeLabels = {
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy' },
 };
 
+// БАЗА ДАННЫХ ИНТЕРАКТИВНЫХ СТАНЦИЙ МЕТРО
+const METRO_STATIONS = [
+  { id: 'chorsu', name: 'Чорсу', line: '🔵 Узбекистанская', x: 180, y: 140, isInterchange: false, info: '🛒 Рынок Чорсу, старый город, сувениры и узбекский плов.' },
+  { id: 'pakhtakor', name: 'Пахтакор', line: '🔴 Чиланзарская', x: 260, y: 220, isInterchange: true, interchangeWith: 'Алишер Навои', info: '🔄 Пересадка на Узбекистанскую (синюю) линию! Рядом стадион Пахтакор и Tashkent City.' },
+  { id: 'navoi', name: 'Алишер Навои', line: '🔵 Узбекистанская', x: 280, y: 200, isInterchange: true, interchangeWith: 'Пахтакор', info: '🔄 Пересадка на Чиланзарскую (красную) линию! Самая красивая станция.' },
+  { id: 'amir_timur', name: 'Амир Тимур Хиёбони', line: '🔴 Чиланзарская', x: 420, y: 220, isInterchange: true, interchangeWith: 'Юнус Раджаби', info: '🔄 Пересадка на Юнусабадскую (зеленую) линию! Центр города, Сквер Амира Тимура, Отель Узбекистан.' },
+  { id: 'yunus_rajabi', name: 'Юнус Раджаби', line: '🟢 Юнусабадская', x: 420, y: 190, isInterchange: true, interchangeWith: 'Амир Тимур', info: '🔄 Пересадка на Чиланзарскую (красную) линию! Самая глубокая станция.' },
+  { id: 'oybek', name: 'Ойбек', line: '🔵 Узбекистанская', x: 420, y: 320, isInterchange: true, interchangeWith: 'Мингурик', info: '🔄 Пересадка на Мингурик (зеленая линия). Выход к фармацевтическому институту.' },
+  { id: 'mingurik', name: 'Мингурик', line: '🟢 Юнусабадская', x: 440, y: 340, isInterchange: true, interchangeWith: 'Ойбек', info: '🔄 Пересадка на Ойбек (синяя линия). Рядом Северный Вокзал.' },
+  { id: 'tashkent', name: 'Ташкент (Вокзал)', line: '🔵 Узбекистанская', x: 480, y: 360, isInterchange: false, info: '🚆 Главный Северный Железнодорожный Вокзал (поезда Афрасиаб в Самарканд/Бухару).' },
+  { id: 'minor', name: 'Минор', line: '🟢 Юнусабадская', x: 420, y: 110, isInterchange: false, info: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.' },
+  { id: 'bodomzor', name: 'Бодомзор', line: '🟢 Юнусабадская', x: 420, y: 60, isInterchange: false, info: '📺 Ташкентская Телебашня и Узэкспоцентр.' },
+];
+
 function formatRate(value, language) {
   if (!value && value !== 0) return '—';
   const numeric = Number(value);
@@ -269,10 +283,10 @@ export default function App() {
   const [calcFrom, setCalcFrom] = useState('USD');
   const [calcTo, setCalcTo] = useState('UZS');
 
-  // Окно карты метро
+  // Выбранная станция на схеме Метро
+  const [selectedMetroStation, setSelectedMetroStation] = useState(METRO_STATIONS[1]); // по умолчанию Пахтакор
   const [isMetroModalOpen, setIsMetroModalOpen] = useState(false);
 
-  // Закрытие модалки по клавише ESC
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') setIsMetroModalOpen(false);
@@ -353,7 +367,7 @@ export default function App() {
         return;
       }
     } catch (e) {
-      console.warn('Не удалось загрузить с ЦБ РУз, пробуем резервный API', e);
+      console.warn('Не удалось загрузить с ЦБ РУз', e);
     }
 
     try {
@@ -367,7 +381,7 @@ export default function App() {
         return;
       }
     } catch (err) {
-      console.error('Резервный API также недоступен', err);
+      console.error('Резервный API недоступен', err);
     }
 
     setRateError(true);
@@ -379,17 +393,10 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
-  // Вычисление результата калькулятора
   const calculatedResult = useMemo(() => {
     if (!usdRate || !eurRate || !calcAmount || Number.isNaN(Number(calcAmount))) return '—';
 
-    // Базовые коэффициенты к UZS
-    const ratesInUzs = {
-      UZS: 1,
-      USD: usdRate,
-      EUR: eurRate,
-    };
-
+    const ratesInUzs = { UZS: 1, USD: usdRate, EUR: eurRate };
     const amountInUzs = calcAmount * ratesInUzs[calcFrom];
     const result = amountInUzs / ratesInUzs[calcTo];
 
@@ -472,85 +479,98 @@ export default function App() {
           </div>
         </section>
 
-        {/* METRO SECTION */}
+        {/* INTERACTIVE VECTOR METRO SECTION */}
         <section className="section section-alt container">
           <div className="section-title">
-            <p className="eyebrow">🚇 METRO GUIDE</p>
+            <p className="eyebrow">🚇 INTERACTIVE METRO</p>
             <h2>{t('metro.title')}</h2>
             <p style={{ color: '#aaa', marginTop: '8px' }}>{t('metro.subtitle')}</p>
           </div>
 
-          <div className="detail-panel" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)', padding: '24px', borderRadius: '24px' }}>
-            <div 
-              onClick={() => setIsMetroModalOpen(true)}
-              style={{ 
-                width: '100%', 
-                cursor: 'pointer', 
-                borderRadius: '16px', 
-                marginBottom: '24px', 
-                background: '#fff', 
-                padding: '16px',
-                position: 'relative',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
-              }}
-            >
-              <span style={{
-                position: 'absolute',
-                top: '24px',
-                right: '24px',
-                background: 'rgba(0,0,0,0.85)',
-                color: '#fff',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                fontSize: '0.85rem',
-                fontWeight: 'bold',
-                pointerEvents: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                zIndex: 5
-              }}>
-                🔍 Нажмите для увеличения
-              </span>
-              <img 
-                src={METRO_MAP_URL}
-                alt="Схема Ташкентского Метрополитена" 
-                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px' }}
-              />
+          <div className="detail-panel" style={{ background: 'rgba(15,23,42,0.8)', border: '1px solid rgba(255,255,255,0.15)', padding: '24px', borderRadius: '24px' }}>
+            
+            {/* SVG INTERACTIVE MAP */}
+            <div style={{ position: 'relative', overflowX: 'auto', background: '#0b1329', padding: '20px', borderRadius: '16px', border: '1px solid #ffffff11' }}>
+              <button 
+                type="button" 
+                onClick={() => setIsMetroModalOpen(true)}
+                style={{ position: 'absolute', top: '15px', right: '15px', background: 'rgba(255,255,255,0.15)', color: '#fff', border: 'none', padding: '6px 14px', borderRadius: '20px', cursor: 'pointer', fontSize: '0.85rem', fontWeight: 'bold' }}
+              >
+                🔍 Открыть фото-схему
+              </button>
+
+              <svg viewBox="0 0 600 420" style={{ width: '100%', minWidth: '500px', height: 'auto' }}>
+                {/* LINETRACKS */}
+                {/* Red Line */}
+                <line x1="80" y1="220" x2="520" y2="220" stroke="#ef4444" strokeWidth="6" strokeLinecap="round" />
+                {/* Blue Line */}
+                <path d="M 120 100 L 280 200 L 480 360" fill="none" stroke="#3b82f6" strokeWidth="6" strokeLinecap="round" />
+                {/* Green Line */}
+                <line x1="420" y1="40" x2="420" y2="380" stroke="#10b981" strokeWidth="6" strokeLinecap="round" />
+
+                {/* INTERCHANGE CONNECTORS */}
+                {/* Pakhtakor - Navoi */}
+                <line x1="260" y1="220" x2="280" y2="200" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
+                {/* Amir Timur - Yunus Rajabi */}
+                <line x1="420" y1="220" x2="420" y2="190" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
+                {/* Oybek - Mingurik */}
+                <line x1="420" y1="320" x2="440" y2="340" stroke="#ffffff" strokeWidth="3" strokeDasharray="3,3" />
+
+                {/* STATIONS DOTS */}
+                {METRO_STATIONS.map((station) => {
+                  const isSelected = selectedMetroStation?.id === station.id;
+                  return (
+                    <g key={station.id} onClick={() => setSelectedMetroStation(station)} style={{ cursor: 'pointer' }}>
+                      <circle
+                        cx={station.x}
+                        cy={station.y}
+                        r={isSelected ? 10 : 7}
+                        fill={station.isInterchange ? '#fbbf24' : '#ffffff'}
+                        stroke={isSelected ? '#10b981' : '#000000'}
+                        strokeWidth={isSelected ? '4' : '2'}
+                      />
+                      <text
+                        x={station.x}
+                        y={station.y - 14}
+                        fill={isSelected ? '#10b981' : '#e2e8f0'}
+                        fontSize={isSelected ? '13' : '11'}
+                        fontWeight={isSelected ? 'bold' : 'normal'}
+                        textAnchor="middle"
+                      >
+                        {station.name}
+                      </text>
+                    </g>
+                  );
+                })}
+              </svg>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '20px' }}>
-              <div>
-                <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.linesTitle')}</h4>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
-                  <li style={{ color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    🔴 <b>Чиланзарская линия</b> — Сквер, Чорсу, Сергели
-                  </li>
-                  <li style={{ color: '#3b82f6', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    🔵 <b>Узбекистанская линия</b> — Базар Чорсу, Вокзал, Космонавтов
-                  </li>
-                  <li style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    🟢 <b>Юнусабадская линия</b> — Телебашня, Минор, Юнус Раджаби
-                  </li>
-                  <li style={{ color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    🩵 <b>Кольцевая линия</b> — Технопарк, Куйлюк, Кипчак
-                  </li>
-                </ul>
+            {/* DYNAMIC INFORMATION CARD FOR SELECTED STATION */}
+            {selectedMetroStation && (
+              <div style={{ marginTop: '20px', background: 'rgba(255, 255, 255, 0.06)', border: '1px solid rgba(251, 191, 36, 0.5)', padding: '20px', borderRadius: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <h3 style={{ margin: 0, color: '#fbbf24', fontSize: '1.3rem' }}>
+                    🚇 Станция: {selectedMetroStation.name}
+                  </h3>
+                  <span style={{ background: '#ffffff22', padding: '4px 10px', borderRadius: '12px', fontSize: '0.85rem' }}>
+                    {selectedMetroStation.line}
+                  </span>
+                </div>
+                <p style={{ color: '#fff', fontSize: '1rem', margin: '8px 0 0' }}>
+                  {selectedMetroStation.info}
+                </p>
+                {selectedMetroStation.isInterchange && (
+                  <div style={{ marginTop: '10px', color: '#10b981', fontWeight: 'bold', fontSize: '0.9rem' }}>
+                    🔄 Узел пересадки на станцию «{selectedMetroStation.interchangeWith}»
+                  </div>
+                )}
               </div>
+            )}
 
-              <div>
-                <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.legendTitle')}</h4>
-                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: '#ccc' }}>
-                  <li>🔄 <b>Пересадочные узлы:</b> <i>Пахтакор ↔ Алишер Навои</i>, <i>Амир Тимур ↔ Юнус Раджаби</i>, <i>Ойбек ↔ Мингурик</i>.</li>
-                  <li>🚆 <b>Вокзалы:</b> Станция «Ташкент» (Северный) и «Жанубий» (Южный).</li>
-                  <li>🎫 <b>Стоимость проезда:</b> 1 700 UZS (оплата любой банковской картой или QR-билетом).</li>
-                </ul>
-              </div>
-            </div>
           </div>
         </section>
 
-        {/* FULLSCREEN LIGHTBOX FOR METRO MAP */}
+        {/* FULLSCREEN LIGHTBOX FOR ORIGINAL MAP PHOTO */}
         {isMetroModalOpen && (
           <div 
             onClick={() => setIsMetroModalOpen(false)}
@@ -645,7 +665,6 @@ export default function App() {
           </div>
           
           <div className="rate-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
-            {/* LIVE RATES CARD */}
             <div className="rate-card">
               <span className="eyebrow">USD & EUR → UZS</span>
               <h3 className="rate-value" style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '1.4rem', margin: '16px 0' }}>
@@ -658,7 +677,6 @@ export default function App() {
               </button>
             </div>
 
-            {/* CURRENCY CALCULATOR CARD */}
             <div className="rate-card" style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.15)', padding: '24px', borderRadius: '16px' }}>
               <h3 style={{ marginTop: 0, marginBottom: '16px', fontSize: '1.2rem', color: '#fbbf24' }}>{t('rate.calcTitle')}</h3>
               
