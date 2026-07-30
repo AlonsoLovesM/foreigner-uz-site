@@ -35,7 +35,7 @@ const translations = {
     },
     metro: {
       title: '🚇 Схема и Линии Метро Ташкента',
-      subtitle: 'Интерактивная карта, пересадочные узлы и обозначения',
+      subtitle: 'Нажмите на карту, чтобы открыть во весь экран (как в Telegram)',
       legendTitle: '📌 Условные обозначения на карте:',
       linesTitle: '🔴 Линии метрополитена:',
     }
@@ -73,7 +73,7 @@ const translations = {
     },
     metro: {
       title: '🚇 Tashkent Metro Map & Lines',
-      subtitle: 'Interactive map, transfer hubs and legend',
+      subtitle: 'Click the map to view in full screen (like Telegram)',
       legendTitle: '📌 Map Legend & Symbols:',
       linesTitle: '🔴 Metro Lines:',
     }
@@ -99,7 +99,7 @@ const translations = {
     rate: { title: 'MB Valyuta kurslari', subtitle: 'AQSh dollari va Yevro kursi so‘mda.', loaded: 'Yangilandi', tip: 'Valyutani qulay kursda almashtirish uchun ishonchli banklar va bankomatlardan foydalaning.', refresh: 'Kursni yangilash', error: 'Kursni yuklab bo‘lmadi. Keyinroq urinib ko‘ring.' },
     places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Manzil' },
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
-    routes: { title: 'Yo‘nalishlar', subtitle: 'Künduzgi va kechki tayyor yo‘nalishlar.' },
+    routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
     download: { pre: 'Tez orada telefoningizda', title: 'Ilovani oching va safaringizni yorqinroq qiladigan marshrutni oling.', text: 'Biz vaqtingizni bekorga sarflamasdan ko‘proq narsani ko‘rishingiz uchun mahsulot yaratmoqdamiz.' },
     faq: {
       title: 'Sayyohlar uchun eslatma',
@@ -111,7 +111,7 @@ const translations = {
     },
     metro: {
       title: '🚇 Toshkent Metropoliteni Xaritasi',
-      subtitle: 'Interaktiv xarita, o‘tish bekatlari va belgilashlar',
+      subtitle: 'To‘liq ekranda ochish uchun xaritaga bosing (Telegram kabi)',
       legendTitle: '📌 Xaritasidagi shartli belgilar:',
       linesTitle: '🔴 Metro yo‘nalishlari:',
     }
@@ -208,13 +208,15 @@ function mapsUrl(place, language) {
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
-// Безопасная официальная ссылка Яндекс Maps / Yandex Go
 function yandexTaxiUrl(place, language) {
   const name = getPlaceField(place, 'name', language) || 'Ташкент';
   const address = getPlaceField(place, 'address', language) || '';
   const searchStr = encodeURIComponent(`Ташкент ${name} ${address}`);
   return `https://yandex.ru/maps/?text=${searchStr}`;
 }
+
+// Прямая ссылка на загруженную тобой четкую схему метро Ташкента
+const METRO_MAP_URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tashkent_Metro_Map_ru.svg/1280px-Tashkent_Metro_Map_ru.svg.png";
 
 export default function App() {
   const [language, setLanguage] = useState('ru');
@@ -226,6 +228,9 @@ export default function App() {
   const [eurRate, setEurRate] = useState(null);
   const [rateUpdated, setRateUpdated] = useState('');
   const [rateError, setRateError] = useState(false);
+
+  // Состояние полноэкранного просмотра карты метро (Telegram Lightbox)
+  const [isMetroModalOpen, setIsMetroModalOpen] = useState(false);
 
   // Избранное
   const [favorites, setFavorites] = useState(() => {
@@ -410,52 +415,140 @@ export default function App() {
 
           <div className="detail-panel" style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.1)', padding: '24px', borderRadius: '24px' }}>
             
-            {/* FULL MAP IMAGE */}
-            <div style={{ width: '100%', overflowX: 'auto', borderRadius: '16px', marginBottom: '24px', background: '#111', padding: '10px' }}>
+            {/* CLICKABLE MAP WITH HOVER & ZOOM ICON */}
+            <div 
+              onClick={() => setIsMetroModalOpen(true)}
+              style={{ 
+                width: '100%', 
+                cursor: 'zoom-in', 
+                borderRadius: '16px', 
+                marginBottom: '24px', 
+                background: '#fff', 
+                padding: '16px',
+                position: 'relative',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+                transition: 'transform 0.2s ease',
+              }}
+              className="metro-img-container"
+            >
+              <span style={{
+                position: 'absolute',
+                top: '24px',
+                right: '24px',
+                background: 'rgba(0,0,0,0.75)',
+                color: '#fff',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                fontSize: '0.85rem',
+                fontWeight: 'bold',
+                pointerEvents: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                zIndex: 2
+              }}>
+                🔍 Нажмите для увеличения
+              </span>
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Tashkent_Metro_Map_ru.svg/1280px-Tashkent_Metro_Map_ru.svg.png" 
+                src={METRO_MAP_URL}
                 alt="Схема Ташкентского Метрополитена" 
-                style={{ width: '100%', minWidth: '600px', height: 'auto', display: 'block', borderRadius: '12px' }}
+                style={{ width: '100%', height: 'auto', display: 'block', borderRadius: '8px' }}
               />
             </div>
 
             {/* LINES & INTERCHANGES LEGEND */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '20px' }}>
-              
-              {/* LINES */}
               <div>
                 <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.linesTitle')}</h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem' }}>
-                  <li style={{ color: '#ef4444', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
-                    🔴 <b>Чиланзарская (Chilonzor)</b> — Центр, Сквер, Базар Чиланзар
+                  <li style={{ color: '#ef4444', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    🔴 <b>Чиланзарская линия</b> — Сквер, Чорсу, Сергели
                   </li>
-                  <li style={{ color: '#3b82f6', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
-                    🔵 <b>Узбекистанская (O‘zbekiston)</b> — Базар Чорсу, Вокзал, Космонавтов
+                  <li style={{ color: '#3b82f6', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    🔵 <b>Узбекистанская линия</b> — Базар Чорсу, Вокзал, Космонавтов
                   </li>
-                  <li style={{ color: '#10b981', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
-                    🟢 <b>Юнусабадская (Yunusobod)</b> — Телебашня, Шахристани, ТРЦ
+                  <li style={{ color: '#10b981', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    🟢 <b>Юнусабадская линия</b> — Телебашня, Минор, Юнус Раджаби
                   </li>
-                  <li style={{ color: '#eab308', display: 'flex', itemsCenter: 'center', gap: '8px' }}>
-                    🟡 <b>30-летия Независимости (Yerusti halqa)</b> — Наземное кольцо
+                  <li style={{ color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    🩵 <b>Кольцевая линия</b> — Технопарк, Куйлюк, Кипчак
                   </li>
                 </ul>
               </div>
 
-              {/* INTERCHANGES & SYMBOLS */}
               <div>
                 <h4 style={{ color: '#fff', marginBottom: '12px', fontSize: '1.1rem' }}>{t('metro.legendTitle')}</h4>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: '#ccc' }}>
-                  <li>🔄 <b>Пересадочный узел:</b> Станции соединяются подземными переходами (например: <i>Пахтакор ↔ Алишер Навои</i>, <i>Амир Тимур ↔ Юнус Раджаби</i>, <i>Ойбек ↔ Мингурик</i>).</li>
-                  <li>🚆 <b>Вокзал (Railway Station):</b> Станция «Ташкент» (Северный) и «Жанубий» (Южный).</li>
-                  <li>✈️ <b>Аэропорт (Airport):</b> Ближайшие станции метро — «Ташкент» или наземное кольцо.</li>
-                  <li>🎫 <b>Стоимость проезда:</b> 1 700 UZS (оплата любой картой/QR).</li>
+                  <li>🔄 <b>Пересадочные узлы:</b> <i>Пахтакор ↔ Алишер Навои</i>, <i>Амир Тимур ↔ Юнус Раджаби</i>, <i>Ойбек ↔ Мингурик</i>.</li>
+                  <li>🚆 <b>Вокзалы:</b> Станция «Ташкент» (Северный) и «Жанубий» (Южный).</li>
+                  <li>🎫 <b>Стоимость проезда:</b> 1 700 UZS (оплата любой банковской картой или QR-билетом).</li>
                 </ul>
               </div>
-
             </div>
 
           </div>
         </section>
+
+        {/* MODAL FULLSCREEN METRO LIGHTBOX (TELEGRAM STYLE) */}
+        {isMetroModalOpen && (
+          <div 
+            onClick={() => setIsMetroModalOpen(false)}
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              backgroundColor: 'rgba(0, 0, 0, 0.92)',
+              backdropFilter: 'blur(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 99999,
+              padding: '20px',
+              cursor: 'zoom-out'
+            }}
+          >
+            <button
+              type="button"
+              onClick={() => setIsMetroModalOpen(false)}
+              style={{
+                position: 'absolute',
+                top: '20px',
+                right: '25px',
+                background: 'rgba(255,255,255,0.2)',
+                border: 'none',
+                color: '#fff',
+                fontSize: '24px',
+                borderRadius: '50%',
+                width: '44px',
+                height: '44px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 100000
+              }}
+            >
+              ✕
+            </button>
+            <img 
+              src={METRO_MAP_URL}
+              alt="Схема Метро Ташкента во весь экран" 
+              onClick={(e) => e.stopPropagation()} // Чтобы клик по самой картинке не закрывал её случайно
+              style={{
+                maxWidth: '95%',
+                maxHeight: '90vh',
+                objectFit: 'contain',
+                borderRadius: '12px',
+                boxShadow: '0 0 40px rgba(0,0,0,0.8)',
+                cursor: 'default',
+                background: '#fff',
+                padding: '8px'
+              }}
+            />
+          </div>
+        )}
 
         <section id="about" className="section container">
           <div className="section-title">
@@ -538,7 +631,6 @@ export default function App() {
                 const isFav = favorites.includes(place.id);
                 return (
                   <article key={place.id} className="place-card" style={{ position: 'relative' }}>
-                    {/* HEART FAVORITE BUTTON */}
                     <button
                       type="button"
                       onClick={() => toggleFavorite(place.id)}
@@ -569,7 +661,6 @@ export default function App() {
                     <p>{getPlaceField(place, 'description', language)}</p>
                     <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
 
-                    {/* ACTION BUTTONS: GOOGLE MAPS + YANDEX GO */}
                     <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
                       <a
                         href={mapsUrl(place, language)}
