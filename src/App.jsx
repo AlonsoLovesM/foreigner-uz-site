@@ -17,12 +17,12 @@ const translations = {
     },
     cards: {
       places: { title: 'Лучшие точки в Ташкенте', description: 'Найди отели, рынки, рестораны, обменные пункты и полезные сервисы рядом с тобой.', accent: 'Места' },
-      currency: { title: 'Курс валют', description: 'Актуальный курс USD и EUR обновляется каждый день автоматически.', accent: 'Курс' },
+      currency: { title: 'Курс валют', description: 'Актуальный курс USD, EUR, RUB и CNY обновляется автоматически.', accent: 'Курс' },
       bot: { title: 'Помощник в Telegram', description: 'Бот поможет ответить на вопросы и даст подсказку по Ташкенту в реальном времени.', accent: 'Бот' },
     },
     rate: {
       title: 'Курсы валют ЦБ РУз & Калькулятор',
-      subtitle: 'Актуальный курс и мгновенный конвертер UZS, USD и EUR.',
+      subtitle: 'Актуальный курс и мгновенный конвертер UZS, USD, EUR, RUB и CNY.',
       loaded: 'Обновлено',
       tip: 'Лучше обменивать деньги в проверенных банках или банкоматах, чтобы получить выгодный курс.',
       refresh: 'Обновить курс',
@@ -91,12 +91,12 @@ const translations = {
     },
     cards: {
       places: { title: 'Best spots in Tashkent', description: 'Find hotels, markets, restaurants, exchange offices and useful services near you.', accent: 'Places' },
-      currency: { title: 'Exchange rates', description: 'The USD and EUR rates are updated daily automatically.', accent: 'Rate' },
+      currency: { title: 'Exchange rates', description: 'The USD, EUR, RUB, and CNY rates are updated daily automatically.', accent: 'Rate' },
       bot: { title: 'Telegram assistant', description: 'The bot helps answer questions and gives tips about Tashkent in real time.', accent: 'Bot' },
     },
     rate: {
       title: 'CBU Exchange Rates & Converter',
-      subtitle: 'Live rates and instant converter for UZS, USD and EUR.',
+      subtitle: 'Live rates and instant converter for UZS, USD, EUR, RUB and CNY.',
       loaded: 'Updated',
       tip: 'It is better to exchange money at trusted banks or ATMs for a good rate.',
       refresh: 'Refresh rate',
@@ -165,12 +165,12 @@ const translations = {
     },
     cards: {
       places: { title: 'Toshkentdagi eng yaxshi joylar', description: 'Yaqiningizdagi mehmonxonalar, bozorlar, restoranlar va foydali xizmatlarni toping.', accent: 'Joylar' },
-      currency: { title: 'Valyuta kursi', description: 'AQSh dollari va Yevro kursi har kuni avtomatik yangilanadi.', accent: 'Kurs' },
+      currency: { title: 'Valyuta kursi', description: 'USD, EUR, RUB va CNY valyuta kurslari avtomatik yangilanadi.', accent: 'Kurs' },
       bot: { title: 'Telegram yordamchi', description: 'Bot savollarga javob beradi va real vaqt rejimida Toshkent bo‘yicha maslahat beradi.', accent: 'Bot' },
     },
     rate: {
       title: 'MB Valyuta kurslari & Kalkulyator',
-      subtitle: 'Jonli kurslar va UZS, USD hamda EUR tezkor kalkulyatori.',
+      subtitle: 'Jonli kurslar va UZS, USD, EUR, RUB hamda CNY tezkor kalkulyatori.',
       loaded: 'Yangilandi',
       tip: 'Valyutani qulay kursda almashtirish uchun ishonchli banklar va bankomatlardan foydalaning.',
       refresh: 'Kursni yangilash',
@@ -390,7 +390,6 @@ const typeLabels = {
 };
 
 const FULL_METRO_STATIONS = [
-  // 🔴 Чиланзарская линия
   { id: 'chinar', name: { ru: 'Чинар (14-Бекат)', en: 'Chinar (Station 14)', uz: 'Chinor (14-Bekat)' }, line: { ru: '🔴 Чиланзарская (Сергели)', en: '🔴 Chilanzar Line (Sergeli)', uz: '🔴 Chilonzor yo‘nalishi' }, x: 100, y: 390, isInterchange: false, info: { ru: 'Конечная Сергелийской надземной ветки.', en: 'Terminus of the Sergeli elevated section.', uz: 'Sergeli yerusti yo‘nalishining oxirgi bekati.' } },
   { id: 'olmazor', name: { ru: 'Олмазор', en: 'Olmazor', uz: 'Olmazor' }, line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' }, x: 180, y: 340, isInterchange: true, interchangeWith: 'Кипчак / Kipchak', info: { ru: '🔄 Пересадка на Кольцевую надземную линию (Станция Кипчак).', en: '🔄 Transfer to Circle Elevated Line (Kipchak Station).', uz: '🔄 Yerusti Halqa yo‘nalishiga o‘tish bekati (Qipchoq bekati).' } },
   { id: 'chilonzor', name: { ru: 'Чиланзар', en: 'Chilanzar', uz: 'Chilonzor' }, line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' }, x: 230, y: 310, isInterchange: false, info: { ru: 'Крупный жилой массив, торговые ряды и кафе.', en: 'Large residential neighborhood, retail areas and cafes.', uz: 'Yirik turar-joy massivi, savdo qatorlari va kafelar.' } },
@@ -402,8 +401,6 @@ const FULL_METRO_STATIONS = [
   { id: 'khamid_olimjon', name: { ru: 'Хамид Олимджан', en: 'Khamid Olimjan', uz: 'Hamid Olimjon' }, line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' }, x: 530, y: 210, isInterchange: false, info: { ru: 'Площадь Х.Олимджана, жилые высотки.', en: 'Kh. Olimjan Square and residential towers.', uz: 'H.Olimjon maydoni va baland turar-joylar.' } },
   { id: 'pushkin', name: { ru: 'Пушкин', en: 'Pushkin', uz: 'Pushkin' }, line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' }, x: 580, y: 210, isInterchange: false, info: { ru: 'Старый город, парковые зоны.', en: 'Historic district and park spaces.', uz: 'Eski shahar, bog‘lar zonalari.' } },
   { id: 'buyuk_ipak_yuli', name: { ru: 'Буюк Ипак Йули', en: 'Buyuk Ipak Yuli', uz: 'Buyuk Ipak Yo‘li' }, line: { ru: '🔴 Чиланзарская', en: '🔴 Chilanzar Line', uz: '🔴 Chilonzor yo‘nalishi' }, x: 640, y: 210, isInterchange: false, info: { ru: 'Конечная красной линии, выезд на Чирчик и Газалкент.', en: 'Terminus of the Red Line, exit towards Chirchik and Gazalkent.', uz: 'Qizil yo‘nalishning oxirgi bekati, Chirchiq va G‘azalkentga chiqish.' } },
-
-  // 🔵 Узбекистанская линия
   { id: 'beruni', name: { ru: 'Беруни', en: 'Beruni', uz: 'Beruniy' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 250, y: 110, isInterchange: false, info: { ru: 'ВУЗгородок, Национальный Университет (НУУз).', en: 'University Campus, National University (NUUz).', uz: 'Talabalar shaharchasi, O‘zbekiston Milliy Universiteti.' } },
   { id: 'tinchlik', name: { ru: 'Тинчлик', en: 'Tinchlik', uz: 'Tinchlik' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 300, y: 130, isInterchange: false, info: { ru: 'Тихий жилой район, автосалоны.', en: 'Quiet residential neighborhood, car dealerships.', uz: 'Sokin turar-joy hududi, avtosalonlar.' } },
   { id: 'chorsu', name: { ru: 'Чорсу', en: 'Chorsu', uz: 'Chorsu' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 350, y: 160, isInterchange: false, info: { ru: '🛒 Знаменитый Базар Чорсу, старый город, сувениры и восточные сладости.', en: '🛒 Famous Chorsu Bazaar, Old City, souvenirs and oriental sweets.', uz: '🛒 Mashhur Chorsu bozori, eski shahar, esdalik sovg‘alari va shirinliklar.' } },
@@ -414,8 +411,6 @@ const FULL_METRO_STATIONS = [
   { id: 'tashkent', name: { ru: 'Ташкент (Вокзал)', en: 'Tashkent (Railway Station)', uz: 'Toshkent (Vokzal)' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 560, y: 340, isInterchange: false, info: { ru: '🚆 Главный Северный Железнодорожный Вокзал (Скоростные поезда Афрасиаб).', en: '🚆 Main Northern Railway Station (Afrasiyab High-Speed Trains to Samarkand).', uz: '🚆 Asosiy Shimoliy Temir Yo‘l Vokzali (Afrosiyob tezurar poyezdlari).' } },
   { id: 'mashinasozlar', name: { ru: 'Машиностроителей', en: 'Mashinosozlar', uz: 'Mashinasozlar' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 620, y: 340, isInterchange: false, info: { ru: 'Промышленная зона, электроаппарат.', en: 'Industrial zone and electrical equipment sector.', uz: 'Sanoat zonasi, elektr apparat zavodi.' } },
   { id: 'dustlik', name: { ru: 'Дустлик', en: 'Dustlik', uz: 'Do‘stlik' }, line: { ru: '🔵 Узбекистанская', en: '🔵 Uzbekistan Line', uz: '🔵 O‘zbekiston yo‘nalishi' }, x: 680, y: 340, isInterchange: true, interchangeWith: 'Технопарк / Technopark', info: { ru: '🔄 ПЕРЕСАДКА на Надземную Кольцевую линию (Станция Технопарк).', en: '🔄 TRANSFER to Circle Elevated Line (Technopark Station).', uz: '🔄 Yerusti Halqa yo‘nalishiga O‘TISH (Texnopark bekati).' } },
-
-  // 🟢 Юнусабадская линия
   { id: 'turkiston', name: { ru: 'Туркистон', en: 'Turkiston', uz: 'Turkiston' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 470, y: 50, isInterchange: false, info: { ru: 'Север Юнусабада, ТРЦ Mega Planet.', en: 'North Yunusabad district, Mega Planet Mall.', uz: 'Yunusobod shimoli, Mega Planet KO‘M.' } },
   { id: 'yunusobod', name: { ru: 'Юнусабад', en: 'Yunusobod', uz: 'Yunusobod' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 470, y: 90, isInterchange: false, info: { ru: 'Юнусабадский базар и теннисный комплекс.', en: 'Yunusabad Bazaar and tennis complex.', uz: 'Yunusobod bozori va tennis majmuasi.' } },
   { id: 'shahriston', name: { ru: 'Шахристан', en: 'Shahriston', uz: 'Shahriston' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 470, y: 120, isInterchange: false, info: { ru: 'Набережная реки Бозсу, транспортная развязка.', en: 'Bozsu River embankment, transit hub.', uz: 'Bozsuv daryosi bo‘yi, yo‘l o‘tkazgich.' } },
@@ -423,8 +418,6 @@ const FULL_METRO_STATIONS = [
   { id: 'minor', name: { ru: 'Минор', en: 'Minor', uz: 'Minor' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 470, y: 175, isInterchange: false, info: { ru: '🕌 Белоснежная мечеть Минор и набережная канала Анхор.', en: '🕌 White Minor Mosque and Anhor Canal promenade.', uz: '🕌 Oppoq Minor masjidi va Anhor kanali bo‘yi.' } },
   { id: 'yunus_rajabi', name: { ru: 'Юнус Раджаби', en: 'Yunus Rajabi', uz: 'Yunus Rajabiy' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 470, y: 195, isInterchange: true, interchangeWith: 'Амир Тимур / Amir Timur', info: { ru: '🔄 ПЕРЕСАДКА на Чиланзарскую (красную) линию! Самая глубокая станция.', en: '🔄 TRANSFER to Chilanzar (Red) Line! Deepest station in Tashkent.', uz: '🔄 Chilonzor (qizil) yo‘nalishiga O‘TISH! Eng chuqur bekat.' } },
   { id: 'mingurik', name: { ru: 'Мингурик', en: 'Mingurik', uz: 'Ming O‘rik' }, line: { ru: '🟢 Юнусабадская', en: '🟢 Yunusabad Line', uz: '🟢 Yunusobod yo‘nalishi' }, x: 510, y: 330, isInterchange: true, interchangeWith: 'Ойбек / Oybek', info: { ru: '🔄 ПЕРЕСАДКА на Узбекистанскую (синюю) линию (Ойбек). Рядом Северный Вокзал.', en: '🔄 TRANSFER to Uzbekistan (Blue) Line (Oybek). Near Northern Station.', uz: '🔄 O‘zbekiston (ko‘k) yo‘nalishiga O‘TISH (Oybek). Shimoliy Vokzal yonida.' } },
-
-  // 🩵 Все 14 станций Кольцевой
   { id: 'technopark', name: { ru: 'Технопарк (1-Бекат)', en: 'Technopark (Station 1)', uz: 'Texnopark (1-Bekat)' }, line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' }, x: 700, y: 340, isInterchange: true, interchangeWith: 'Дустлик / Dustlik', info: { ru: '🔄 ПЕРЕСАДКА на синюю линию (Дустлик). Начало надземного кольца.', en: '🔄 TRANSFER to Blue Line (Dustlik). Start of elevated circle.', uz: '🔄 Ko‘k yo‘nalishga O‘TISH (Do‘stlik). Yerusti halqasi boshi.' } },
   { id: 'yashnobod', name: { ru: 'Яшнабад (2-Бекат)', en: 'Yashnabad (Station 2)', uz: 'Yashnobod (2-Bekat)' }, line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' }, x: 700, y: 370, isInterchange: false, info: { ru: 'Эстакада над Яшнабадским районом.', en: 'Elevated viaduct over Yashnabad district.', uz: 'Yashnobod tumani yerusti ko‘prigi.' } },
   { id: 'tuzel', name: { ru: 'Тузель (3-Бекат)', en: 'Tuzel (Station 3)', uz: 'Tuzel (3-Bekat)' }, line: { ru: '🩵 Кольцевая Надземная', en: '🩵 Circle Elevated Line', uz: '🩵 Yerusti Halqa yo‘nalishi' }, x: 690, y: 400, isInterchange: false, info: { ru: 'Массив Тузель, локальный рынок.', en: 'Tuzel neighborhood, local market.', uz: 'Tuzel massivi, mahalliy bozor.' } },
@@ -467,7 +460,7 @@ function getTypeLabel(place, language) {
 function mapsUrl(place, language) {
   const queryValue = place.maps_query || `${getPlaceField(place, 'name', language)} ${getPlaceField(place, 'address', language)}`;
   const query = encodeURIComponent(queryValue.trim());
-  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+  return `https://www.google.com/maps/search/?api=1&query=$${query}`;
 }
 
 function yandexTaxiUrl(place, language) {
@@ -485,21 +478,19 @@ export default function App() {
 
   const [usdRate, setUsdRate] = useState(null);
   const [eurRate, setEurRate] = useState(null);
+  const [rubRate, setRubRate] = useState(null);
+  const [cnyRate, setCnyRate] = useState(null);
   const [rateUpdated, setRateUpdated] = useState('');
   const [rateError, setRateError] = useState(false);
 
-  // ПОГОДА В ТАШКЕНТЕ
   const [weatherData, setWeatherData] = useState(null);
 
-  // Калькулятор Валют
   const [calcAmount, setCalcAmount] = useState(100);
   const [calcFrom, setCalcFrom] = useState('USD');
   const [calcTo, setCalcTo] = useState('UZS');
 
-  // Выбранная станция на схеме Метро
   const [selectedMetroStation, setSelectedMetroStation] = useState(FULL_METRO_STATIONS[6]);
 
-  // Избранное
   const [favorites, setFavorites] = useState(() => {
     try {
       const saved = localStorage.getItem('foreigner_favorites');
@@ -579,32 +570,21 @@ export default function App() {
 
       const usd = data.find((item) => item.Ccy === 'USD');
       const eur = data.find((item) => item.Ccy === 'EUR');
+      const rub = data.find((item) => item.Ccy === 'RUB');
+      const cny = data.find((item) => item.Ccy === 'CNY');
 
       if (usd && eur) {
         setUsdRate(parseFloat(usd.Rate));
         setEurRate(parseFloat(eur.Rate));
+        if (rub) setRubRate(parseFloat(rub.Rate));
+        if (cny) setCnyRate(parseFloat(cny.Rate));
         setRateUpdated(usd.Date || new Date().toLocaleDateString());
         return;
       }
     } catch (e) {
       console.warn('Не удалось загрузить с ЦБ РУз', e);
+      setRateError(true);
     }
-
-    try {
-      const response = await fetch('https://open.er-api.com/v6/latest/USD');
-      const data = await response.json();
-      if (data?.rates?.UZS) {
-        setUsdRate(data.rates.UZS);
-        const eurInUzs = data.rates.EUR ? (data.rates.UZS / data.rates.EUR) : 13800;
-        setEurRate(eurInUzs);
-        setRateUpdated(data.time_last_update_utc || new Date().toISOString());
-        return;
-      }
-    } catch (err) {
-      console.error('Резервный API недоступен', err);
-    }
-
-    setRateError(true);
   };
 
   useEffect(() => {
@@ -620,14 +600,21 @@ export default function App() {
   const calculatedResult = useMemo(() => {
     if (!usdRate || !eurRate || !calcAmount || Number.isNaN(Number(calcAmount))) return '—';
 
-    const ratesInUzs = { UZS: 1, USD: usdRate, EUR: eurRate };
-    const amountInUzs = calcAmount * ratesInUzs[calcFrom];
-    const result = amountInUzs / ratesInUzs[calcTo];
+    const ratesInUzs = { 
+      UZS: 1, 
+      USD: usdRate, 
+      EUR: eurRate, 
+      RUB: rubRate || 140, 
+      CNY: cnyRate || 1750 
+    };
+
+    const amountInUzs = calcAmount * (ratesInUzs[calcFrom] || 1);
+    const result = amountInUzs / (ratesInUzs[calcTo] || 1);
 
     return calcTo === 'UZS' 
       ? Math.round(result).toLocaleString('ru-RU') 
       : result.toFixed(2).toLocaleString('en-US');
-  }, [calcAmount, calcFrom, calcTo, usdRate, eurRate]);
+  }, [calcAmount, calcFrom, calcTo, usdRate, eurRate, rubRate, cnyRate]);
 
   const routeItems = selectedRoute?.items || [];
 
@@ -675,7 +662,6 @@ export default function App() {
           </div>
 
           <div className="hero-panel">
-            {/* WEATHER WIDGET */}
             <div style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255,255,255,0.15)', padding: '16px', borderRadius: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h4 style={{ margin: 0, color: '#fbbf24', fontSize: '1rem' }}>{t('weather.title')}</h4>
@@ -696,7 +682,7 @@ export default function App() {
             <p>{t('about.subtitle')}</p>
             <div className="hero-list">
               <div>{language === 'uz' ? 'Sayyohlar uchun xizmatlar va maslahatlar' : language === 'ru' ? 'Сервисы и советы для туристов' : 'Services and tips for tourists'}</div>
-              <div>{language === 'uz' ? 'USD va EUR jonli kursi' : language === 'ru' ? 'Актуальный курс USD и EUR' : 'Live USD & EUR rates'}</div>
+              <div>{language === 'uz' ? 'USD, EUR, RUB, CNY jonli kursi' : language === 'ru' ? 'Актуальный курс USD, EUR, RUB и CNY' : 'Live USD, EUR, RUB & CNY rates'}</div>
               <div>{language === 'uz' ? 'Kun va kech uchun marshrut rejasi' : language === 'ru' ? 'План маршрута на день и вечер' : 'Day and evening routes'}</div>
             </div>
           </div>
@@ -704,7 +690,6 @@ export default function App() {
       </header>
 
       <main>
-        {/* PHRASEBOOK SECTION */}
         <section id="phrasebook" className="section container">
           <div className="section-title">
             <p className="eyebrow">🗣️ TOURIST PHRASEBOOK</p>
@@ -726,7 +711,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* SOUVENIRS SECTION */}
         <section id="souvenirs" className="section section-alt container">
           <div className="section-title">
             <p className="eyebrow">🏺 SOUVENIRS GUIDE</p>
@@ -748,7 +732,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* MUST EAT SECTION */}
         <section id="must-eat" className="section container">
           <div className="section-title">
             <p className="eyebrow">🍲 GOURMET GUIDE</p>
@@ -772,7 +755,7 @@ export default function App() {
                 <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5', margin: '0 0 16px' }}>{getTranslatedText(item.desc, language)}</p>
                 
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.query)}`}
+                  href={`https://www.google.com/maps/search/?api=1&query=$${encodeURIComponent(item.query)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary small"
@@ -785,7 +768,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* TOURIST FAQ SECTION */}
         <section className="section section-alt container">
           <div className="section-title">
             <p className="eyebrow">💡 Foreigner.uz Survival Kit</p>
@@ -804,7 +786,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* METRO MAP SECTION */}
         <section className="section container">
           <div className="section-title">
             <p className="eyebrow">🚇 FULL INTERACTIVE METRO</p>
@@ -904,7 +885,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* RATES & CURRENCY CONVERTER */}
         <section id="rates" className="section section-alt container">
           <div className="section-title">
             <p className="eyebrow">💰 CURRENCY & CONVERTER</p>
@@ -914,12 +894,14 @@ export default function App() {
           
           <div className="rate-panel" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             <div className="rate-card">
-              <span className="eyebrow">USD & EUR → UZS</span>
-              <h3 className="rate-value" style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '1.4rem', margin: '16px 0' }}>
-                <div>💵 <b>USD:</b> {usdRate ? `${formatRate(usdRate, language)} sum` : rateError ? t('rate.error') : '...'}</div>
-                <div>💶 <b>EUR:</b> {eurRate ? `${formatRate(eurRate, language)} sum` : rateError ? t('rate.error') : '...'}</div>
+              <span className="eyebrow">CBU exchange rates</span>
+              <h3 className="rate-value" style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '1.2rem', margin: '16px 0' }}>
+                <div>💵 <b>USD:</b> {usdRate ? `${formatRate(usdRate, language)} sum` : '...'}</div>
+                <div>💶 <b>EUR:</b> {eurRate ? `${formatRate(eurRate, language)} sum` : '...'}</div>
+                <div>🇷🇺 <b>RUB:</b> {rubRate ? `${formatRate(rubRate, language)} sum` : '...'}</div>
+                <div>🇨🇳 <b>CNY:</b> {cnyRate ? `${formatRate(cnyRate, language)} sum` : '...'}</div>
               </h3>
-              <p>{rateError ? '' : `${t('rate.loaded')}: ${rateUpdated}`}</p>
+              <p>{rateError ? t('rate.error') : `${t('rate.loaded')}: ${rateUpdated}`}</p>
               <button type="button" className="btn btn-secondary small" onClick={fetchRates} style={{ marginTop: '12px' }}>
                 {t('rate.refresh')}
               </button>
@@ -959,6 +941,8 @@ export default function App() {
                     >
                       <option value="USD">💵 USD</option>
                       <option value="EUR">💶 EUR</option>
+                      <option value="RUB">🇷🇺 RUB</option>
+                      <option value="CNY">🇨🇳 CNY</option>
                       <option value="UZS">🇺🇿 UZS</option>
                     </select>
                   </div>
@@ -973,6 +957,8 @@ export default function App() {
                       <option value="UZS">🇺🇿 UZS</option>
                       <option value="USD">💵 USD</option>
                       <option value="EUR">💶 EUR</option>
+                      <option value="RUB">🇷🇺 RUB</option>
+                      <option value="CNY">🇨🇳 CNY</option>
                     </select>
                   </div>
                 </div>
