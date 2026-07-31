@@ -3,10 +3,10 @@ import placesData from '../data/places.json';
 
 const translations = {
   ru: {
-    nav: { about: 'О продукте', places: 'Места', eat: 'Must Eat', rates: 'Курс', language: 'RU' },
+    nav: { about: 'О продукте', places: 'Места', eat: 'Must Eat', souvenirs: 'Сувениры', phrasebook: 'Разговорник', rates: 'Курс', language: 'RU' },
     hero: {
       headline: 'Полезный путеводитель по Ташкенту: где жить, что посмотреть и где вкусно поесть.',
-      description: 'Foreigner.uz собирает лучшие отели, рестораны, рынки, клиники, АЗС и легендарный плов в одном приложении.',
+      description: 'Foreigner.uz собирает лучшие отели, рестораны, рынки, клиники, АЗС, сувениры и узбекский разговорник в одном месте.',
       action: 'Посмотреть места',
       contact: 'Написать на почту',
       telegram: 'Telegram @foreigneruz_bot',
@@ -65,13 +65,22 @@ const translations = {
       subtitle: 'Главные блюда узбекской кухни и легендарные места, где их стоит попробовать.',
       tipTitle: '💡 Лайфхак по Плову:',
       tipDesc: 'Плов в Ташкенте варят с утра и едят на обед! Лучшее время для посещения ошхоны — с 11:30 до 13:30. После 14:00 самого вкусного плова может уже не остаться.',
+    },
+    phrasebook: {
+      title: '🗣️ Узбекский разговорник туриста',
+      subtitle: 'Фразы, которые вызовут уважение местных и помогут на базаре или в такси.',
+    },
+    souvenirs: {
+      title: '🏺 Что везти из Узбекистана (Сувениры)',
+      subtitle: 'Лучшие подарки и места, где их покупать выгодно.',
+      whereLabel: '📍 Где покупать:',
     }
   },
   en: {
-    nav: { about: 'About', places: 'Places', eat: 'Must Eat', rates: 'Rates', language: 'EN' },
+    nav: { about: 'About', places: 'Places', eat: 'Must Eat', souvenirs: 'Souvenirs', phrasebook: 'Phrasebook', rates: 'Rates', language: 'EN' },
     hero: {
       headline: 'Handy travel guide for Tashkent: where to stay, what to see and where to eat authentic food.',
-      description: 'Foreigner.uz collects top hotels, restaurants, markets, clinics, gas stations and legendary Plov in one place.',
+      description: 'Foreigner.uz collects top hotels, restaurants, markets, clinics, souvenirs and an Uzbek phrasebook in one place.',
       action: 'Browse places',
       contact: 'Send email',
       telegram: 'Telegram @foreigneruz_bot',
@@ -130,13 +139,22 @@ const translations = {
       subtitle: 'Essential Uzbek dishes and iconic spots where you must try them.',
       tipTitle: '💡 Plov Pro Tip:',
       tipDesc: 'Plov is cooked fresh daily and served for lunch! Prime time to visit Plov Centers is 11:30 AM – 1:30 PM. After 2:00 PM the best batches are usually sold out.',
+    },
+    phrasebook: {
+      title: '🗣️ Uzbek Tourist Phrasebook',
+      subtitle: 'Phrases to impress locals and help at markets or in taxis.',
+    },
+    souvenirs: {
+      title: '🏺 What to bring from Uzbekistan (Souvenirs)',
+      subtitle: 'Best authentic gifts and best places to buy them.',
+      whereLabel: '📍 Where to buy:',
     }
   },
   uz: {
-    nav: { about: 'Haqida', places: 'Joylar', eat: 'Taomlar', rates: 'Kurs', language: 'UZ' },
+    nav: { about: 'Haqida', places: 'Joylar', eat: 'Taomlar', souvenirs: 'Esodaliklar', phrasebook: 'So‘zlashgich', rates: 'Kurs', language: 'UZ' },
     hero: {
       headline: 'Toshkent bo‘ylab qulay qo‘llanma: qayerda yashash, nimani ko‘rish va maza qilib ovqatlanish.',
-      description: 'Foreigner.uz eng yaxshi mehmonxonalar, restoranlar, bozorlar, klinikalar va afsonaviy osh markazlarini bitta ilovada jamlaydi.',
+      description: 'Foreigner.uz eng yaxshi mehmonxonalar, restoranlar, bozorlar, klinikalar, esdalik sovg‘alari va so‘zlashgichni bitta joyda jamlaydi.',
       action: 'Joylar bilan tanishish',
       contact: 'Pochtaga yozish',
       telegram: 'Telegram @foreigneruz_bot',
@@ -195,9 +213,61 @@ const translations = {
       subtitle: 'O‘zbek milliy taomlari va ularni tatib ko‘rish kerak bo‘lgan afsonaviy maskanlar.',
       tipTitle: '💡 Palov bo‘yicha maslahat:',
       tipDesc: 'Toshkentda palov ertalabdan damlanadi va tushlikda yeyiladi! Oshxonalarga borish uchun eng qulay vaqt — 11:30 dan 13:30 gacha. Soat 14:00 dan keyin palov tugab qolishi mumkin.',
+    },
+    phrasebook: {
+      title: '🗣️ O‘zbekcha iboralar (Sayyohlar uchun)',
+      subtitle: 'Bozorda yoki taksida asqotadigan eng kerakli iboralar.',
+    },
+    souvenirs: {
+      title: '🏺 O‘zbekistondan nima olib ketish kerak',
+      subtitle: 'Eng yaxshi esdalik sovg‘alari va ularni qulay narxda sotib olish joylari.',
+      whereLabel: '📍 Qayerdan sotib olish kerak:',
     }
   },
 };
+
+const PHRASEBOOK_LIST = [
+  { uzbek: "Assalomu alaykum!", translit: "Ассалому алайкум!", ru: "Здравствуйте!", en: "Hello / Peace be upon you!" },
+  { uzbek: "Rahmat!", translit: "Рахмат!", ru: "Спасибо!", en: "Thank you!" },
+  { uzbek: "Necha pul?", translit: "Неч пул?", ru: "Сколько стоит?", en: "How much is it?" },
+  { uzbek: "Arzonroq qilib bering", translit: "Арзонрок килиб беринг", ru: "Сделайте скидку (подешевле)", en: "Can you give a discount?" },
+  { uzbek: "Juda shirin!", translit: "Жуда ширин!", ru: "Очень вкусно!", en: "Very delicious!" },
+  { uzbek: "Hisobni keltiring", translit: "Хисобни келтиринг", ru: "Принесите счёт", en: "Bring the bill, please" },
+  { uzbek: "Xayr / Salomat bo'ling", translit: "Хайр / Саломат булинг", ru: "До свидания / Будьте здоровы", en: "Goodbye / Stay healthy" }
+];
+
+const SOUVENIRS_LIST = [
+  {
+    icon: "🏺",
+    title: { ru: "Риштанская Керамика", en: "Rishtan Ceramics", uz: "Rishton Keramikasi" },
+    desc: {
+      ru: "Знаменитая сине-голубая ляган-посуда и пиалы ручной работы с узорами.",
+      en: "Famous blue-and-turquoise handmade ceramic plates (lyagan) & tea cups.",
+      uz: "O‘zbekistonning mashhur qo‘lda ishlangan ko‘k-havorang lagan va piyolalari."
+    },
+    where: "Chorsu Bazaar / Abulkasym Medrese"
+  },
+  {
+    icon: "🧣",
+    title: { ru: "Икат, Адрас и Сюзане", en: "Ikat & Suzani", uz: "Ikat, Adras va So‘zana" },
+    desc: {
+      ru: "Шёлковые ткани (адрас), шарфы и настенные вышитые полотна сюзане.",
+      en: "Handwoven silk fabrics (Ikat/Adras), scarves, and embroidered Suzani wall hangings.",
+      uz: "Ipak va paxta matolari (adras), ro‘mollar va qo‘lda tikilgan so‘zanalar."
+    },
+    where: "Chorsu Bazaar Art Alley"
+  },
+  {
+    icon: "🌰",
+    title: { ru: "Сухофрукты и Орехи", en: "Dry Fruits & Nuts", uz: "Quritilgan mevalar va yong‘oqlar" },
+    desc: {
+      ru: "Самаркандский изюм, курага, солёные косточки урюка (шондона) и миндаль.",
+      en: "Samarkand raisins, dried apricots, salted apricot seeds (shondona) and almonds.",
+      uz: "Samarqand mayizi, turshak, sho‘r dasta va bodomlar."
+    },
+    where: "Chorsu Bazaar (Row 3-4)"
+  }
+];
 
 const routeCards = [
   {
@@ -484,7 +554,6 @@ export default function App() {
     [],
   );
 
-  // ЗАГРУЗКА ПОГОДЫ
   const fetchWeather = async () => {
     try {
       const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current_weather=true&hourly=relativehumidity_2m');
@@ -583,6 +652,8 @@ export default function App() {
           <div className="nav-links">
             <a href="#about">{t('nav.about')}</a>
             <a href="#must-eat">{t('nav.eat')}</a>
+            <a href="#phrasebook">{t('nav.phrasebook')}</a>
+            <a href="#souvenirs">{t('nav.souvenirs')}</a>
             <a href="#places">{t('nav.places')}</a>
             <a href="#rates">{t('nav.rates')}</a>
             <button type="button" className="lang-toggle" onClick={toggleLanguage}>
@@ -598,7 +669,7 @@ export default function App() {
             <p className="lead">{t('hero.description')}</p>
             <div className="hero-actions">
               <a href="#must-eat" className="btn btn-primary">🍲 Must Eat Plov</a>
-              <a href="#places" className="btn btn-secondary">{t('hero.action')}</a>
+              <a href="#phrasebook" className="btn btn-secondary">🗣️ Phrasebook</a>
               <a href="https://t.me/foreigneruz_bot" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">{t('hero.telegram')}</a>
             </div>
           </div>
@@ -633,6 +704,50 @@ export default function App() {
       </header>
 
       <main>
+        {/* PHRASEBOOK SECTION */}
+        <section id="phrasebook" className="section container">
+          <div className="section-title">
+            <p className="eyebrow">🗣️ TOURIST PHRASEBOOK</p>
+            <h2>{t('phrasebook.title')}</h2>
+            <p style={{ color: '#aaa', marginTop: '4px' }}>{t('phrasebook.subtitle')}</p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
+            {PHRASEBOOK_LIST.map((item, idx) => (
+              <div key={idx} style={{ background: 'rgba(15, 23, 42, 0.85)', border: '1px solid rgba(255, 255, 255, 0.12)', padding: '18px', borderRadius: '16px' }}>
+                <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#fbbf24' }}>{item.uzbek}</div>
+                <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '10px' }}>[{item.translit}]</div>
+                <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '8px', fontSize: '0.9rem', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ color: '#e2e8f0' }}>🇷🇺 <strong>RU:</strong> {item.ru}</div>
+                  <div style={{ color: '#e2e8f0' }}>🇬🇧 <strong>EN:</strong> {item.en}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SOUVENIRS SECTION */}
+        <section id="souvenirs" className="section section-alt container">
+          <div className="section-title">
+            <p className="eyebrow">🏺 SOUVENIRS GUIDE</p>
+            <h2>{t('souvenirs.title')}</h2>
+            <p style={{ color: '#aaa', marginTop: '4px' }}>{t('souvenirs.subtitle')}</p>
+          </div>
+
+          <div className="card-grid">
+            {SOUVENIRS_LIST.map((item, idx) => (
+              <div key={idx} className="detail-panel" style={{ background: 'rgba(15, 23, 42, 0.8)', border: '1px solid rgba(255, 255, 255, 0.12)', padding: '20px', borderRadius: '18px' }}>
+                <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{item.icon}</div>
+                <h3 style={{ color: '#fff', margin: '0 0 8px', fontSize: '1.2rem' }}>{getTranslatedText(item.title, language)}</h3>
+                <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5', margin: '0 0 12px' }}>{getTranslatedText(item.desc, language)}</p>
+                <div style={{ background: 'rgba(251, 191, 36, 0.15)', color: '#fbbf24', padding: '6px 12px', borderRadius: '8px', fontSize: '0.85rem', fontWeight: 'bold', display: 'inline-block' }}>
+                  {t('souvenirs.whereLabel')} {item.where}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* MUST EAT SECTION */}
         <section id="must-eat" className="section container">
           <div className="section-title">
