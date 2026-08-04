@@ -34,6 +34,7 @@ const translations = {
       resultLabel: 'Итого:',
     },
     places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Google Maps', taxi: 'Яндекс Go', location: 'Адрес' },
+    favorites: { title: 'Избранное и план поездки', subtitle: 'Сохраняй места и собирай короткий маршрут на день.', empty: 'Пока нет сохранённых мест', emptyHint: 'Нажми ❤️ на любом месте, чтобы собрать маршрут.', ready: 'Сохранено', show: 'Показать избранное', clear: 'Очистить', planTitle: 'Короткий маршрут', stepLabel: 'Шаг' },
     mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
     download: { pre: 'Скоро в вашем телефоне', title: 'Откройте приложение и получите маршрут, который делает поездку проще и ярче.', text: 'Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.' },
@@ -121,6 +122,7 @@ const translations = {
       resultLabel: 'Result:',
     },
     places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Address' },
+    favorites: { title: 'Saved places & trip plan', subtitle: 'Save places you like and build a quick day plan.', empty: 'No saved places yet', emptyHint: 'Tap ❤️ on any place to start building your route.', ready: 'Saved', show: 'Show favorites', clear: 'Clear', planTitle: 'Quick route', stepLabel: 'Step' },
     mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
     download: { pre: 'Soon on your phone', title: 'Open the app and get a route that makes your trip easier and brighter.', text: 'We are building the product for those who want to see more without wasting time on chaotic search.' },
@@ -208,6 +210,7 @@ const translations = {
       resultLabel: 'Natija:',
     },
     places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Manzil' },
+    favorites: { title: 'Tanlanganlar va sayohat rejasi', subtitle: 'Yoqtirgan joylaringizni saqlang va qisqa kunlik marshrut yarating.', empty: 'Hozircha saqlangan joylar yo‘q', emptyHint: 'Har qanday joyda ❤️ bosib marshrutni yarating.', ready: 'Saqlangan', show: 'Tanlanganlarni ko‘rsatish', clear: 'Tozalash', planTitle: 'Qisqa marshrut', stepLabel: 'Qadam' },
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
     routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
     download: { pre: 'Tez orada telefoningizda', title: 'Ilovani oching va safaringizni yorqinroq qiladigan marshrutni oling.', text: 'Biz vaqtingizni bekorga sarflamasdan ko‘proq narsani ko‘rishingiz uchun mahsulot yaratmoqdamiz.' },
@@ -295,6 +298,7 @@ const translations = {
       resultLabel: 'Нәтиже:',
     },
     places: { title: 'Пайдалы орындар', subtitle: 'Қонақ үйлер, валюта айырбастау, клиникалар, базарлар және демалу орындары.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Мекенжай' },
+    favorites: { title: 'Сақталған орындар мен сапар жоспары', subtitle: 'Ұнайтын орындарды сақтап, қысқа күндік маршрут құрыңыз.', empty: 'Әзірге сақталған орындар жоқ', emptyHint: 'Кез келген орынға ❤️ басып маршрут құра бастау.', ready: 'Сақталды', show: 'Сақталғандарды көрсету', clear: 'Тазалау', planTitle: 'Қысқа маршрут', stepLabel: 'Қадам' },
     mustVisit: { title: 'Көріп шығу керек', subtitle: 'Ташкенттегі ең қызықты орындар, сатып алу және әсерлер үшін.' },
     routes: { title: 'Маршруттар', subtitle: 'Күндізгі және кешкі дайын нұсқалар.' },
     download: { pre: 'Жақында телефоныңызда', title: 'Қолданбаны ашып, сапарыңызды жеңілдететін маршрут алыңыз.', text: 'Біз уақытты босқа жоғалтпай көбірек нәрсені көру үшін өнім құрып жатырмыз.' },
@@ -382,6 +386,7 @@ const translations = {
       resultLabel: 'Натыйжа:',
     },
     places: { title: 'Пайдалуу жайгашуулар', subtitle: 'Мейманканалар, валюта алмаштыруу, клиникалар, базарлар жана эс алуу жерлери.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Дарек' },
+    favorites: { title: 'Сакталган жерлер жана сапар планы', subtitle: 'Ұнай турган жерлерди сактап, кыска күндүк маршрут түзүңүз.', empty: 'Азырынча сакталган жерлер жок', emptyHint: 'Кез келген жерге ❤️ басып маршрут түзө баштаңыз.', ready: 'Сакталды', show: 'Сакталгандарды көрсөтүү', clear: 'Тазалоо', planTitle: 'Кыска маршрут', stepLabel: 'Кадам' },
     mustVisit: { title: 'Көрүү керек', subtitle: 'Ташкенттин эң сонун жерлери, сатып алуу жана тажрыйба үчүн.' },
     routes: { title: 'Маршруттар', subtitle: 'Күндүзгү жана кечки даяр варианттар.' },
     download: { pre: 'Жакында телефонуңузда', title: 'Колдонмону ачып, сапарыңызды жеңилдеткен маршрут алыңыз.', text: 'Биз убактыңызды боско жоготпостон көбүрөөк нерсени көрүү үчүн продукт түзүп жатабыз.' },
@@ -852,6 +857,15 @@ export default function App() {
     });
   };
 
+  const clearFavorites = () => {
+    setFavorites([]);
+    try {
+      localStorage.removeItem('foreigner_favorites');
+    } catch (e) {
+      console.error('Failed to clear favorites', e);
+    }
+  };
+
   const t = (path) => {
     return path.split('.').reduce((acc, key) => acc?.[key], translations[language]) || path;
   };
@@ -882,6 +896,47 @@ export default function App() {
     const types = categoryGroups[activeCategory] || categoryGroups.all;
     return placesData.filter((place) => types.includes(place.type));
   }, [activeCategory, favorites]);
+
+  const favoritePlaces = useMemo(() => {
+    return placesData.filter((place) => favorites.includes(place.id));
+  }, [favorites]);
+
+  const timeLabels = useMemo(() => ({
+    morning: language === 'ru' ? 'Утро' : language === 'uz' ? 'Ertalab' : language === 'kk' ? 'Таң' : language === 'ky' ? 'Эртө' : 'Morning',
+    day: language === 'ru' ? 'День' : language === 'uz' ? 'Kunduz' : language === 'kk' ? 'Күндіз' : language === 'ky' ? 'Күндүз' : 'Day',
+    evening: language === 'ru' ? 'Вечер' : language === 'uz' ? 'Kechqurun' : language === 'kk' ? 'Кеш' : language === 'ky' ? 'Кеш' : 'Evening',
+  }), [language]);
+
+  const planByTime = useMemo(() => {
+    const groups = { morning: [], day: [], evening: [] };
+    const morningTypes = ['sight', 'market', 'hotel', 'cafe'];
+    const dayTypes = ['restaurant', 'exchange', 'bank', 'clinic', 'pharmacy', 'mall', 'gas', 'market'];
+    const eveningTypes = ['restaurant', 'cafe', 'sight', 'mall', 'hotel'];
+
+    favoritePlaces.forEach((place, index) => {
+      const type = place.type;
+      let target = 'day';
+
+      if (morningTypes.includes(type)) target = 'morning';
+      else if (eveningTypes.includes(type)) target = 'evening';
+      else if (dayTypes.includes(type)) target = 'day';
+
+      if (index % 3 === 0) target = 'morning';
+      else if (index % 3 === 1) target = 'day';
+      else target = 'evening';
+
+      groups[target].push(place);
+    });
+
+    return Object.entries(groups).map(([key, places]) => ({
+      key,
+      label: timeLabels[key],
+      places: places.slice(0, 2).map((place, stepIndex) => ({
+        ...place,
+        step: stepIndex + 1,
+      })),
+    }));
+  }, [favoritePlaces, timeLabels]);
 
   const fetchWeather = async () => {
     try {
@@ -1359,6 +1414,51 @@ export default function App() {
           <div className="section-title">
             <p className="eyebrow">{t('places.title')}</p>
             <h2>{t('places.subtitle')}</h2>
+          </div>
+
+          <div className="detail-panel" style={{ background: 'rgba(15, 23, 42, 0.82)', border: '1px solid rgba(255,255,255,0.14)', padding: '18px', borderRadius: '18px', marginBottom: '18px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+              <div>
+                <div style={{ color: '#5bd1ff', fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.16em', fontWeight: '700' }}>{t('favorites.title')}</div>
+                <h3 style={{ margin: '4px 0 6px', color: '#fff', fontSize: '1.1rem' }}>{t('favorites.subtitle')}</h3>
+                <p style={{ margin: 0, color: '#abc0d7', fontSize: '0.95rem' }}>
+                  {favorites.length > 0 ? `${t('favorites.ready')}: ${favorites.length}` : t('favorites.empty')}
+                </p>
+              </div>
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                <button type="button" className="btn btn-secondary small" onClick={() => setActiveCategory('favorites')} style={{ textDecoration: 'none' }}>
+                  {t('favorites.show')}
+                </button>
+                {favorites.length > 0 && (
+                  <button type="button" className="btn btn-secondary small" onClick={clearFavorites} style={{ textDecoration: 'none' }}>
+                    {t('favorites.clear')}
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {favorites.length > 0 ? (
+              <div className="trip-plan-grid" style={{ marginTop: '14px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                {planByTime.map((slot) => (
+                  <div key={slot.key} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.12)', padding: '12px', borderRadius: '12px' }}>
+                    <div style={{ color: '#5bd1ff', fontWeight: '700', fontSize: '0.8rem', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.14em' }}>{slot.label}</div>
+                    {slot.places.length > 0 ? slot.places.map((place) => (
+                      <div key={place.id} style={{ paddingTop: '6px', borderTop: '1px solid rgba(255,255,255,0.1)', marginTop: '6px' }}>
+                        <div style={{ color: '#fbbf24', fontWeight: '700', fontSize: '0.8rem', marginBottom: '4px' }}>{t('favorites.stepLabel')} {place.step}</div>
+                        <div style={{ color: '#fff', fontWeight: '700', marginBottom: '4px' }}>{getPlaceField(place, 'name', language)}</div>
+                        <div style={{ color: '#abc0d7', fontSize: '0.9rem' }}>{getPlaceField(place, 'description', language)}</div>
+                      </div>
+                    )) : (
+                      <div style={{ color: '#abc0d7', fontSize: '0.9rem' }}>—</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div style={{ marginTop: '14px', color: '#abc0d7', background: 'rgba(255,255,255,0.05)', padding: '12px 14px', borderRadius: '12px' }}>
+                {t('favorites.emptyHint')}
+              </div>
+            )}
           </div>
 
           <div className="category-buttons">
