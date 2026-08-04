@@ -38,12 +38,12 @@ const translations = {
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
     download: { pre: 'Скоро в вашем телефоне', title: 'Откройте приложение и получите маршрут, который делает поездку проще и ярче.', text: 'Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.' },
     planner: {
-      title: 'План на сегодня',
-      subtitle: 'Собери быстрый маршрут под свой стиль: еда, шопинг, культура или бюджет.',
-      vibeLabel: 'Выбери режим:',
-      modes: { food: 'Еда', shopping: 'Шопинг', culture: 'Культура', budget: 'Бюджет' },
-      resultTitle: 'Быстрый маршрут на 4 часа',
-      resultDesc: 'Мы собрали удобный путь по Ташкенту без лишней суеты.',
+      title: 'Готовый маршрут для Ташкента',
+      subtitle: 'Выбери сценарий под свой темп: быстрый день, полноценный день или выходной.',
+      vibeLabel: 'Выбери формат:',
+      modes: { quick: 'Быстрый день', full: 'Полный день', weekend: 'Выходной' },
+      resultTitle: 'Средний маршрут на день',
+      resultDesc: 'Подходит и для одного дня, и для нескольких дней в городе — можно легко растянуть или сократить.',
       stepLabel: 'Шаг',
       maps: 'Карты',
       taxi: 'Такси',
@@ -125,12 +125,12 @@ const translations = {
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
     download: { pre: 'Soon on your phone', title: 'Open the app and get a route that makes your trip easier and brighter.', text: 'We are building the product for those who want to see more without wasting time on chaotic search.' },
     planner: {
-      title: 'Today’s plan',
-      subtitle: 'Build a fast route that matches your vibe: food, shopping, culture, or budget.',
-      vibeLabel: 'Choose a mode:',
-      modes: { food: 'Food', shopping: 'Shopping', culture: 'Culture', budget: 'Budget' },
-      resultTitle: 'Quick 4-hour route',
-      resultDesc: 'We put together a smooth plan across Tashkent without the usual chaos.',
+      title: 'Ready-made route for Tashkent',
+      subtitle: 'Pick a format that matches your pace: quick day, full day, or weekend.',
+      vibeLabel: 'Choose a format:',
+      modes: { quick: 'Quick day', full: 'Full day', weekend: 'Weekend' },
+      resultTitle: 'Balanced day plan',
+      resultDesc: 'Works for a single day or for several days in the city — easy to stretch or shorten.',
       stepLabel: 'Step',
       maps: 'Maps',
       taxi: 'Taxi',
@@ -212,12 +212,12 @@ const translations = {
     routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
     download: { pre: 'Tez orada telefoningizda', title: 'Ilovani oching va safaringizni yorqinroq qiladigan marshrutni oling.', text: 'Biz vaqtingizni bekorga sarflamasdan ko‘proq narsani ko‘rishingiz uchun mahsulot yaratmoqdamiz.' },
     planner: {
-      title: 'Bugungi reja',
-      subtitle: 'O‘zingizga mos tez marshrut yarating: taom, xarid, madaniyat yoki byudjet.',
-      vibeLabel: 'Rejimni tanlang:',
-      modes: { food: 'Taom', shopping: 'Xarid', culture: 'Madaniyat', budget: 'Byudjet' },
-      resultTitle: '4 soatlik tez marshrut',
-      resultDesc: 'Biz Toshkent bo‘ylab ortiqcha tashvishsiz qulay yo‘nalishni tayyorladik.',
+      title: 'Toshkent uchun tayyor marshrut',
+      subtitle: 'Sizning tezligingizga mos formatni tanlang: tez kun, to‘liq kun yoki dam olish kunlari.',
+      vibeLabel: 'Formatni tanlang:',
+      modes: { quick: 'Tez kun', full: 'To‘liq kun', weekend: 'Dam olish' },
+      resultTitle: 'O‘rtacha kunlik marshrut',
+      resultDesc: 'Bu bir kunlik ham, shaharda bir necha kun qolish uchun ham mos — osonlik bilan qisqartirish yoki cho‘zish mumkin.',
       stepLabel: 'Qadam',
       maps: 'Xarita',
       taxi: 'Taksi',
@@ -299,12 +299,12 @@ const translations = {
     routes: { title: 'Маршруттар', subtitle: 'Күндізгі және кешкі дайын нұсқалар.' },
     download: { pre: 'Жақында телефоныңызда', title: 'Қолданбаны ашып, сапарыңызды жеңілдететін маршрут алыңыз.', text: 'Біз уақытты босқа жоғалтпай көбірек нәрсені көру үшін өнім құрып жатырмыз.' },
     planner: {
-      title: 'Бүгінгі жоспар',
-      subtitle: 'Сіздің стиліңізге сай жылдам маршрут құрыңыз: тамақ, сатып алу, мәдениет немесе бюджет.',
-      vibeLabel: 'Режим таңдау:',
-      modes: { food: 'Тамақ', shopping: 'Сатып алу', culture: 'Мәдениет', budget: 'Бюджет' },
-      resultTitle: '4 сағаттық жылдам маршрут',
-      resultDesc: 'Біз Ташкенттегі қажетсіз шатасудан аулақ жылдам жоспар құрдық.',
+      title: 'Бүгінгі дайын маршрут',
+      subtitle: 'Сіздің қарқыныңызға сай формат таңдаңыз: тез күн, толық күн немесе демалыс.',
+      vibeLabel: 'Формат таңдаңыз:',
+      modes: { quick: 'Тез күн', full: 'Толық күн', weekend: 'Демалыс' },
+      resultTitle: 'Орташа күндік маршрут',
+      resultDesc: 'Бұл бір күн үшін де, қалада бірнеше күн қалу үшін де жарайды — оңай қысқарту немесе созу мүмкін.',
       stepLabel: 'Қадам',
       maps: 'Карта',
       taxi: 'Такси',
@@ -386,12 +386,12 @@ const translations = {
     routes: { title: 'Маршруттар', subtitle: 'Күндүзгү жана кечки даяр варианттар.' },
     download: { pre: 'Жакында телефонуңузда', title: 'Колдонмону ачып, сапарыңызды жеңилдеткен маршрут алыңыз.', text: 'Биз убактыңызды боско жоготпостон көбүрөөк нерсени көрүү үчүн продукт түзүп жатабыз.' },
     planner: {
-      title: 'Бүгүнкү план',
-      subtitle: 'Сиздин стилиңизге жараша тез маршрут түзүңүз: тамак, сатып алуу, маданият же бюджет.',
-      vibeLabel: 'Режимди тандаңыз:',
-      modes: { food: 'Тамак', shopping: 'Сатып алуу', culture: 'Маданият', budget: 'Бюджет' },
-      resultTitle: '4 саатлык тез маршрут',
-      resultDesc: 'Биз Ташкенттин айланасында талапсыз, жеңил маршрут түздүкт.',
+      title: 'Ташкент үчүн даяр маршрут',
+      subtitle: 'Сиздин ылдамдыгыңызга жараша формат тандаңыз: тез күн, толук күн же дем алуу.',
+      vibeLabel: 'Формат тандаңыз:',
+      modes: { quick: 'Тез күн', full: 'Толук күн', weekend: 'Дем алуу' },
+      resultTitle: 'Орточо күндүк маршрут',
+      resultDesc: 'Бул бир күн үчүн да, шаарда бир нече күн калуу үчүн да ылайыктуу — оңой кыскартууга же узартууга болот.',
       stepLabel: 'Кадам',
       maps: 'Карта',
       taxi: 'Такси',
@@ -473,12 +473,12 @@ const translations = {
     routes: { title: '精选路线', subtitle: '为您准备好的日间和夜间游览方案。' },
     download: { pre: '即将登陆手机端', title: '打开应用，开启轻松精彩的旅行路线。', text: '我们致力于打造一款让您无需盲目搜索即可探索更多的产品。' },
     planner: {
-      title: '今日路线',
-      subtitle: '根据你的需求快速安排路线：美食、购物、文化或预算优先。',
-      vibeLabel: '选择模式：',
-      modes: { food: '美食', shopping: '购物', culture: '文化', budget: '预算' },
-      resultTitle: '4 小时轻松路线',
-      resultDesc: '我们为你整理了一条不费力的塔什干探索路线。',
+      title: '塔什干城市路线',
+      subtitle: '根据你的节奏选择形式：轻松半日、完整一天或周末放松。',
+      vibeLabel: '选择形式：',
+      modes: { quick: '轻松半日', full: '完整一天', weekend: '周末' },
+      resultTitle: '适合一天的平衡路线',
+      resultDesc: '适合一天，也适合在城里停留多日，可以随时缩短或延长。',
       stepLabel: '步骤',
       maps: '地图',
       taxi: '打车',
@@ -814,7 +814,7 @@ export default function App() {
   const [activeCard, setActiveCard] = useState('places');
   const [activeRoute, setActiveRoute] = useState(routeCards[0].id);
   const [activeCategory, setActiveCategory] = useState('all');
-  const [plannerMode, setPlannerMode] = useState('food');
+  const [plannerMode, setPlannerMode] = useState('full');
 
   const [usdRate, setUsdRate] = useState(null);
   const [eurRate, setEurRate] = useState(null);
@@ -958,13 +958,28 @@ export default function App() {
 
   const plannerItems = useMemo(() => {
     const modeMap = {
-      food: placesData.filter((place) => ['restaurant', 'cafe', 'hotel'].includes(place.type)).slice(0, 3),
-      shopping: placesData.filter((place) => ['market', 'mall', 'exchange'].includes(place.type)).slice(0, 3),
-      culture: placesData.filter((place) => ['sight', 'hotel', 'restaurant'].includes(place.type)).slice(0, 3),
-      budget: placesData.filter((place) => ['cafe', 'exchange', 'hotel'].includes(place.type)).slice(0, 3),
+      quick: [
+        placesData.find((place) => place.id === 'tower-1'),
+        placesData.find((place) => place.id === 'rest-1'),
+        placesData.find((place) => place.id === 'market-1'),
+      ].filter(Boolean),
+      full: [
+        placesData.find((place) => place.id === 'tower-1'),
+        placesData.find((place) => place.id === 'sight-2'),
+        placesData.find((place) => place.id === 'mall-1'),
+        placesData.find((place) => place.id === 'rest-1'),
+        placesData.find((place) => place.id === 'market-1'),
+      ].filter(Boolean),
+      weekend: [
+        placesData.find((place) => place.id === 'tower-1'),
+        placesData.find((place) => place.id === 'magic-1'),
+        placesData.find((place) => place.id === 'mall-1'),
+        placesData.find((place) => place.id === 'rest-1'),
+        placesData.find((place) => place.id === 'shop-1'),
+      ].filter(Boolean),
     };
 
-    return (modeMap[plannerMode] || modeMap.food).map((place, index) => ({
+    return (modeMap[plannerMode] || modeMap.full).map((place, index) => ({
       ...place,
       step: index + 1,
     }));
