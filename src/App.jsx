@@ -37,6 +37,18 @@ const translations = {
     mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
     download: { pre: 'Скоро в вашем телефоне', title: 'Откройте приложение и получите маршрут, который делает поездку проще и ярче.', text: 'Мы создаём продукт для тех, кто хочет увидеть больше, не тратя время на хаотичный поиск.' },
+    planner: {
+      title: 'План на сегодня',
+      subtitle: 'Собери быстрый маршрут под свой стиль: еда, шопинг, культура или бюджет.',
+      vibeLabel: 'Выбери режим:',
+      modes: { food: 'Еда', shopping: 'Шопинг', culture: 'Культура', budget: 'Бюджет' },
+      resultTitle: 'Быстрый маршрут на 4 часа',
+      resultDesc: 'Мы собрали удобный путь по Ташкенту без лишней суеты.',
+      stepLabel: 'Шаг',
+      maps: 'Карты',
+      taxi: 'Такси',
+      call: 'Позвонить',
+    },
     faq: {
       title: 'Памятка туристу',
       subtitle: 'Важная информация для комфортного пребывания в городе.',
@@ -112,6 +124,18 @@ const translations = {
     mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
     download: { pre: 'Soon on your phone', title: 'Open the app and get a route that makes your trip easier and brighter.', text: 'We are building the product for those who want to see more without wasting time on chaotic search.' },
+    planner: {
+      title: 'Today’s plan',
+      subtitle: 'Build a fast route that matches your vibe: food, shopping, culture, or budget.',
+      vibeLabel: 'Choose a mode:',
+      modes: { food: 'Food', shopping: 'Shopping', culture: 'Culture', budget: 'Budget' },
+      resultTitle: 'Quick 4-hour route',
+      resultDesc: 'We put together a smooth plan across Tashkent without the usual chaos.',
+      stepLabel: 'Step',
+      maps: 'Maps',
+      taxi: 'Taxi',
+      call: 'Call',
+    },
     faq: {
       title: 'Tourist Survival Guide',
       subtitle: 'Essential info for a seamless stay in the city.',
@@ -187,6 +211,18 @@ const translations = {
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
     routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
     download: { pre: 'Tez orada telefoningizda', title: 'Ilovani oching va safaringizni yorqinroq qiladigan marshrutni oling.', text: 'Biz vaqtingizni bekorga sarflamasdan ko‘proq narsani ko‘rishingiz uchun mahsulot yaratmoqdamiz.' },
+    planner: {
+      title: 'Bugungi reja',
+      subtitle: 'O‘zingizga mos tez marshrut yarating: taom, xarid, madaniyat yoki byudjet.',
+      vibeLabel: 'Rejimni tanlang:',
+      modes: { food: 'Taom', shopping: 'Xarid', culture: 'Madaniyat', budget: 'Byudjet' },
+      resultTitle: '4 soatlik tez marshrut',
+      resultDesc: 'Biz Toshkent bo‘ylab ortiqcha tashvishsiz qulay yo‘nalishni tayyorladik.',
+      stepLabel: 'Qadam',
+      maps: 'Xarita',
+      taxi: 'Taksi',
+      call: 'Qo‘ng‘iroq',
+    },
     faq: {
       title: 'Sayyohlar uchun eslatma',
       subtitle: 'Shaharda qulay harakatlanish uchun muhim ma\'lumotlar.',
@@ -227,6 +263,180 @@ const translations = {
       whereLabel: '📍 Qayerdan sotib olish kerak:',
     }
   },
+  kk: {
+    nav: { about: 'Туралы', places: 'Орындар', eat: 'Must Eat', souvenirs: 'Сувенирлер', phrasebook: 'Сөйлеу сөздігі', rates: 'Баға', language: 'KK' },
+    hero: {
+      headline: 'Ташкенттегі пайдалы саяхат нұсқаулығы: қайда тұру, не көретініміз және қайда жақсы жеу.',
+      description: 'Foreigner.uz бір жерде ең жақсы қонақ үйлер, мейрамханалар, базарлар, клиникалар, сувенирлер және дыбыстық өзбекше сөйлеу сөздігін жинайды.',
+      action: 'Орындарды қарау',
+      contact: 'Поштаға жазу',
+      telegram: 'Telegram @foreigneruz_bot',
+    },
+    about: {
+      title: 'Не жаңалық',
+      subtitle: 'Ташкенттегі әрбір турист үшін толық анықтама жинағы.',
+    },
+    cards: {
+      places: { title: 'Ташкенттегі үздік орындар', description: 'Жақын жерде қонақ үйлер, базарлар, мейрамханалар, валюта айырбастау пункттері мен пайдалы қызметтерді табыңыз.', accent: 'Орындар' },
+      currency: { title: 'Валюта бағамы', description: 'USD, EUR, RUB және CNY бағамдары автоматты түрде жаңартылады.', accent: 'Баға' },
+      bot: { title: 'Telegram көмекшісі', description: 'Бот сұрақтарға жауап беріп, Ташкент туралы нақты уақытта кеңес береді.', accent: 'Бот' },
+    },
+    rate: {
+      title: 'CBU валюта бағамы & калькулятор',
+      subtitle: 'USD, EUR, RUB, CNY және UZS үшін нақты баға және жылдам конвертер.',
+      loaded: 'Жаңартылды',
+      tip: 'Жақсы баға алу үшін валюта айырбастау үшін сенімді банктер мен банкоматтарды таңдаңыз.',
+      refresh: 'Бағаны жаңарту',
+      error: 'Бағаларды жүктеу мүмкін болмады. Кейінірек қайталап көріңіз.',
+      calcTitle: '🧮 Валюта калькуляторы',
+      amountLabel: 'Сома:',
+      fromLabel: 'Кімнен:',
+      toLabel: 'Кімге:',
+      resultLabel: 'Нәтиже:',
+    },
+    places: { title: 'Пайдалы орындар', subtitle: 'Қонақ үйлер, валюта айырбастау, клиникалар, базарлар және демалу орындары.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Мекенжай' },
+    mustVisit: { title: 'Көріп шығу керек', subtitle: 'Ташкенттегі ең қызықты орындар, сатып алу және әсерлер үшін.' },
+    routes: { title: 'Маршруттар', subtitle: 'Күндізгі және кешкі дайын нұсқалар.' },
+    download: { pre: 'Жақында телефоныңызда', title: 'Қолданбаны ашып, сапарыңызды жеңілдететін маршрут алыңыз.', text: 'Біз уақытты босқа жоғалтпай көбірек нәрсені көру үшін өнім құрып жатырмыз.' },
+    planner: {
+      title: 'Бүгінгі жоспар',
+      subtitle: 'Сіздің стиліңізге сай жылдам маршрут құрыңыз: тамақ, сатып алу, мәдениет немесе бюджет.',
+      vibeLabel: 'Режим таңдау:',
+      modes: { food: 'Тамақ', shopping: 'Сатып алу', culture: 'Мәдениет', budget: 'Бюджет' },
+      resultTitle: '4 сағаттық жылдам маршрут',
+      resultDesc: 'Біз Ташкенттегі қажетсіз шатасудан аулақ жылдам жоспар құрдық.',
+      stepLabel: 'Қадам',
+      maps: 'Карта',
+      taxi: 'Такси',
+      call: 'Қоңырау',
+    },
+    faq: {
+      title: 'Туристерге арналған нұсқаулық',
+      subtitle: 'Қаланың ішінде жайлы болу үшін маңызды ақпарат.',
+      metroTitle: '🚇 Метро төлеу',
+      metroDesc: 'Түрлі банктік карталармен (Visa, Mastercard, Humo, Uzcard) немесе NFC телефонымен турникеттен тікелей төлеуге болады. Нақты ақша арқылы кассада QR-билет сатып алуға болады (1700 UZS).',
+      restTitle: '🍽️ Сервиc және чәй',
+      restDesc: 'Көптеген мейрамханалар чектерге 10–15% қызмет ақысы автоматты түрде қосады. Қосымша чәй қалдыру міндетті емес.',
+    },
+    metro: {
+      title: '🚇 Ташкент метросының интерактивті картасы',
+      subtitle: 'Картадағы кез келген аялдаманы басыңыз!',
+      legendTitle: '📌 Ауыстыру түйіндері:',
+      linesTitle: '🔴 Метро желілері:',
+      stationLabel: '🚇 Станция:',
+      transferLabel: '🔄 Ауыстыру станциясы',
+    },
+    weather: {
+      title: '☀️ Ташкенттегі ауа райы',
+      loading: 'Ауа райы жүктелуде...',
+      temp: 'Температура:',
+      wind: 'Жел:',
+      humidity: 'Ылғалдылық:',
+    },
+    mustEat: {
+      title: '🍲 Ташкентте Must Eat',
+      subtitle: 'Өзбек тағамдары мен оларды дәмдеу үшін әйгілі орындар.',
+      tipTitle: '💡 Плов туралы кеңес:',
+      tipDesc: 'Ташкентте плов таңертең пісіріліп, түскі уақытта беріледі! Оны жеу үшін ең жақсы уақыт — 11:30-ден 13:30-ға дейін. 14:00ден кейін ең тәттісі таусылып қалуы мүмкін.',
+    },
+    phrasebook: {
+      title: '🗣️ Туристер үшін өзбек сөйлеу сөздігі',
+      subtitle: 'Жергілікті тұрғындармен жақсы қарым-қатынаста болу үшін пайдалы фразалар. Дыбысты тыңдау үшін 🔊 басыңыз!',
+      listenBtn: '🔊 Дыбысты тыңдау',
+    },
+    souvenirs: {
+      title: '🏺 Өзбекстаннан не алып кетуге болады',
+      subtitle: 'Ең жақсы сувенирлер және оларды сатып алудың тиімді орындары.',
+      whereLabel: '📍 Қайдан сатып алу керек:',
+    }
+  },
+  ky: {
+    nav: { about: 'Жөнүндө', places: 'Жайгашуулар', eat: 'Must Eat', souvenirs: 'Сувенирлер', phrasebook: 'Сөздүк', rates: 'Баасы', language: 'KY' },
+    hero: {
+      headline: 'Ташкенттеги пайдалуу саякат колдонмосу: кайда жашоо, эмне көрүү жана кайда жеп коюу.',
+      description: 'Foreigner.uz бир жерде мыкты мейманканалар, ресторандар, базарлар, клиникалар, сувенирлер жана үн менен угулатылган өзбекче сөздүктү чогултту.',
+      action: 'Жайгашууларды караңыз',
+      contact: 'Почтага жазуу',
+      telegram: 'Telegram @foreigneruz_bot',
+    },
+    about: {
+      title: 'Эмне жаңы',
+      subtitle: 'Ташкенттеги ар бир турист үчүн толук маалымат.',
+    },
+    cards: {
+      places: { title: 'Ташкенттин мыкты жайгашуусу', description: 'Жакын жердеги мейманканаларды, базарларды, ресторандарды, валюта алмаштырууну жана пайдалуу кызматтарды табыңыз.', accent: 'Жайгашуулар' },
+      currency: { title: 'Валюта курсу', description: 'USD, EUR, RUB жана CNY курстары автоматтык түрдө жаңылат.', accent: 'Курс' },
+      bot: { title: 'Telegram жардамчы', description: 'Бот суроолорго жооп берет жана Ташкент жөнүндө реалдуу убакта кеңеш берет.', accent: 'Бот' },
+    },
+    rate: {
+      title: 'CBU валюта курсу & калькулятор',
+      subtitle: 'USD, EUR, RUB, CNY жана UZS үчүн реалдуу курс жана тез конвертер.',
+      loaded: 'Жаңыланды',
+      tip: 'Жакшы курс алуу үчүн ишенимдүү банктер менен банкоматтарды колдонуңуз.',
+      refresh: 'Курсту жаңылоо',
+      error: 'Курс жүктөлбөдү. Кейинчерээк кайра аракет кылыңыз.',
+      calcTitle: '🧮 Валюта калькулятору',
+      amountLabel: 'Сумма:',
+      fromLabel: 'Кимден:',
+      toLabel: 'Кимге:',
+      resultLabel: 'Натыйжа:',
+    },
+    places: { title: 'Пайдалуу жайгашуулар', subtitle: 'Мейманканалар, валюта алмаштыруу, клиникалар, базарлар жана эс алуу жерлери.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Дарек' },
+    mustVisit: { title: 'Көрүү керек', subtitle: 'Ташкенттин эң сонун жерлери, сатып алуу жана тажрыйба үчүн.' },
+    routes: { title: 'Маршруттар', subtitle: 'Күндүзгү жана кечки даяр варианттар.' },
+    download: { pre: 'Жакында телефонуңузда', title: 'Колдонмону ачып, сапарыңызды жеңилдеткен маршрут алыңыз.', text: 'Биз убактыңызды боско жоготпостон көбүрөөк нерсени көрүү үчүн продукт түзүп жатабыз.' },
+    planner: {
+      title: 'Бүгүнкү план',
+      subtitle: 'Сиздин стилиңизге жараша тез маршрут түзүңүз: тамак, сатып алуу, маданият же бюджет.',
+      vibeLabel: 'Режимди тандаңыз:',
+      modes: { food: 'Тамак', shopping: 'Сатып алуу', culture: 'Маданият', budget: 'Бюджет' },
+      resultTitle: '4 саатлык тез маршрут',
+      resultDesc: 'Биз Ташкенттин айланасында талапсыз, жеңил маршрут түздүкт.',
+      stepLabel: 'Кадам',
+      maps: 'Карта',
+      taxi: 'Такси',
+      call: 'Чалуу',
+    },
+    faq: {
+      title: 'Туристтерге арналған эскертүү',
+      subtitle: 'Шаарда ыңгайлуу болуу үчүн маанилүү маалымат.',
+      metroTitle: '🚇 Метро төлөө',
+      metroDesc: 'Банк карталары (Visa, Mastercard, Humo, Uzcard) же NFC телефон аркылуу турникеттен түздөн-түз төлөөгө болот. Накас акча менен кассада QR-билет сатып алууга болот (1700 UZS).',
+      restTitle: '🍽️ Сервис жана чаевые',
+      restDesc: 'Көпчүлүк ресторандарда чектерге 10–15% кызмат акысы автоматтык түрдө кошулат. Кошумча чаевые калтыруу милдеттүү эмес.',
+    },
+    metro: {
+      title: '🚇 Ташкент метросунун интерактивтик картасы',
+      subtitle: 'Картанын каалаган станциясын басыңыз!',
+      legendTitle: '📌 Алмашуу түйүндөрү:',
+      linesTitle: '🔴 Метро линиялары:',
+      stationLabel: '🚇 Станция:',
+      transferLabel: '🔄 Алмашуу станциясы',
+    },
+    weather: {
+      title: '☀️ Ташкенттеги аба ырайы',
+      loading: 'Аба ырайы жүктөлүүдө...',
+      temp: 'Температура:',
+      wind: 'Жел:',
+      humidity: 'Ылгалдуулук:',
+    },
+    mustEat: {
+      title: '🍲 Ташкентте Must Eat',
+      subtitle: 'Өзбек тамактары жана аларды татуу үчүн белгилүү жерлер.',
+      tipTitle: '💡 Плов боюнча кеңеш:',
+      tipDesc: 'Ташкентте плов эртең менен пиши жана түштөн кийин жейт. Эң жакшы убакыт — 11:30дөн 13:30га чейин. 14:00дөн кийин эң таттуусы барат.',
+    },
+    phrasebook: {
+      title: '🗣️ Туристтер үчүн өзбекче сөздүк',
+      subtitle: 'Жергиликтүү адамдар менен жакшы карым-катнаш үчүн пайдалуу сөздөр. Угуу үчүн 🔊 басыңыз!',
+      listenBtn: '🔊 Угуу',
+    },
+    souvenirs: {
+      title: '🏺 Өзбекстандан эмне алып кетүү керек',
+      subtitle: 'Эң жакшы сувенирлер жана аларды сатып алуу үчүн жагымдуу жерлер.',
+      whereLabel: '📍 Кайдан сатып алуу керек:',
+    }
+  },
   zh: {
     nav: { about: '关于', places: '地点', eat: '必吃', souvenirs: '纪念品', phrasebook: '常用语', rates: '汇率', language: 'ZH' },
     hero: {
@@ -262,6 +472,18 @@ const translations = {
     mustVisit: { title: '必游景点', subtitle: '塔什干最佳散步、购物和体验打卡点。', google: 'Google 地图', taxi: 'Yandex 叫车' },
     routes: { title: '精选路线', subtitle: '为您准备好的日间和夜间游览方案。' },
     download: { pre: '即将登陆手机端', title: '打开应用，开启轻松精彩的旅行路线。', text: '我们致力于打造一款让您无需盲目搜索即可探索更多的产品。' },
+    planner: {
+      title: '今日路线',
+      subtitle: '根据你的需求快速安排路线：美食、购物、文化或预算优先。',
+      vibeLabel: '选择模式：',
+      modes: { food: '美食', shopping: '购物', culture: '文化', budget: '预算' },
+      resultTitle: '4 小时轻松路线',
+      resultDesc: '我们为你整理了一条不费力的塔什干探索路线。',
+      stepLabel: '步骤',
+      maps: '地图',
+      taxi: '打车',
+      call: '拨打',
+    },
     faq: {
       title: '游客生存指南',
       subtitle: '城市出行必备重要信息。',
@@ -592,6 +814,7 @@ export default function App() {
   const [activeCard, setActiveCard] = useState('places');
   const [activeRoute, setActiveRoute] = useState(routeCards[0].id);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [plannerMode, setPlannerMode] = useState('food');
 
   const [usdRate, setUsdRate] = useState(null);
   const [eurRate, setEurRate] = useState(null);
@@ -637,6 +860,8 @@ export default function App() {
     if (language === 'ru') setLanguage('en');
     else if (language === 'en') setLanguage('uz');
     else if (language === 'uz') setLanguage('zh');
+    else if (language === 'zh') setLanguage('kk');
+    else if (language === 'kk') setLanguage('ky');
     else setLanguage('ru');
   };
 
@@ -711,23 +936,39 @@ export default function App() {
   }, []);
 
   const calculatedResult = useMemo(() => {
-    if (!usdRate || !eurRate || !calcAmount || Number.isNaN(Number(calcAmount))) return '—';
+    if (!calcAmount || Number.isNaN(Number(calcAmount))) return '—';
 
-    const ratesInUzs = { 
-      UZS: 1, 
-      USD: usdRate, 
-      EUR: eurRate, 
-      RUB: rubRate || 140, 
-      CNY: cnyRate || 1750 
+    const ratesInUzs = {
+      UZS: 1,
+      USD: usdRate ?? 12650,
+      EUR: eurRate ?? 13800,
+      RUB: rubRate ?? 140,
+      CNY: cnyRate ?? 1750,
+      KZT: 28,
+      KGS: 145,
     };
 
-    const amountInUzs = calcAmount * (ratesInUzs[calcFrom] || 1);
+    const amountInUzs = Number(calcAmount) * (ratesInUzs[calcFrom] || 1);
     const result = amountInUzs / (ratesInUzs[calcTo] || 1);
 
-    return calcTo === 'UZS' 
-      ? Math.round(result).toLocaleString('ru-RU') 
+    return calcTo === 'UZS'
+      ? Math.round(result).toLocaleString('ru-RU')
       : result.toFixed(2).toLocaleString('en-US');
   }, [calcAmount, calcFrom, calcTo, usdRate, eurRate, rubRate, cnyRate]);
+
+  const plannerItems = useMemo(() => {
+    const modeMap = {
+      food: placesData.filter((place) => ['restaurant', 'cafe', 'hotel'].includes(place.type)).slice(0, 3),
+      shopping: placesData.filter((place) => ['market', 'mall', 'exchange'].includes(place.type)).slice(0, 3),
+      culture: placesData.filter((place) => ['sight', 'hotel', 'restaurant'].includes(place.type)).slice(0, 3),
+      budget: placesData.filter((place) => ['cafe', 'exchange', 'hotel'].includes(place.type)).slice(0, 3),
+    };
+
+    return (modeMap[plannerMode] || modeMap.food).map((place, index) => ({
+      ...place,
+      step: index + 1,
+    }));
+  }, [plannerMode]);
 
   const routeItems = selectedRoute?.items || [];
 
@@ -803,6 +1044,57 @@ export default function App() {
       </header>
 
       <main>
+        <section className="section container">
+          <div className="section-title">
+            <p className="eyebrow">📱 SMART TRAVEL MODE</p>
+            <h2>{t('planner.title')}</h2>
+            <p style={{ color: '#aaa', marginTop: '4px' }}>{t('planner.subtitle')}</p>
+          </div>
+
+          <div className="detail-panel" style={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(255,255,255,0.14)', padding: '20px', borderRadius: '20px' }}>
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '8px' }}>{t('planner.vibeLabel')}</div>
+              <div className="category-buttons" style={{ justifyContent: 'flex-start' }}>
+                {Object.entries(t('planner.modes')).map(([key, label]) => (
+                  <button
+                    key={key}
+                    type="button"
+                    className={`category-btn ${plannerMode === key ? 'active' : ''}`}
+                    onClick={() => setPlannerMode(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div style={{ marginBottom: '16px', background: 'rgba(251, 191, 36, 0.12)', padding: '12px 14px', borderRadius: '12px', color: '#fbbf24', fontSize: '0.95rem' }}>
+              <strong>{t('planner.resultTitle')}</strong> — {t('planner.resultDesc')}
+            </div>
+
+            <div className="card-grid">
+              {plannerItems.map((place) => (
+                <div key={place.id} className="detail-panel" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', padding: '16px', borderRadius: '16px' }}>
+                  <div style={{ color: '#fbbf24', fontWeight: 'bold', marginBottom: '8px' }}>{t('planner.stepLabel')} {place.step}</div>
+                  <h3 style={{ color: '#fff', margin: '0 0 8px', fontSize: '1.1rem' }}>{getPlaceField(place, 'name', language)}</h3>
+                  <p style={{ color: '#cbd5e1', margin: '0 0 10px', fontSize: '0.95rem' }}>{getPlaceField(place, 'description', language)}</p>
+                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary small" style={{ textDecoration: 'none', textAlign: 'center' }}>
+                      📍 {t('planner.maps')}
+                    </a>
+                    <a href={yandexTaxiUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-primary small" style={{ textDecoration: 'none', textAlign: 'center', background: '#f59e0b', color: '#000', fontWeight: 'bold', border: 'none' }}>
+                      🚖 {t('planner.taxi')}
+                    </a>
+                    <a href={`tel:${place.phone || '1173'}`} className="btn btn-secondary small" style={{ textDecoration: 'none', textAlign: 'center' }}>
+                      📞 {t('planner.call')}
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* РАЗГОВОРНИК С НАЧИСТО ИСПРАВЛЕННОЙ ОЗВУЧКОЙ */}
         <section id="phrasebook" className="section container">
           <div className="section-title">
@@ -967,6 +1259,8 @@ export default function App() {
                 <div>💶 <b>EUR:</b> {eurRate ? `${formatRate(eurRate, language)} sum` : '...'}</div>
                 <div>🇷🇺 <b>RUB:</b> {rubRate ? `${formatRate(rubRate, language)} sum` : '...'}</div>
                 <div>🇨🇳 <b>CNY:</b> {cnyRate ? `${formatRate(cnyRate, language)} sum` : '...'}</div>
+                <div>💰 <b>KZT:</b> {formatRate(28, language)} sum</div>
+                <div>🪙 <b>KGS:</b> {formatRate(145, language)} sum</div>
               </h3>
               <p>{rateError ? t('rate.error') : `${t('rate.loaded')}: ${rateUpdated}`}</p>
               <button type="button" className="btn btn-secondary small" onClick={fetchRates} style={{ marginTop: '12px' }}>
@@ -1010,6 +1304,8 @@ export default function App() {
                       <option value="EUR">💶 EUR</option>
                       <option value="RUB">🇷🇺 RUB</option>
                       <option value="CNY">🇨🇳 CNY</option>
+                      <option value="KZT">💰 KZT</option>
+                      <option value="KGS">🪙 KGS</option>
                       <option value="UZS">🇺🇿 UZS</option>
                     </select>
                   </div>
@@ -1026,6 +1322,8 @@ export default function App() {
                       <option value="EUR">💶 EUR</option>
                       <option value="RUB">🇷🇺 RUB</option>
                       <option value="CNY">🇨🇳 CNY</option>
+                      <option value="KZT">💰 KZT</option>
+                      <option value="KGS">🪙 KGS</option>
                     </select>
                   </div>
                 </div>
