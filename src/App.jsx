@@ -859,7 +859,23 @@ function getTranslatedText(text, language) {
 }
 
 function getPlaceField(place, field, language) {
-  return place[`${field}_${language}`] || place[field] || '';
+  const preferredLanguage = language || 'en';
+  const candidates = [];
+
+  if (preferredLanguage === 'ru') {
+    candidates.push(`${field}_ru`, field, `${field}_en`);
+  } else {
+    candidates.push(`${field}_${preferredLanguage}`, `${field}_en`, field);
+  }
+
+  for (const key of candidates) {
+    const value = place[key];
+    if (typeof value === 'string' && value.trim()) {
+      return value;
+    }
+  }
+
+  return '';
 }
 
 function getTypeLabel(place, language) {
