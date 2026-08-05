@@ -178,6 +178,94 @@ const translations = {
       whereLabel: '📍 Where to buy:',
     }
   },
+  hi: {
+    nav: { about: 'के बारे में', places: 'स्थान', eat: 'ज़रूर आज़माएँ', souvenirs: 'स्मृति-चिन्ह', phrasebook: 'वाक्यांश', rates: 'दर', language: 'HI' },
+    hero: {
+      headline: 'ताशकंद के लिए उपयोगी यात्रा मार्गदर्शिका: कहाँ रहना है, क्या देखना है और क्या खाना है।',
+      description: 'Foreigner.uz एक ही जगह पर सबसे अच्छे होटल, रेस्तरां, बाजार, क्लिनिक, स्मृति-चिन्ह और उज़्बेक वाक्यांशों को एक साथ प्रस्तुत करता है।',
+      action: 'स्थान देखें',
+      contact: 'ईमेल लिखें',
+      telegram: 'Telegram @foreigneruz_bot',
+    },
+    about: {
+      title: 'नई चीज़ें',
+      subtitle: 'ताशकंद में हर यात्रा करने वाले के लिए एक पूरी जानकारी।',
+    },
+    cards: {
+      places: { title: 'ताशकंद के सबसे अच्छे स्थान', description: 'अपने आसपास के होटल, बाजार, रेस्तरां, विनिमय केंद्र और उपयोगी सेवाएँ खोजें।', accent: 'स्थान' },
+      currency: { title: 'मुद्रा दर', description: 'USD, EUR, RUB और CNY की दरें स्वचालित रूप से अपडेट होती हैं।', accent: 'दर' },
+      bot: { title: 'Telegram सहायक', description: 'बॉट आपके सवालों का जवाब देगा और ताशकंद के लिए वास्तविक समय में सलाह देगा।', accent: 'सहायक' },
+    },
+    rate: {
+      title: 'CBU मुद्रा दर और कैलकुलेटर',
+      subtitle: 'UZS, USD, EUR, RUB, CNY और INR की तात्कालिक दरें।',
+      loaded: 'अपडेट किया गया',
+      tip: 'अच्छी दर पाने के लिए भरोसेमंद बैंकों या ATM से मुद्रा बदलें।',
+      refresh: 'दर रिफ्रेश करें',
+      error: 'दर लोड नहीं हो सकी। कृपया बाद में कोशिश करें।',
+      calcTitle: '🧮 मुद्रा कैलकुलेटर',
+      amountLabel: 'राशि:',
+      fromLabel: 'से:',
+      toLabel: 'तक:',
+      resultLabel: 'परिणाम:',
+    },
+    places: { title: 'उपयोगी स्थान', subtitle: 'होटल, विनिमय, क्लिनिक, बाजार और आराम करने की जगहें।', google: 'Google Maps', taxi: 'Yandex Go', location: 'पता' },
+    favorites: { title: 'सहेजे गए स्थान और यात्रा योजना', subtitle: 'अपने पसंदीदा स्थान बचाएँ और एक छोटी दिन-योजना बनाएं।', empty: 'अभी तक कोई पसंदीदा स्थान नहीं', emptyHint: 'किसी भी स्थान पर ❤️ दबाकर अपना маршрут बनाएँ।', ready: 'सहेजा गया', show: 'पसंदीदा दिखाएँ', clear: 'साफ करें', planTitle: 'छोटा маршрут', stepLabel: 'कदम' },
+    mustVisit: { title: 'ज़रूर देखें', subtitle: 'खरीदारी, sightseeing और अनुभवों के लिए ताशकंद के शीर्ष स्थान।' },
+    routes: { title: 'मार्ग', subtitle: 'दिन और शाम के लिए तैयार विकल्प।' },
+    download: { pre: 'जल्द ही आपके फोन पर', title: 'ऐप खोलें और एक ऐसा मार्ग पाएं जो आपकी यात्रा को आसान और रंगीन बना दे।', text: 'हम ऐसे उत्पाद बना रहे हैं जिससे आप समय बर्बाद किए बिना अधिक देखें।' },
+    planner: {
+      title: 'ताशकंद के लिए तैयार маршрут',
+      subtitle: 'अपने रफ्तार के अनुसार प्रारूप चुनें: जल्दी दिन, पूरा दिन या सप्ताहांत।',
+      vibeLabel: 'प्रारूप चुनें:',
+      modes: { quick: 'तुरंत दिन', full: 'पूरा दिन', weekend: 'सप्ताहांत' },
+      resultTitle: 'संतुलित दिन-योजना',
+      resultDesc: 'यह एक दिन या कई दिनों के लिए भी काम करता है — आसानी से छोटा या बड़ा किया जा सकता है।',
+      stepLabel: 'कदम',
+      maps: 'नक्शा',
+      taxi: 'टैक्सी',
+      call: 'कॉल',
+    },
+    faq: {
+      title: 'यात्री मार्गदर्शिका',
+      subtitle: 'शहर में सहज रहने के लिए जरूरी जानकारी।',
+      metroTitle: '🚇 मेट्रो भुगतान',
+      metroDesc: 'टर्नस्टाइल पर सीधे बैंक कार्ड (Visa, Mastercard, Humo, Uzcard) या NFC फोन से भुगतान किया जा सकता है। नकद से टिकट काउंटर पर QR-पर्ची खरीदी जा सकती है (1700 UZS)।',
+      restTitle: '🍽️ टिपिंग और सेवा शुल्क',
+      restDesc: 'अधिकतर रेस्तरां में बिल में 10–15% सेवा शुल्क पहले से जुड़ा होता है। अतिरिक्त टिप देना वैकल्पिक है।',
+    },
+    metro: {
+      title: '🚇 ताशकंद इंटरैक्टिव मेट्रो मानचित्र',
+      subtitle: 'नीचे दिए गए किसी भी स्टेशन पर क्लिक करें!',
+      legendTitle: '📌 ट्रांसफ़र हब:',
+      linesTitle: '🔴 मेट्रो लाइनें:',
+      stationLabel: '🚇 स्टेशन:',
+      transferLabel: '🔄 स्टेशन पर बदलें',
+    },
+    weather: {
+      title: '☀️ ताशकंद में मौसम',
+      loading: 'मौसम लोड हो रहा है...',
+      temp: 'तापमान:',
+      wind: 'हवा:',
+      humidity: 'नमी:',
+    },
+    mustEat: {
+      title: '🍲 ताशकंद में ज़रूर आज़माएँ',
+      subtitle: 'उज़्बेक व्यंजनों और उनके प्रसिद्ध स्थान जहाँ उन्हें कोशिश करना चाहिए।',
+      tipTitle: '💡 प्लोव टिप:',
+      tipDesc: 'ताशकंद में प्लोव सुबह बनाया जाता है और दोपहर में परोसा जाता है! इसे खाने का सबसे अच्छा समय 11:30 से 13:30 तक है। 14:00 के बाद सबसे अच्छा प्लोव खत्म हो सकता है।',
+    },
+    phrasebook: {
+      title: '🗣️ उज़्बेक पर्यटक वाक्यांश',
+      subtitle: 'स्थानीय लोगों के साथ अच्छा संबंध बनाने के लिए उपयोगी वाक्य। 🔊 पर क्लिक करें!',
+      listenBtn: '🔊 आवाज़ सुनें',
+    },
+    souvenirs: {
+      title: '🏺 उज़्बेकिस्तान से क्या लाएँ (स्मृति-चिन्ह)',
+      subtitle: 'सबसे अच्छे उपहार और उन्हें खरीदने के सबसे अच्छे स्थान।',
+      whereLabel: '📍 कहाँ खरीदें:',
+    }
+  },
   uz: {
     nav: { about: 'Haqida', places: 'Joylar', eat: 'Taomlar', souvenirs: 'Esodaliklar', phrasebook: 'So‘zlashgich', rates: 'Kurs', language: 'UZ' },
     hero: {
@@ -872,7 +960,8 @@ export default function App() {
 
   const toggleLanguage = () => {
     if (language === 'ru') setLanguage('en');
-    else if (language === 'en') setLanguage('uz');
+    else if (language === 'en') setLanguage('hi');
+    else if (language === 'hi') setLanguage('uz');
     else if (language === 'uz') setLanguage('zh');
     else if (language === 'zh') setLanguage('kk');
     else if (language === 'kk') setLanguage('ky');
@@ -902,9 +991,9 @@ export default function App() {
   }, [favorites]);
 
   const timeLabels = useMemo(() => ({
-    morning: language === 'ru' ? 'Утро' : language === 'uz' ? 'Ertalab' : language === 'kk' ? 'Таң' : language === 'ky' ? 'Эртө' : 'Morning',
-    day: language === 'ru' ? 'День' : language === 'uz' ? 'Kunduz' : language === 'kk' ? 'Күндіз' : language === 'ky' ? 'Күндүз' : 'Day',
-    evening: language === 'ru' ? 'Вечер' : language === 'uz' ? 'Kechqurun' : language === 'kk' ? 'Кеш' : language === 'ky' ? 'Кеш' : 'Evening',
+    morning: language === 'ru' ? 'Утро' : language === 'uz' ? 'Ertalab' : language === 'kk' ? 'Таң' : language === 'ky' ? 'Эртө' : language === 'hi' ? 'सुबह' : 'Morning',
+    day: language === 'ru' ? 'День' : language === 'uz' ? 'Kunduz' : language === 'kk' ? 'Күндіз' : language === 'ky' ? 'Күндүз' : language === 'hi' ? 'दिन' : 'Day',
+    evening: language === 'ru' ? 'Вечер' : language === 'uz' ? 'Kechqurun' : language === 'kk' ? 'Кеш' : language === 'ky' ? 'Кеш' : language === 'hi' ? 'शाम' : 'Evening',
   }), [language]);
 
   const planByTime = useMemo(() => {
@@ -999,6 +1088,7 @@ export default function App() {
       EUR: eurRate ?? 13800,
       RUB: rubRate ?? 140,
       CNY: cnyRate ?? 1750,
+      INR: 150,
       KZT: 28,
       KGS: 145,
     };
@@ -1329,6 +1419,7 @@ export default function App() {
                 <div>💶 <b>EUR:</b> {eurRate ? `${formatRate(eurRate, language)} sum` : '...'}</div>
                 <div>🇷🇺 <b>RUB:</b> {rubRate ? `${formatRate(rubRate, language)} sum` : '...'}</div>
                 <div>🇨🇳 <b>CNY:</b> {cnyRate ? `${formatRate(cnyRate, language)} sum` : '...'}</div>
+                <div>🇮🇳 <b>INR:</b> {formatRate(150, language)} sum</div>
                 <div>💰 <b>KZT:</b> {formatRate(28, language)} sum</div>
                 <div>🪙 <b>KGS:</b> {formatRate(145, language)} sum</div>
               </h3>
@@ -1374,6 +1465,7 @@ export default function App() {
                       <option value="EUR">💶 EUR</option>
                       <option value="RUB">🇷🇺 RUB</option>
                       <option value="CNY">🇨🇳 CNY</option>
+                      <option value="INR">🇮🇳 INR</option>
                       <option value="KZT">💰 KZT</option>
                       <option value="KGS">🪙 KGS</option>
                       <option value="UZS">🇺🇿 UZS</option>
@@ -1392,6 +1484,7 @@ export default function App() {
                       <option value="EUR">💶 EUR</option>
                       <option value="RUB">🇷🇺 RUB</option>
                       <option value="CNY">🇨🇳 CNY</option>
+                      <option value="INR">🇮🇳 INR</option>
                       <option value="KZT">💰 KZT</option>
                       <option value="KGS">🪙 KGS</option>
                     </select>
