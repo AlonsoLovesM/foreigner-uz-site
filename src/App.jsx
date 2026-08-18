@@ -620,13 +620,14 @@ const translations = {
 };
 
 const PHRASEBOOK_LIST = [
-  { uzbek: "Assalomu alaykum!", translit: "Ассалому алайкум!", ru: "Здравствуйте!", en: "Hello / Peace be upon you!", zh: "你好！" },
-  { uzbek: "Rahmat!", translit: "Рахмат!", ru: "Спасибо!", en: "Thank you!", zh: "谢谢！" },
-  { uzbek: "Necha pul?", translit: "Неч пул?", ru: "Сколько стоит?", en: "How much is it?", zh: "多少钱？" },
-  { uzbek: "Arzonroq qilib bering", translit: "Арзонрок килиб беринг", ru: "Сделайте скидку (подешевле)", en: "Can you give a discount?", zh: "能便宜一点吗？" },
-  { uzbek: "Juda shirin!", translit: "Жуда ширин!", ru: "Очень вкусно!", en: "Very delicious!", zh: "非常美味！" },
-  { uzbek: "Hisobni keltiring", translit: "Хисобни келтиринг", ru: "Принесите счёт", en: "Bring the bill, please", zh: "请结账" },
-  { uzbek: "Xayr / Salomat bo'ling", translit: "Хайр / Саломат булинг", ru: "До свидания / Будьте здоровы", en: "Goodbye / Stay healthy", zh: "再见 / 保重" }
+  { uzbek: 'Salom! Assalomu alaykum!', translit: 'Salom! Assalomu alaykum!', ru: 'Здравствуйте!', en: 'Hello!', zh: '你好！' },
+  { uzbek: 'Rahmat!', translit: 'Rahmat!', ru: 'Спасибо!', en: 'Thank you!', zh: '谢谢！' },
+  { uzbek: 'Bu nima turadi?', translit: 'Bu nima turadi?', ru: 'Что это?', en: 'What is this?', zh: '这是什么？' },
+  { uzbek: 'Bu qancha turadi?', translit: 'Bu qancha turadi?', ru: 'Сколько это стоит?', en: 'How much is this?', zh: '这个多少钱？' },
+  { uzbek: 'Bir oz arzonroq bo\'lmasa?', translit: 'Bir oz arzonroq bo\'lmasa?', ru: 'Можно немного дешевле?', en: 'Could you make it a bit cheaper?', zh: '能便宜一点吗？' },
+  { uzbek: 'Bu juda mazali!', translit: 'Bu juda mazali!', ru: 'Очень вкусно!', en: 'It is very tasty!', zh: '非常好吃！' },
+  { uzbek: 'Hisobni olib bering, iltimos.', translit: 'Hisobni olib bering, iltimos.', ru: 'Принесите счёт, пожалуйста.', en: 'Please bring the bill.', zh: '请给我结账。' },
+  { uzbek: 'Xayr, salomat bo\'ling!', translit: 'Xayr, salomat bo\'ling!', ru: 'До свидания, будьте здоровы!', en: 'Goodbye, take care!', zh: '再见，保重！' }
 ];
 
 const SOUVENIRS_LIST = [
@@ -756,20 +757,22 @@ const categoryFilters = [
   { key: 'all', label: { ru: 'Всё', en: 'All', uz: 'Barchasi', zh: '全部' } },
   { key: 'favorites', label: { ru: '❤️ Избранное', en: '❤️ Favorites', uz: '❤️ Tanlanganlar', zh: '❤️ 收藏' } },
   { key: 'hotels', label: { ru: 'Отели', en: 'Hotels', uz: 'Mehmonxonalar', zh: '酒店' } },
+  { key: 'coffee', label: { ru: 'Кофейни', en: 'Coffee shops', uz: 'Kofejarlar', zh: '咖啡馆' } },
   { key: 'food', label: { ru: 'Еда', en: 'Food', uz: 'Taomlar', zh: '美食' } },
   { key: 'finance', label: { ru: 'Банки & обмен', en: 'Banks & exchange', uz: 'Banklar va almashtirish', zh: '银行&兑换' } },
   { key: 'health', label: { ru: 'Медицина', en: 'Health', uz: 'Tibbiyot', zh: '医疗' } },
   { key: 'shopping', label: { ru: 'Шопинг', en: 'Shopping', uz: 'Xaridlar', zh: '购物' } },
   { key: 'park', label: { ru: 'Парки', en: 'Parks', uz: 'Bog\'lar', zh: '公园' } },
   { key: 'aquapark', label: { ru: 'Аквапарки', en: 'Aquaparks', uz: 'Akvaparklar', zh: '水上乐园' } },
-  { key: 'zoo', label: { ru: 'Зоопарки', en: 'Zoos', uz: 'Hayvonot bog‘lari', zh: '动物园' } },
+  { key: 'zoo', label: { ru: 'Зоопарки', en: 'Zoos', uz: 'Hayvonot bog\'lari', zh: '动物园' } },
   { key: 'gas', label: { ru: 'АЗС', en: 'Gas stations', uz: 'AYQSH', zh: '加油站' } },
   { key: 'sights', label: { ru: 'Достопримечательности', en: 'Sights', uz: 'Diqqatga sazovor joylar', zh: '景点' } },
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
+  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
   hotels: ['hotel'],
+  coffee: ['coffee'],
   food: ['restaurant', 'cafe'],
   finance: ['bank', 'exchange'],
   health: ['clinic', 'pharmacy'],
@@ -783,6 +786,7 @@ const categoryGroups = {
 
 const typeLabels = {
   hotel: { ru: 'Отель', en: 'Hotel', uz: 'Mehmonxona', zh: '酒店' },
+  coffee: { ru: 'Кофейня', en: 'Coffee shop', uz: 'Kofe', zh: '咖啡店' },
   restaurant: { ru: 'Ресторан', en: 'Restaurant', uz: 'Restoran', zh: '餐厅' },
   cafe: { ru: 'Кафе', en: 'Cafe', uz: 'Kafe', zh: '咖啡馆' },
   exchange: { ru: 'Обмен', en: 'Exchange', uz: 'Valyuta ayirboshlash', zh: '外汇兑换' },
@@ -793,7 +797,7 @@ const typeLabels = {
   mall: { ru: 'ТЦ / торговый центр', en: 'Mall', uz: 'Tashkiliy markaz', zh: '购物中心' },
   park: { ru: 'Парк', en: 'Park', uz: 'Bog\'', zh: '公园' },
   aquapark: { ru: 'Аквапарк', en: 'Aquapark', uz: 'Akvapark', zh: '水上乐园' },
-  zoo: { ru: 'Зоопарк', en: 'Zoo', uz: 'Hayvonot bog‘i', zh: '动物园' },
+  zoo: { ru: 'Зоопарк', en: 'Zoo', uz: 'Hayvonot bog\'i', zh: '动物园' },
   gas: { ru: 'АЗС', en: 'Gas Station', uz: 'AYQSH', zh: '加油站' },
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy', zh: '景点' },
 };
@@ -1064,9 +1068,9 @@ export default function App() {
 
   const planByTime = useMemo(() => {
     const groups = { morning: [], day: [], evening: [] };
-    const morningTypes = ['sight', 'market', 'hotel', 'cafe'];
-    const dayTypes = ['restaurant', 'exchange', 'bank', 'clinic', 'pharmacy', 'mall', 'gas', 'market'];
-    const eveningTypes = ['restaurant', 'cafe', 'sight', 'mall', 'hotel'];
+    const morningTypes = ['sight', 'market', 'hotel', 'cafe', 'coffee'];
+    const dayTypes = ['restaurant', 'exchange', 'bank', 'clinic', 'pharmacy', 'mall', 'gas', 'market', 'coffee'];
+    const eveningTypes = ['restaurant', 'cafe', 'sight', 'mall', 'hotel', 'coffee'];
 
     favoritePlaces.forEach((place, index) => {
       const type = place.type;
