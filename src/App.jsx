@@ -760,6 +760,7 @@ const categoryFilters = [
   { key: 'finance', label: { ru: 'Банки & обмен', en: 'Banks & exchange', uz: 'Banklar va almashtirish', zh: '银行&兑换' } },
   { key: 'health', label: { ru: 'Медицина', en: 'Health', uz: 'Tibbiyot', zh: '医疗' } },
   { key: 'shopping', label: { ru: 'Шопинг', en: 'Shopping', uz: 'Xaridlar', zh: '购物' } },
+  { key: 'park', label: { ru: 'Парки', en: 'Parks', uz: 'Bog\'lar', zh: '公园' } },
   { key: 'aquapark', label: { ru: 'Аквапарки', en: 'Aquaparks', uz: 'Akvaparklar', zh: '水上乐园' } },
   { key: 'zoo', label: { ru: 'Зоопарки', en: 'Zoos', uz: 'Hayvonot bog‘lari', zh: '动物园' } },
   { key: 'gas', label: { ru: 'АЗС', en: 'Gas stations', uz: 'AYQSH', zh: '加油站' } },
@@ -767,12 +768,13 @@ const categoryFilters = [
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'aquapark', 'zoo', 'gas', 'sight'],
+  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
   hotels: ['hotel'],
   food: ['restaurant', 'cafe'],
   finance: ['bank', 'exchange'],
   health: ['clinic', 'pharmacy'],
   shopping: ['market', 'mall'],
+  park: ['park'],
   aquapark: ['aquapark'],
   zoo: ['zoo'],
   gas: ['gas'],
@@ -789,6 +791,7 @@ const typeLabels = {
   pharmacy: { ru: 'Аптека', en: 'Pharmacy', uz: 'Dorixona', zh: '药店' },
   market: { ru: 'Рынок', en: 'Market', uz: 'Bozor', zh: '集市' },
   mall: { ru: 'ТЦ / торговый центр', en: 'Mall', uz: 'Tashkiliy markaz', zh: '购物中心' },
+  park: { ru: 'Парк', en: 'Park', uz: 'Bog\'', zh: '公园' },
   aquapark: { ru: 'Аквапарк', en: 'Aquapark', uz: 'Akvapark', zh: '水上乐园' },
   zoo: { ru: 'Зоопарк', en: 'Zoo', uz: 'Hayvonot bog‘i', zh: '动物园' },
   gas: { ru: 'АЗС', en: 'Gas Station', uz: 'AYQSH', zh: '加油站' },
@@ -929,6 +932,7 @@ export default function App() {
   const [activeCard, setActiveCard] = useState('places');
   const [activeRoute, setActiveRoute] = useState(routeCards[0].id);
   const [activeCategory, setActiveCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const [plannerMode, setPlannerMode] = useState('full');
 
   const [usdRate, setUsdRate] = useState(null);
@@ -976,6 +980,25 @@ export default function App() {
     }
   };
 
+  const sharePlace = async (place) => {
+    const shareData = {
+      title: getPlaceField(place, 'name', language),
+      text: getPlaceField(place, 'description', language),
+      url: window.location.href.split('#')[0] + '#places',
+    };
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+      }
+      await navigator.clipboard.writeText(`${shareData.title} — ${shareData.url}`);
+      alert('Ссылка скопирована в буфер обмена');
+    } catch (error) {
+      console.error('Share failed', error);
+    }
+  };
+
   const t = (path) => {
     return path.split('.').reduce((acc, key) => acc?.[key], translations[language]) || path;
   };
@@ -1001,12 +1024,33 @@ export default function App() {
   );
 
   const filteredPlaces = useMemo(() => {
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+
+    const matchesQuery = (place) => {
+      if (!normalizedQuery) return true;
+      const text = [
+        place.name,
+        place.name_en,
+        place.description,
+        place.description_en,
+        place.address,
+        place.address_en,
+        place.category,
+        place.category_en,
+        place.type,
+        place.type_en,
+      ].join(' ').toLowerCase();
+
+      return text.includes(normalizedQuery);
+    };
+
     if (activeCategory === 'favorites') {
-      return placesData.filter((place) => favorites.includes(place.id));
+      return placesData.filter((place) => favorites.includes(place.id) && matchesQuery(place));
     }
+
     const types = categoryGroups[activeCategory] || categoryGroups.all;
-    return placesData.filter((place) => types.includes(place.type));
-  }, [activeCategory, favorites]);
+    return placesData.filter((place) => types.includes(place.type) && matchesQuery(place));
+  }, [activeCategory, favorites, searchQuery]);
 
   const favoritePlaces = useMemo(() => {
     return placesData.filter((place) => favorites.includes(place.id));
@@ -1576,18 +1620,36 @@ export default function App() {
             )}
           </div>
 
-          <div className="category-buttons">
-            {categoryFilters.map((category) => (
-              <button
-                key={category.key}
-                type="button"
-                className={`category-btn ${activeCategory === category.key ? 'active' : ''}`}
-                onClick={() => setActiveCategory(category.key)}
-              >
-                {getTranslatedText(category.label, language)}
-                {category.key === 'favorites' && favorites.length > 0 ? ` (${favorites.length})` : ''}
-              </button>
-            ))}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder={language === 'ru' ? 'Поиск по названию, адресу или категории' : language === 'en' ? 'Search by name, address or category' : 'Nom, manzil yoki kategoriya bo\'yicha qidirish'}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                borderRadius: '12px',
+                border: '1px solid rgba(255,255,255,0.15)',
+                background: 'rgba(255,255,255,0.04)',
+                color: '#fff',
+                fontSize: '0.96rem',
+                outline: 'none',
+              }}
+            />
+            <div className="category-buttons">
+              {categoryFilters.map((category) => (
+                <button
+                  key={category.key}
+                  type="button"
+                  className={`category-btn ${activeCategory === category.key ? 'active' : ''}`}
+                  onClick={() => setActiveCategory(category.key)}
+                >
+                  {getTranslatedText(category.label, language)}
+                  {category.key === 'favorites' && favorites.length > 0 ? ` (${favorites.length})` : ''}
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="places-grid">
@@ -1624,6 +1686,14 @@ export default function App() {
                         🚖 {t('places.taxi')}
                       </a>
                     </div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary small"
+                      onClick={() => sharePlace(place)}
+                      style={{ width: '100%', marginTop: '10px', textAlign: 'center' }}
+                    >
+                      🔗 Share
+                    </button>
                   </article>
                 );
               })
