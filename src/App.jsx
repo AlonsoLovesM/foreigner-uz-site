@@ -760,17 +760,21 @@ const categoryFilters = [
   { key: 'finance', label: { ru: 'Банки & обмен', en: 'Banks & exchange', uz: 'Banklar va almashtirish', zh: '银行&兑换' } },
   { key: 'health', label: { ru: 'Медицина', en: 'Health', uz: 'Tibbiyot', zh: '医疗' } },
   { key: 'shopping', label: { ru: 'Шопинг', en: 'Shopping', uz: 'Xaridlar', zh: '购物' } },
+  { key: 'aquapark', label: { ru: 'Аквапарки', en: 'Aquaparks', uz: 'Akvaparklar', zh: '水上乐园' } },
+  { key: 'zoo', label: { ru: 'Зоопарки', en: 'Zoos', uz: 'Hayvonot bog‘lari', zh: '动物园' } },
   { key: 'gas', label: { ru: 'АЗС', en: 'Gas stations', uz: 'AYQSH', zh: '加油站' } },
   { key: 'sights', label: { ru: 'Достопримечательности', en: 'Sights', uz: 'Diqqatga sazovor joylar', zh: '景点' } },
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'gas', 'sight'],
+  all: ['hotel', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'aquapark', 'zoo', 'gas', 'sight'],
   hotels: ['hotel'],
   food: ['restaurant', 'cafe'],
   finance: ['bank', 'exchange'],
   health: ['clinic', 'pharmacy'],
   shopping: ['market', 'mall'],
+  aquapark: ['aquapark'],
+  zoo: ['zoo'],
   gas: ['gas'],
   sights: ['sight'],
 };
@@ -785,6 +789,8 @@ const typeLabels = {
   pharmacy: { ru: 'Аптека', en: 'Pharmacy', uz: 'Dorixona', zh: '药店' },
   market: { ru: 'Рынок', en: 'Market', uz: 'Bozor', zh: '集市' },
   mall: { ru: 'ТЦ / торговый центр', en: 'Mall', uz: 'Tashkiliy markaz', zh: '购物中心' },
+  aquapark: { ru: 'Аквапарк', en: 'Aquapark', uz: 'Akvapark', zh: '水上乐园' },
+  zoo: { ru: 'Зоопарк', en: 'Zoo', uz: 'Hayvonot bog‘i', zh: '动物园' },
   gas: { ru: 'АЗС', en: 'Gas Station', uz: 'AYQSH', zh: '加油站' },
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy', zh: '景点' },
 };

@@ -216,6 +216,38 @@
     "category_en": "Must Visit"
   },
   {
+    "id": "aquapark-1",
+    "type": "aquapark",
+    "type_en": "Aquapark",
+    "name": "Tashkent Aqua Park",
+    "name_en": "Tashkent Aqua Park",
+    "rating": 4.7,
+    "description": "Современный аквапарк с бассейнами, горками и зонами отдыха для всей семьи.",
+    "description_en": "Modern aquapark with pools, slides and relaxation areas for the whole family.",
+    "address": "ул. Бунёдкор, 12",
+    "address_en": "12 Bunyodkor St",
+    "price_level": "$$",
+    "average_check": "15–25$",
+    "category": "Aquaparks",
+    "category_en": "Aquaparks"
+  },
+  {
+    "id": "zoo-1",
+    "type": "zoo",
+    "type_en": "Zoo",
+    "name": "Tashkent Zoo",
+    "name_en": "Tashkent Zoo",
+    "rating": 4.6,
+    "description": "Городской зоопарк с экзотическими животными, пешеходными маршрутами и детскими зонами.",
+    "description_en": "City zoo with exotic animals, walking paths and family-friendly areas.",
+    "address": "парк имени Ленина",
+    "address_en": "Lenin Park",
+    "price_level": "$",
+    "average_check": "5–10$",
+    "category": "Zoos",
+    "category_en": "Zoos"
+  },
+  {
     "id": "gas-1",
     "type": "gas",
     "type_en": "Gas Station",
