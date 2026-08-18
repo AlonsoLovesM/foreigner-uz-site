@@ -759,6 +759,7 @@ const categoryFilters = [
   { key: 'hotels', label: { ru: 'Отели', en: 'Hotels', uz: 'Mehmonxonalar', zh: '酒店' } },
   { key: 'coffee', label: { ru: 'Кофейни', en: 'Coffee shops', uz: 'Kofejarlar', zh: '咖啡馆' } },
   { key: 'food', label: { ru: 'Еда', en: 'Food', uz: 'Taomlar', zh: '美食' } },
+  { key: 'cyber', label: { ru: 'Компьютерные клубы', en: 'Gaming clubs', uz: 'Kompyuter klublari', zh: '电脑俱乐部' } },
   { key: 'finance', label: { ru: 'Банки & обмен', en: 'Banks & exchange', uz: 'Banklar va almashtirish', zh: '银行&兑换' } },
   { key: 'health', label: { ru: 'Медицина', en: 'Health', uz: 'Tibbiyot', zh: '医疗' } },
   { key: 'shopping', label: { ru: 'Шопинг', en: 'Shopping', uz: 'Xaridlar', zh: '购物' } },
@@ -770,10 +771,11 @@ const categoryFilters = [
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
+  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'foodmall', 'cyber', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
   hotels: ['hotel'],
   coffee: ['coffee'],
-  food: ['restaurant', 'cafe'],
+  food: ['restaurant', 'cafe', 'foodmall'],
+  cyber: ['cyber'],
   finance: ['bank', 'exchange'],
   health: ['clinic', 'pharmacy'],
   shopping: ['market', 'mall'],
@@ -787,8 +789,10 @@ const categoryGroups = {
 const typeLabels = {
   hotel: { ru: 'Отель', en: 'Hotel', uz: 'Mehmonxona', zh: '酒店' },
   coffee: { ru: 'Кофейня', en: 'Coffee shop', uz: 'Kofe', zh: '咖啡店' },
+  foodmall: { ru: 'Фудмолл', en: 'Food mall', uz: 'Food mall', zh: '美食广场' },
   restaurant: { ru: 'Ресторан', en: 'Restaurant', uz: 'Restoran', zh: '餐厅' },
   cafe: { ru: 'Кафе', en: 'Cafe', uz: 'Kafe', zh: '咖啡馆' },
+  cyber: { ru: 'Компьютерный клуб', en: 'Gaming club', uz: 'Kompyuter klubi', zh: '电脑俱乐部' },
   exchange: { ru: 'Обмен', en: 'Exchange', uz: 'Valyuta ayirboshlash', zh: '外汇兑换' },
   bank: { ru: 'Банк / банкомат', en: 'Bank / ATM', uz: 'Bank / Bankomat', zh: '银行 / ATM' },
   clinic: { ru: 'Клиника', en: 'Clinic', uz: 'Klinika', zh: '诊所' },
@@ -899,7 +903,7 @@ function getTypeLabel(place, language) {
 function mapsUrl(place, language) {
   const queryValue = place.maps_query || `${getPlaceField(place, 'name', language)} ${getPlaceField(place, 'address', language)}`;
   const query = encodeURIComponent(queryValue.trim());
-  return `https://www.google.com/maps/search/?api=1&query=$${query}`;
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
 function yandexTaxiUrl(place, language) {
@@ -985,10 +989,11 @@ export default function App() {
   };
 
   const sharePlace = async (place) => {
+    const mapUrl = mapsUrl(place, language);
     const shareData = {
       title: getPlaceField(place, 'name', language),
       text: getPlaceField(place, 'description', language),
-      url: window.location.href.split('#')[0] + '#places',
+      url: mapUrl,
     };
 
     try {
@@ -997,7 +1002,7 @@ export default function App() {
         return;
       }
       await navigator.clipboard.writeText(`${shareData.title} — ${shareData.url}`);
-      alert('Ссылка скопирована в буфер обмена');
+      alert('Ссылка на карту скопирована в буфер обмена');
     } catch (error) {
       console.error('Share failed', error);
     }
@@ -1069,8 +1074,8 @@ export default function App() {
   const planByTime = useMemo(() => {
     const groups = { morning: [], day: [], evening: [] };
     const morningTypes = ['sight', 'market', 'hotel', 'cafe', 'coffee'];
-    const dayTypes = ['restaurant', 'exchange', 'bank', 'clinic', 'pharmacy', 'mall', 'gas', 'market', 'coffee'];
-    const eveningTypes = ['restaurant', 'cafe', 'sight', 'mall', 'hotel', 'coffee'];
+    const dayTypes = ['restaurant', 'exchange', 'bank', 'clinic', 'pharmacy', 'mall', 'gas', 'market', 'coffee', 'foodmall', 'cyber'];
+    const eveningTypes = ['restaurant', 'cafe', 'sight', 'mall', 'hotel', 'coffee', 'foodmall'];
 
     favoritePlaces.forEach((place, index) => {
       const type = place.type;
