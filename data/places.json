@@ -131,6 +131,23 @@
     "category_en": "Food"
   },
   {
+    "id": "rest-beshqozon",
+    "type": "restaurant",
+    "type_en": "Restaurant",
+    "name": "Besh Qozon (Центр Плова)",
+    "name_en": "Besh Qozon (Plov Center)",
+    "rating": 4.8,
+    "description": "Самый знаменитый центр плова в Ташкенте с огромными казанами.",
+    "description_en": "The most famous plov center in Tashkent with giant kazans.",
+    "address": "ул. Ифтихор, 1",
+    "address_en": "1 Iftikhor St",
+    "maps_query": "Besh Qozon Tashkent",
+    "price_level": "$$",
+    "average_check": "5–10$",
+    "category": "Food",
+    "category_en": "Food"
+  },
+  {
     "id": "cafe-1",
     "type": "cafe",
     "type_en": "Cafe",
@@ -211,6 +228,23 @@
     "maps_query": "Bezone Gaming Shakhrisabz Street 1",
     "price_level": "$",
     "average_check": "4–9$ / hour",
+    "category": "Gaming Clubs",
+    "category_en": "Gaming Clubs"
+  },
+  {
+    "id": "cyber-3",
+    "type": "cyber",
+    "type_en": "Gaming Club",
+    "name": "Major Cyber Arena",
+    "name_en": "Major Cyber Arena",
+    "rating": 4.7,
+    "description": "Топовый компьютерный клуб с топовым железом, VIP-комнатами и PS5 зоной.",
+    "description_en": "Top-tier gaming lounge with high-end hardware, VIP rooms, and a PS5 area.",
+    "address": "ул. Ойбека, 14",
+    "address_en": "14 Oybek St",
+    "maps_query": "Major Cyber Arena Tashkent",
+    "price_level": "$$",
+    "average_check": "4–10$ / hour",
     "category": "Gaming Clubs",
     "category_en": "Gaming Clubs"
   },
@@ -748,16 +782,5 @@
     "price_level": "N/A",
     "category": "Banks & Exchange",
     "category_en": "Banks & Exchange"
-  },
-
-
-  {
-    "name": "Besh Qozon (Центр Плова)",
-    "type": "restaurant",
-    "price_level": "$$",
-    "rating": "4.8",
-    "description": "Самый знаменитый центр плова в Ташкенте с огромными казанами.",
-    "address": "ул. Ифтихор, 1",
-    "map_url": "https://maps.google.com/?q=Besh+Qozon+Tashkent"
   }
 ]
