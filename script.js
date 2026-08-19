@@ -3,6 +3,9 @@ const detailPanel = document.getElementById('detail-panel');
 const routeButtons = document.querySelectorAll('.route-btn');
 const routeCard = document.getElementById('route-card');
 
+// Глобальный массив для хранения всех 800+ мест
+let globalPlaces = [];
+
 // ==========================================
 // 1. ТЕКСТОВЫЕ БЛОКИ (RU / UZ / EN)
 // ==========================================
@@ -65,39 +68,103 @@ routeButtons.forEach((button) => {
   });
 });
 
+// Вспомогательная функция: делает из любого названия рабочий ID (slug)
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .trim()
+    .replace(/\s+/g, '-')           // Заменяет пробелы на -
+    .replace(/[^\w\u0400-\u04FF\-]+/g, '') // Удаляет спецсимволы
+    .replace(/\-\-+/g, '-');        // Заменяет двойные дефисы
+}
+
 // ==========================================
-// 2. ЗАГРУЗКА МЕСТ (с поддержкой Google Maps)
+// 2. ЗАГРУЗКА И ОТРИСОВКА ВСЕХ 800+ МЕСТ
 // ==========================================
 async function loadPlaces() {
   try {
     const res = await fetch('data/places.json');
     if (!res.ok) throw new Error('Failed to load places');
-    const places = await res.json();
+    
+    const rawPlaces = await res.json();
     const container = document.getElementById('places-list');
     if (!container) return;
     
-    container.innerHTML = places.map(p => {
-      // Если у места есть map_url, делаем название кликабельным
+    // Проходимся по всей базе: если ID нет, создаем его автоматически из имени
+    globalPlaces = rawPlaces.map((p, index) => {
+      const placeId = p.id || (p.name ? slugify(p.name) : `place-${index}`);
+      return { ...p, unique_id: placeId };
+    });
+
+    // Отрисовываем абсолютно все карточки
+    container.innerHTML = globalPlaces.map(p => {
+      // Если у места есть map_url, делаем заголовок ссылкой на карты
       const nameHtml = p.map_url 
         ? `<a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a>`
         : p.name;
 
+      const type = p.type ? p.type.toUpperCase() : 'МЕСТО';
+      const price = p.price_level ? ` · ${p.price_level}` : '';
+      const rating = p.rating ? ` · ⭐ ${p.rating}` : '';
+
       return `
-        <article class="place-card">
+        <article class="place-card" id="card-${p.unique_id}">
            <h4>${nameHtml}</h4>
-           <p class="muted">${p.type.toUpperCase()} · ${p.price_level} · ⭐ ${p.rating}</p>
-           <p>${p.description}</p>
-           <p class="address">${p.address}</p>
+           <p class="muted">${type}${price}${rating}</p>
+           <p>${p.description || ''}</p>
+           <p class="address">${p.address || ''}</p>
+           
+           <button class="share-btn" onclick="sharePlace('${p.unique_id}')">🔗 Поделиться</button>
         </article>
       `;
     }).join('');
+
+    // Проверяем, перешел ли кто-то по ссылке вида ?place=ИМЯ
+    checkUrlForPlace();
+
   } catch (e) {
     console.error('Error loading places', e);
   }
 }
 
 // ==========================================
-// 3. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
+// 3. ФУНКЦИЯ КОПИРОВАНИЯ ССЫЛКИ НА ТВОЙ САЙТ
+// ==========================================
+function sharePlace(placeId) {
+  const shareUrl = `${window.location.origin}${window.location.pathname}?place=${encodeURIComponent(placeId)}`;
+
+  navigator.clipboard.writeText(shareUrl).then(() => {
+    alert(`Ссылка на место скопирована!\n\n${shareUrl}`);
+  }).catch(err => {
+    console.error('Ошибка копирования:', err);
+  });
+}
+
+// ==========================================
+// 4. ПОИСК МЕСТА ПО ССЫЛКЕ И АВТО-СКРОЛЛ
+// ==========================================
+function checkUrlForPlace() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const placeId = urlParams.get('place');
+
+  if (placeId) {
+    const targetPlace = globalPlaces.find(p => p.unique_id === placeId);
+    
+    if (targetPlace) {
+      setTimeout(() => {
+        const cardElement = document.getElementById(`card-${targetPlace.unique_id}`);
+        if (cardElement) {
+          cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          cardElement.style.transition = 'all 0.5s ease';
+          cardElement.style.outline = '2px solid #007bff';
+          cardElement.style.boxShadow = '0 0 15px rgba(0, 123, 255, 0.5)';
+        }
+      }, 400);
+    }
+  }
+}
+
+// ==========================================
+// 5. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
 // ==========================================
 window.currentRates = { USD: 12800, EUR: 13900 };
 
@@ -122,7 +189,7 @@ async function fetchRates() {
   }
 }
 
-// Запуск при загрузке страницы
+// Запуск приложения
 document.addEventListener('DOMContentLoaded', () => {
   loadPlaces();
   fetchRates();
