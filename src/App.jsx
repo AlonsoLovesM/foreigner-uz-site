@@ -33,7 +33,7 @@ const translations = {
       toLabel: 'В:',
       resultLabel: 'Итого:',
     },
-    places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Google Maps', taxi: 'Яндекс Go', location: 'Адрес' },
+    places: { title: 'Полезные места', subtitle: 'Отели, обмен, клиники, рынки и заведения для отдыха.', google: 'Яндекс Карты', taxi: 'Яндекс Go', location: 'Адрес' },
     favorites: { title: 'Избранное и план поездки', subtitle: 'Сохраняй места и собирай короткий маршрут на день.', empty: 'Пока нет сохранённых мест', emptyHint: 'Нажми ❤️ на любом месте, чтобы собрать маршрут.', ready: 'Сохранено', show: 'Показать избранное', clear: 'Очистить', planTitle: 'Короткий маршрут', stepLabel: 'Шаг' },
     mustVisit: { title: 'Что стоит посетить', subtitle: 'Лучшие точки Ташкента для прогулок, шопинга и впечатлений.' },
     routes: { title: 'Маршруты', subtitle: 'Готовые варианты для дня и вечера.' },
@@ -121,7 +121,7 @@ const translations = {
       toLabel: 'To:',
       resultLabel: 'Result:',
     },
-    places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Address' },
+    places: { title: 'Useful places', subtitle: 'Hotels, exchange, clinics, markets and places to relax.', google: 'Yandex Maps', taxi: 'Yandex Go', location: 'Address' },
     favorites: { title: 'Saved places & trip plan', subtitle: 'Save places you like and build a quick day plan.', empty: 'No saved places yet', emptyHint: 'Tap ❤️ on any place to start building your route.', ready: 'Saved', show: 'Show favorites', clear: 'Clear', planTitle: 'Quick route', stepLabel: 'Step' },
     mustVisit: { title: 'Must visit', subtitle: 'Top Tashkent spots for shopping, sightseeing and experiences.' },
     routes: { title: 'Routes', subtitle: 'Ready-made day and evening options.' },
@@ -209,7 +209,7 @@ const translations = {
       toLabel: 'तक:',
       resultLabel: 'परिणाम:',
     },
-    places: { title: 'उपयोगी स्थान', subtitle: 'होटल, विनिमय, क्लिनिक, बाजार और आराम करने की जगहें।', google: 'Google Maps', taxi: 'Yandex Go', location: 'पता' },
+    places: { title: 'उपयोगी स्थान', subtitle: 'होटल, विनिमय, क्लिनिक, बाजार और आराम करने की जगहें।', google: 'Yandex Maps', taxi: 'Yandex Go', location: 'पता' },
     favorites: { title: 'सहेजे गए स्थान और यात्रा योजना', subtitle: 'अपने पसंदीदा स्थान बचाएँ और एक छोटी दिन-योजना बनाएं।', empty: 'अभी तक कोई पसंदीदा स्थान नहीं', emptyHint: 'किसी भी स्थान पर ❤️ दबाकर अपना маршрут बनाएँ।', ready: 'सहेजा गया', show: 'पसंदीदा दिखाएँ', clear: 'साफ करें', planTitle: 'छोटा маршрут', stepLabel: 'कदम' },
     mustVisit: { title: 'ज़रूर देखें', subtitle: 'खरीदारी, sightseeing और अनुभवों के लिए ताशकंद के शीर्ष स्थान।' },
     routes: { title: 'मार्ग', subtitle: 'दिन और शाम के लिए तैयार विकल्प।' },
@@ -297,7 +297,7 @@ const translations = {
       toLabel: 'Ga:',
       resultLabel: 'Natija:',
     },
-    places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Manzil' },
+    places: { title: 'Foydali joylar', subtitle: 'Mehmonxonalar, valyuta ayirboshlash, klinikalar va hordiq chiqarish maskanlari.', google: 'Yandex Xarita', taxi: 'Yandex Go', location: 'Manzil' },
     favorites: { title: 'Tanlanganlar va sayohat rejasi', subtitle: 'Yoqtirgan joylaringizni saqlang va qisqa kunlik marshrut yarating.', empty: 'Hozircha saqlangan joylar yo‘q', emptyHint: 'Har qanday joyda ❤️ bosib marshrutni yarating.', ready: 'Saqlangan', show: 'Tanlanganlarni ko‘rsatish', clear: 'Tozalash', planTitle: 'Qisqa marshrut', stepLabel: 'Qadam' },
     mustVisit: { title: 'Tashrif buyurish shart', subtitle: 'Toshkentdagi sayr, xarid va taassurotlar uchun eng yaxshi maskanlar.' },
     routes: { title: 'Yo‘nalishlar', subtitle: 'Kunduzgi va kechki tayyor yo‘nalishlar.' },
@@ -385,7 +385,7 @@ const translations = {
       toLabel: 'Кімге:',
       resultLabel: 'Нәтиже:',
     },
-    places: { title: 'Пайдалы орындар', subtitle: 'Қонақ үйлер, валюта айырбастау, клиникалар, базарлар және демалу орындары.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Мекенжай' },
+    places: { title: 'Пайдалы орындар', subtitle: 'Қонақ үйлер, валюта айырбастау, клиникалар, базарлар және демалу орындары.', google: 'Яндекс Карта', taxi: 'Yandex Go', location: 'Мекенжай' },
     favorites: { title: 'Сақталған орындар мен сапар жоспары', subtitle: 'Ұнайтын орындарды сақтап, қысқа күндік маршрут құрыңыз.', empty: 'Әзірге сақталған орындар жоқ', emptyHint: 'Кез келген орынға ❤️ басып маршрут құра бастау.', ready: 'Сақталды', show: 'Сақталғандарды көрсету', clear: 'Тазалау', planTitle: 'Қысқа маршрут', stepLabel: 'Қадам' },
     mustVisit: { title: 'Көріп шығу керек', subtitle: 'Ташкенттегі ең қызықты орындар, сатып алу және әсерлер үшін.' },
     routes: { title: 'Маршруттар', subtitle: 'Күндізгі және кешкі дайын нұсқалар.' },
@@ -473,7 +473,7 @@ const translations = {
       toLabel: 'Кимге:',
       resultLabel: 'Натыйжа:',
     },
-    places: { title: 'Пайдалуу жайгашуулар', subtitle: 'Мейманканалар, валюта алмаштыруу, клиникалар, базарлар жана эс алуу жерлери.', google: 'Google Maps', taxi: 'Yandex Go', location: 'Дарек' },
+    places: { title: 'Пайдалуу жайгашуулар', subtitle: 'Мейманканалар, валюта алмаштыруу, клиникалар, базарлар жана эс алуу жерлери.', google: 'Яндекс Карта', taxi: 'Yandex Go', location: 'Дарек' },
     favorites: { title: 'Сакталган жерлер жана сапар планы', subtitle: 'Ұнай турган жерлерди сактап, кыска күндүк маршрут түзүңүз.', empty: 'Азырынча сакталган жерлер жок', emptyHint: 'Кез келген жерге ❤️ басып маршрут түзө баштаңыз.', ready: 'Сакталды', show: 'Сакталгандарды көрсөтүү', clear: 'Тазалоо', planTitle: 'Кыска маршрут', stepLabel: 'Кадам' },
     mustVisit: { title: 'Көрүү керек', subtitle: 'Ташкенттин эң сонун жерлери, сатып алуу жана тажрыйба үчүн.' },
     routes: { title: 'Маршруттар', subtitle: 'Күндүзгү жана кечки даяр варианттар.' },
@@ -517,7 +517,7 @@ const translations = {
       title: '🍲 Ташкентте Must Eat',
       subtitle: 'Өзбек тамактары жана аларды татуу үчүн белгилүү жерлер.',
       tipTitle: '💡 Плов боюнча кеңеш:',
-      tipDesc: 'Ташкентте плов эртең менен пиши жана түштөн кийин жейт. Эң жакшы убакыт — 11:30дөн 13:30га чейин. 14:00дөн кийин эң таттуусы барат.',
+      tipDesc: 'Ташкентте плов эртең менен пиши жана түштөн кийин жейт. Эң жакшы убакыт — 11:30дөн 13:30га чейин. 14:00дөн кийин эң таттуусу барат.',
     },
     phrasebook: {
       title: '🗣️ Туристтер үчүн өзбекче сөздүк',
@@ -561,8 +561,8 @@ const translations = {
       toLabel: '到：',
       resultLabel: '总计：',
     },
-    places: { title: '实用地点', subtitle: '酒店、外汇、诊所、集市与休闲场所。', google: 'Google 地图', taxi: 'Yandex 叫车', location: '地址' },
-    mustVisit: { title: '必游景点', subtitle: '塔什干最佳散步、购物和体验打卡点。', google: 'Google 地图', taxi: 'Yandex 叫车' },
+    places: { title: '实用地点', subtitle: '酒店、外汇、诊所、集市与休闲场所。', google: 'Yandex 地图', taxi: 'Yandex 叫车', location: '地址' },
+    mustVisit: { title: '必游景点', subtitle: '塔什干最佳散步、购物和体验打卡点。', google: 'Yandex 地图', taxi: 'Yandex 叫车' },
     routes: { title: '精选路线', subtitle: '为您准备好的日间和夜间游览方案。' },
     download: { pre: '即将登陆手机端', title: '打开应用，开启轻松精彩的旅行路线。', text: '我们致力于打造一款让您无需盲目搜索即可探索更多的产品。' },
     planner: {
@@ -622,7 +622,7 @@ const translations = {
 const PHRASEBOOK_LIST = [
   { uzbek: 'Salom! Assalomu alaykum!', translit: 'Salom! Assalomu alaykum!', ru: 'Здравствуйте!', en: 'Hello!', zh: '你好！' },
   { uzbek: 'Rahmat!', translit: 'Rahmat!', ru: 'Спасибо!', en: 'Thank you!', zh: '谢谢！' },
-  { uzbek: 'Bu nima turadi?', translit: 'Bu nima turadi?', ru: 'Что это?', en: 'What is this?', zh: '这是什么？' },
+  { uzbek: 'Bu nima?', translit: 'Bu nima?', ru: 'Что это?', en: 'What is this?', zh: '这是什么？' },
   { uzbek: 'Bu qancha turadi?', translit: 'Bu qancha turadi?', ru: 'Сколько это стоит?', en: 'How much is this?', zh: '这个多少钱？' },
   { uzbek: 'Bir oz arzonroq bo\'lmasa?', translit: 'Bir oz arzonroq bo\'lmasa?', ru: 'Можно немного дешевле?', en: 'Could you make it a bit cheaper?', zh: '能便宜一点吗？' },
   { uzbek: 'Bu juda mazali!', translit: 'Bu juda mazali!', ru: 'Очень вкусно!', en: 'It is very tasty!', zh: '非常好吃！' },
@@ -902,8 +902,8 @@ function getTypeLabel(place, language) {
 
 function mapsUrl(place, language) {
   const queryValue = place.maps_query || `${getPlaceField(place, 'name', language)} ${getPlaceField(place, 'address', language)}`;
-  const query = encodeURIComponent(queryValue.trim());
-  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+  const query = encodeURIComponent(`Ташкент ${queryValue}`.trim());
+  return `https://yandex.ru/maps/?text=${query}`;
 }
 
 function yandexTaxiUrl(place, language) {
@@ -958,6 +958,23 @@ export default function App() {
 
   const [selectedMetroStation, setSelectedMetroStation] = useState(FULL_METRO_STATIONS[6]); // Pakhtakor by default
 
+  const [sharedPlaceId, setSharedPlaceId] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const placeId = params.get('place');
+    if (placeId) {
+      setSharedPlaceId(placeId);
+      setActiveCategory('all');
+      setTimeout(() => {
+        const el = document.getElementById(`place-${placeId}`);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 400);
+    }
+  }, []);
+
   const [favorites, setFavorites] = useState(() => {
     try {
       const saved = localStorage.getItem('foreigner_favorites');
@@ -989,11 +1006,11 @@ export default function App() {
   };
 
   const sharePlace = async (place) => {
-    const mapUrl = mapsUrl(place, language);
+    const ownSiteUrl = `${window.location.origin}${window.location.pathname}?place=${encodeURIComponent(place.id)}`;
     const shareData = {
       title: getPlaceField(place, 'name', language),
       text: getPlaceField(place, 'description', language),
-      url: mapUrl,
+      url: ownSiteUrl,
     };
 
     try {
@@ -1002,7 +1019,7 @@ export default function App() {
         return;
       }
       await navigator.clipboard.writeText(`${shareData.title} — ${shareData.url}`);
-      alert('Ссылка на карту скопирована в буфер обмена');
+      alert('Ссылка скопирована — она откроет это место прямо на сайте');
     } catch (error) {
       console.error('Share failed', error);
     }
@@ -1291,8 +1308,7 @@ export default function App() {
               <div style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '8px' }}>{t('planner.vibeLabel')}</div>
               <div className="category-buttons" style={{ justifyContent: 'flex-start' }}>
                 {Object.entries(t('planner.modes')).map(([key, label]) => (
-                  <button
-                    key={key}
+                  <button key={key}
                     type="button"
                     className={`category-btn ${plannerMode === key ? 'active' : ''}`}
                     onClick={() => setPlannerMode(key)}
@@ -1346,8 +1362,7 @@ export default function App() {
                     <div style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#fbbf24' }}>{item.uzbek}</div>
                     <div style={{ fontSize: '0.85rem', color: '#94a3b8', marginBottom: '10px' }}>[{item.translit}]</div>
                   </div>
-                  <button 
-                    type="button" 
+                  <button type="button"
                     onClick={() => speakText(item.uzbek)}
                     style={{ background: 'rgba(251, 191, 36, 0.2)', border: '1px solid #fbbf24', color: '#fbbf24', borderRadius: '10px', padding: '8px 14px', cursor: 'pointer', fontWeight: 'bold', fontSize: '1rem' }}
                   >
@@ -1410,8 +1425,7 @@ export default function App() {
                 <p style={{ color: '#fbbf24', fontWeight: 'bold', margin: '0 0 10px', fontSize: '0.95rem' }}>📍 {item.spot} · ⭐ {item.rating}</p>
                 <p style={{ color: '#ccc', fontSize: '0.9rem', lineHeight: '1.5', margin: '0 0 16px' }}>{getTranslatedText(item.desc, language)}</p>
                 
-                <a
-                  href={`https://www.google.com/maps/search/?api=1&query=$${encodeURIComponent(item.query)}`}
+                <a href={`https://yandex.ru/maps/?text=${encodeURIComponent('Ташкент ' + item.query)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary small"
@@ -1510,8 +1524,7 @@ export default function App() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.amountLabel')}</label>
-                  <input 
-                    type="number" 
+                  <input type="number"
                     value={calcAmount} 
                     onChange={(e) => setCalcAmount(e.target.value)}
                     style={{
@@ -1531,8 +1544,7 @@ export default function App() {
                 <div style={{ display: 'flex', gap: '12px' }}>
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.fromLabel')}</label>
-                    <select 
-                      value={calcFrom} 
+                    <select value={calcFrom}
                       onChange={(e) => setCalcFrom(e.target.value)}
                       style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', background: '#222', color: '#fff', fontSize: '1rem', outline: 'none' }}
                     >
@@ -1549,8 +1561,7 @@ export default function App() {
 
                   <div style={{ flex: 1 }}>
                     <label style={{ display: 'block', fontSize: '0.85rem', color: '#ccc', marginBottom: '6px' }}>{t('rate.toLabel')}</label>
-                    <select 
-                      value={calcTo} 
+                    <select value={calcTo}
                       onChange={(e) => setCalcTo(e.target.value)}
                       style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.2)', background: '#222', color: '#fff', fontSize: '1rem', outline: 'none' }}
                     >
@@ -1630,8 +1641,7 @@ export default function App() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '16px' }}>
-            <input
-              type="text"
+            <input type="text"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder={language === 'ru' ? 'Поиск по названию, адресу или категории' : language === 'en' ? 'Search by name, address or category' : 'Nom, manzil yoki kategoriya bo\'yicha qidirish'}
@@ -1648,8 +1658,7 @@ export default function App() {
             />
             <div className="category-buttons">
               {categoryFilters.map((category) => (
-                <button
-                  key={category.key}
+                <button key={category.key}
                   type="button"
                   className={`category-btn ${activeCategory === category.key ? 'active' : ''}`}
                   onClick={() => setActiveCategory(category.key)}
@@ -1670,9 +1679,8 @@ export default function App() {
               filteredPlaces.map((place) => {
                 const isFav = favorites.includes(place.id);
                 return (
-                  <article key={place.id} className="place-card" style={{ position: 'relative' }}>
-                    <button
-                      type="button"
+                  <article key={place.id} id={`place-${place.id}`} className="place-card" style={{ position: 'relative', ...(place.id === sharedPlaceId ? { outline: '3px solid #fbbf24', boxShadow: '0 0 0 6px rgba(251,191,36,0.25)' } : {}) }}>
+                    <button type="button"
                       onClick={() => toggleFavorite(place.id)}
                       style={{
                         position: 'absolute', top: '12px', right: '12px', background: 'rgba(0,0,0,0.6)', border: 'none', borderRadius: '50%', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', zIndex: 2
@@ -1695,8 +1703,7 @@ export default function App() {
                         🚖 {t('places.taxi')}
                       </a>
                     </div>
-                    <button
-                      type="button"
+                    <button type="button"
                       className="btn btn-secondary small"
                       onClick={() => sharePlace(place)}
                       style={{ width: '100%', marginTop: '10px', textAlign: 'center' }}
