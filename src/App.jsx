@@ -935,6 +935,31 @@ function speakText(text) {
   }
 }
 
+// Сравнивает текущее время устройства с графиком "HH:MM-HH:MM" (поддерживает ночные интервалы типа 22:00-02:00)
+function isOpenNow(openingHours) {
+  if (!openingHours || typeof openingHours !== 'string') return null;
+  const match = openingHours.match(/^(\d{1,2}):(\d{2})-(\d{1,2}):(\d{2})$/);
+  if (!match) return null;
+
+  const [, startH, startM, endH, endM] = match.map(Number);
+  const now = new Date();
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+  const startMinutes = startH * 60 + startM;
+  let endMinutes = endH * 60 + endM;
+
+  if (endH === 23 && endM === 59) endMinutes = 24 * 60;
+
+  if (endMinutes <= startMinutes) {
+    // Ночной интервал, например 22:00-02:00
+    return nowMinutes >= startMinutes || nowMinutes < endMinutes;
+  }
+  return nowMinutes >= startMinutes && nowMinutes < endMinutes;
+}
+
+function askAiUrl(place) {
+  return `https://t.me/foreigneruz_bot?start=${encodeURIComponent(place.id)}`;
+}
+
 export default function App() {
   const [language, setLanguage] = useState('ru');
   const [activeCard, setActiveCard] = useState('places');
@@ -1023,6 +1048,20 @@ export default function App() {
     } catch (error) {
       console.error('Share failed', error);
     }
+  };
+
+  const pickRandomPlace = () => {
+    if (!placesData || placesData.length === 0) return;
+    const randomPlace = placesData[Math.floor(Math.random() * placesData.length)];
+    setActiveCategory('all');
+    setSearchQuery('');
+    setSharedPlaceId(randomPlace.id);
+    setTimeout(() => {
+      const el = document.getElementById(`place-${randomPlace.id}`);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }, 150);
   };
 
   const t = (path) => {
@@ -1226,6 +1265,20 @@ export default function App() {
 
   return (
     <div className="page-shell">
+      <button type="button"
+        onClick={pickRandomPlace}
+        title={language === 'en' ? 'Feeling lucky' : language === 'uz' ? "Omadimni sinab ko'raman" : language === 'zh' ? '手气不错' : 'Мне повезёт'}
+        style={{
+          position: 'fixed', bottom: '24px', right: '24px', zIndex: 50,
+          width: '58px', height: '58px', borderRadius: '50%',
+          background: 'linear-gradient(135deg, #5bd1ff, #4de3a8)',
+          border: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.35)',
+          fontSize: '1.6rem', cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+      >
+        🎲
+      </button>
       <header className="hero" id="top">
         <nav className="nav container">
           <a href="#top" className="brand">Foreigner.uz</a>
@@ -1678,6 +1731,7 @@ export default function App() {
             ) : (
               filteredPlaces.map((place) => {
                 const isFav = favorites.includes(place.id);
+                const openNow = isOpenNow(place.opening_hours);
                 return (
                   <article key={place.id} id={`place-${place.id}`} className="place-card" style={{ position: 'relative', ...(place.id === sharedPlaceId ? { outline: '3px solid #fbbf24', boxShadow: '0 0 0 6px rgba(251,191,36,0.25)' } : {}) }}>
                     <button type="button"
@@ -1689,11 +1743,27 @@ export default function App() {
                       {isFav ? '❤️' : '🤍'}
                     </button>
 
-                    <span className="badge">{getTypeLabel(place, language)}</span>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
+                      <span className="badge">{getTypeLabel(place, language)}</span>
+                      {openNow !== null && (
+                        <span style={{
+                          fontSize: '0.72rem', fontWeight: 'bold', padding: '3px 9px', borderRadius: '999px',
+                          background: openNow ? 'rgba(16, 185, 129, 0.18)' : 'rgba(239, 68, 68, 0.18)',
+                          color: openNow ? '#34d399' : '#f87171',
+                        }}>
+                          {openNow
+                            ? (language === 'en' ? '● Open now' : language === 'uz' ? '● Hozir ochiq' : language === 'zh' ? '● 营业中' : '● Открыто')
+                            : (language === 'en' ? '● Closed' : language === 'uz' ? '● Yopiq' : language === 'zh' ? '● 已关闭' : '● Закрыто')}
+                        </span>
+                      )}
+                    </div>
                     <h4>{getPlaceField(place, 'name', language)}</h4>
                     <p className="muted">{(place.average_check || place.price_level) ? `${place.average_check || place.price_level} · ` : ''}⭐ {place.rating}</p>
                     <p>{getPlaceField(place, 'description', language)}</p>
                     <p className="address"><strong>{t('places.location')}:</strong> {getPlaceField(place, 'address', language)}</p>
+                    {place.opening_hours && (
+                      <p className="muted" style={{ fontSize: '0.85rem' }}>🕒 {place.opening_hours}</p>
+                    )}
 
                     <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
                       <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary small" style={{ flex: 1, textDecoration: 'none', textAlign: 'center' }}>
@@ -1703,6 +1773,9 @@ export default function App() {
                         🚖 {t('places.taxi')}
                       </a>
                     </div>
+                    <a href={askAiUrl(place)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary small" style={{ width: '100%', marginTop: '8px', textDecoration: 'none', textAlign: 'center', display: 'block', boxSizing: 'border-box' }}>
+                      🤖 {language === 'en' ? 'Ask AI assistant' : language === 'uz' ? 'AI yordamchidan so\'rash' : language === 'zh' ? '咨询 AI 助手' : 'Спросить у ИИ-помощника'}
+                    </a>
                     <button type="button"
                       className="btn btn-secondary small"
                       onClick={() => sharePlace(place)}

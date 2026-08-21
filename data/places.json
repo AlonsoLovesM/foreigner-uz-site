@@ -14,8 +14,7 @@
     "average_check": "100–200$",
     "category": "Hotels",
     "category_en": "Hotels",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Lotte+City+Hotel+Tashkent+Palace"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "hotel-2",
@@ -32,8 +31,7 @@
     "average_check": "80–150$",
     "category": "Hotels",
     "category_en": "Hotels",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Hyatt+Regency+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "hotel-3",
@@ -50,8 +48,7 @@
     "average_check": "70–130$",
     "category": "Hotels",
     "category_en": "Hotels",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Wyndham+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "hotel-4",
@@ -68,8 +65,7 @@
     "average_check": "10–20$",
     "category": "Hotels",
     "category_en": "Hotels",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Ideal+Hostel+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "coffee-safiya",
@@ -87,8 +83,7 @@
     "average_check": "6–12$",
     "category": "Coffee Shops",
     "category_en": "Coffee Shops",
-    "hours": "08:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Safiya+Coffee+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "coffee-cafito",
@@ -106,8 +101,7 @@
     "average_check": "5–10$",
     "category": "Coffee Shops",
     "category_en": "Coffee Shops",
-    "hours": "08:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Coffeeito+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "coffee-butcoin",
@@ -125,8 +119,7 @@
     "average_check": "7–11$",
     "category": "Coffee Shops",
     "category_en": "Coffee Shops",
-    "hours": "09:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Butcoin+Coffee+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "rest-1",
@@ -143,8 +136,7 @@
     "average_check": "15–25$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "10:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Central+Asian+Kitchen+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "cafe-1",
@@ -161,8 +153,7 @@
     "average_check": "5–10$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "08:00-21:00",
-    "map_url": "https://yandex.ru/maps/?text=Chorsu+Coffee+House+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "foodmall-1",
@@ -180,8 +171,7 @@
     "average_check": "15–30$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "10:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+Food+Mall"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "buffet-17",
@@ -199,8 +189,7 @@
     "average_check": "8–15$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "09:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Bufet+17+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "cyber-1",
@@ -218,8 +207,7 @@
     "average_check": "1–3$ / hour",
     "category": "Gaming Clubs",
     "category_en": "Gaming Clubs",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=CyberBox+Game+zone+Tashkent"
+    "opening_hours": "10:00-02:00"
   },
   {
     "id": "cyber-gonzo",
@@ -237,8 +225,7 @@
     "average_check": "1.5–3.5$ / hour",
     "category": "Gaming Clubs",
     "category_en": "Gaming Clubs",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Bezone+Gaming+Shakhrisabz+Street+1"
+    "opening_hours": "10:00-02:00"
   },
   {
     "id": "cyber-nova",
@@ -256,8 +243,7 @@
     "average_check": "1–2.5$ / hour",
     "category": "Gaming Clubs",
     "category_en": "Gaming Clubs",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Nova+Cyber+Arena+Tashkent"
+    "opening_hours": "10:00-02:00"
   },
   {
     "id": "cyber-elite",
@@ -275,8 +261,7 @@
     "average_check": "1–2$ / hour",
     "category": "Gaming Clubs",
     "category_en": "Gaming Clubs",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Elite+Gaming+House+Tashkent"
+    "opening_hours": "10:00-02:00"
   },
   {
     "id": "exchange-1",
@@ -292,8 +277,7 @@
     "price_level": "N/A",
     "category": "Banks & Exchange",
     "category_en": "Banks & Exchange",
-    "hours": "09:00-18:00",
-    "map_url": "https://yandex.ru/maps/?text=Asia+Forex+Exchange+Tashkent"
+    "opening_hours": "09:00-19:00"
   },
   {
     "id": "bank-1",
@@ -309,8 +293,7 @@
     "price_level": "N/A",
     "category": "Banks & Exchange",
     "category_en": "Banks & Exchange",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Kapital+Bank+ATM+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "clinic-1",
@@ -326,8 +309,7 @@
     "price_level": "$$$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=City+Med+Clinic+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "pharmacy-1",
@@ -343,8 +325,7 @@
     "price_level": "$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "08:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Green+Pharmacy+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "market-1",
@@ -360,8 +341,7 @@
     "price_level": "$$",
     "category": "Markets & Shopping",
     "category_en": "Markets & Shopping",
-    "hours": "06:00-19:00",
-    "map_url": "https://yandex.ru/maps/?text=Chorsu+Market+Tashkent"
+    "opening_hours": "08:00-19:00"
   },
   {
     "id": "mall-1",
@@ -377,8 +357,7 @@
     "price_level": "$$$",
     "category": "Markets & Shopping",
     "category_en": "Markets & Shopping",
-    "hours": "10:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+City+Mall"
+    "opening_hours": "10:00-22:00"
   },
   {
     "id": "magic-1",
@@ -394,8 +373,7 @@
     "price_level": "$$",
     "category": "Markets & Shopping",
     "category_en": "Markets & Shopping",
-    "hours": "10:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Magic+City+Tashkent"
+    "opening_hours": "10:00-22:00"
   },
   {
     "id": "tower-1",
@@ -411,8 +389,7 @@
     "price_level": "$$",
     "category": "Must Visit",
     "category_en": "Must Visit",
-    "hours": "10:00-20:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+TV+Tower"
+    "opening_hours": "09:00-22:00"
   },
   {
     "id": "aquapark-1",
@@ -430,8 +407,7 @@
     "average_check": "15–25$",
     "category": "Aquaparks",
     "category_en": "Aquaparks",
-    "hours": "10:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+Aqua+Park"
+    "opening_hours": "09:00-19:00"
   },
   {
     "id": "zoo-1",
@@ -449,8 +425,7 @@
     "average_check": "5–10$",
     "category": "Zoos",
     "category_en": "Zoos",
-    "hours": "09:00-19:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+Zoo"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "park-eco",
@@ -468,8 +443,7 @@
     "average_check": "бесплатно",
     "category": "Parks",
     "category_en": "Parks",
-    "hours": "06:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Eco+Park+Tashkent"
+    "opening_hours": "06:00-23:00"
   },
   {
     "id": "park-telman",
@@ -487,8 +461,7 @@
     "average_check": "бесплатно",
     "category": "Parks",
     "category_en": "Parks",
-    "hours": "06:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Telman+Park+Tashkent"
+    "opening_hours": "06:00-23:00"
   },
   {
     "id": "park-ashxabad",
@@ -506,8 +479,7 @@
     "average_check": "бесплатно",
     "category": "Parks",
     "category_en": "Parks",
-    "hours": "06:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Ashkhabad+Park+Tashkent"
+    "opening_hours": "06:00-23:00"
   },
   {
     "id": "park-botanical",
@@ -525,8 +497,7 @@
     "average_check": "бесплатно",
     "category": "Parks",
     "category_en": "Parks",
-    "hours": "08:00-19:00",
-    "map_url": "https://yandex.ru/maps/?text=Botanical+Garden+Tashkent"
+    "opening_hours": "06:00-23:00"
   },
   {
     "id": "park-central",
@@ -544,8 +515,7 @@
     "average_check": "бесплатно",
     "category": "Parks",
     "category_en": "Parks",
-    "hours": "06:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Central+Park+Tashkent"
+    "opening_hours": "06:00-23:00"
   },
   {
     "id": "aquapark-solar",
@@ -563,8 +533,7 @@
     "average_check": "20–30$",
     "category": "Aquaparks",
     "category_en": "Aquaparks",
-    "hours": "10:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Solar+Aqua+Park+Tashkent"
+    "opening_hours": "09:00-19:00"
   },
   {
     "id": "zoo-botanical",
@@ -582,8 +551,7 @@
     "average_check": "8–12$",
     "category": "Zoos",
     "category_en": "Zoos",
-    "hours": "09:00-19:00",
-    "map_url": "https://yandex.ru/maps/?text=National+Zoo+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "gas-1",
@@ -599,8 +567,7 @@
     "price_level": "$$",
     "category": "Gas Stations",
     "category_en": "Gas Stations",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Lukoil+Gas+Station+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "shop-1",
@@ -616,8 +583,7 @@
     "price_level": "$",
     "category": "Markets & Shopping",
     "category_en": "Markets & Shopping",
-    "hours": "08:00-19:00",
-    "map_url": "https://yandex.ru/maps/?text=Chorsu+Souvenir+Street+Tashkent"
+    "opening_hours": "08:00-19:00"
   },
   {
     "id": "sight-2",
@@ -633,8 +599,7 @@
     "price_level": "$",
     "category": "Must Visit",
     "category_en": "Must Visit",
-    "hours": "09:00-18:00",
-    "map_url": "https://yandex.ru/maps/?text=Center+of+Islamic+Civilization+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "sight-3",
@@ -650,8 +615,7 @@
     "price_level": "$",
     "category": "Must Visit",
     "category_en": "Must Visit",
-    "hours": "10:00-17:00",
-    "map_url": "https://yandex.ru/maps/?text=State+Museum+of+Temurids+History+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "rest-2",
@@ -668,8 +632,7 @@
     "average_check": "5–10$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "09:00-16:00",
-    "map_url": "https://yandex.ru/maps/?text=Plov+Center+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "cafe-2",
@@ -686,8 +649,7 @@
     "average_check": "5–12$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "08:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Sammy+Coffee+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "cafe-3",
@@ -704,8 +666,7 @@
     "average_check": "4–10$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "09:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Bibliophile+Coffee+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "cafe-4",
@@ -722,8 +683,7 @@
     "average_check": "1–3$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "08:00-18:00",
-    "map_url": "https://yandex.ru/maps/?text=Somsa+Corner+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "rest-3",
@@ -740,8 +700,7 @@
     "average_check": "12–20$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "11:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Karavon+Restaurant+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "rest-4",
@@ -758,8 +717,7 @@
     "average_check": "10–18$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "12:00-23:00",
-    "map_url": "https://yandex.ru/maps/?text=Barbeque+House+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "rest-5",
@@ -776,8 +734,7 @@
     "average_check": "10–16$",
     "category": "Food",
     "category_en": "Food",
-    "hours": "11:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Il+Forno+Pizzeria+Tashkent"
+    "opening_hours": "09:00-23:00"
   },
   {
     "id": "clinic-2",
@@ -793,8 +750,7 @@
     "price_level": "$$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Republican+Clinical+Hospital+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "clinic-3",
@@ -810,8 +766,7 @@
     "price_level": "$$$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "08:00-20:00",
-    "map_url": "https://yandex.ru/maps/?text=Tashkent+International+Clinic"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "pharmacy-2",
@@ -827,8 +782,7 @@
     "price_level": "$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Optima+Pharm+Tashkent"
+    "opening_hours": "00:00-23:59"
   },
   {
     "id": "pharmacy-3",
@@ -844,8 +798,7 @@
     "price_level": "$",
     "category": "Health",
     "category_en": "Health",
-    "hours": "08:00-22:00",
-    "map_url": "https://yandex.ru/maps/?text=Dori-Darmon+Pharmacy+Tashkent"
+    "opening_hours": "08:00-22:00"
   },
   {
     "id": "bank-2",
@@ -861,8 +814,7 @@
     "price_level": "N/A",
     "category": "Banks & Exchange",
     "category_en": "Banks & Exchange",
-    "hours": "00:00-24:00",
-    "map_url": "https://yandex.ru/maps/?text=Hamkorbank+ATM+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "bank-3",
@@ -878,8 +830,7 @@
     "price_level": "N/A",
     "category": "Banks & Exchange",
     "category_en": "Banks & Exchange",
-    "hours": "09:00-17:00",
-    "map_url": "https://yandex.ru/maps/?text=Ipoteka+Bank+Tashkent"
+    "opening_hours": "09:00-18:00"
   },
   {
     "id": "besh-qozon-1",
@@ -896,7 +847,6 @@
     "maps_query": "Besh Qozon Tashkent",
     "category": "Food",
     "category_en": "Food",
-    "hours": "09:00-17:00",
-    "map_url": "https://yandex.ru/maps/?text=Besh+Qozon+Tashkent"
+    "opening_hours": "09:00-23:00"
   }
 ]
