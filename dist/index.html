@@ -17,6 +17,14 @@
     <link rel="stylesheet" crossorigin href="/assets/index-DpY5zGMr.css">
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Панель быстрых фичей (Рулетка + График) -->
+    <div id="extra-tools" style="padding: 10px; display: flex; gap: 10px; justify-content: center; align-items: center; background: rgba(7, 17, 31, 0.8);">
+      <button id="random-place-btn" style="padding: 8px 16px; border-radius: 8px; background: #ff9900; color: #fff; border: none; font-weight: bold; cursor: pointer;">🎲 Мне повезёт!</button>
+      <label style="color: #fff; font-size: 14px; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+        <input type="checkbox" id="open-now-checkbox"> 🟢 Открыто сейчас
+      </label>
+    </div>
+
+    <div id="root"></div>
   </body>
 </html>

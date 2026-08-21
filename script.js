@@ -3,7 +3,7 @@ const detailPanel = document.getElementById('detail-panel');
 const routeButtons = document.querySelectorAll('.route-btn');
 const routeCard = document.getElementById('route-card');
 
-// Глобальный массив для хранения всех 800+ мест
+// Глобальный массив для хранения всех мест
 let globalPlaces = [];
 
 // ==========================================
@@ -72,13 +72,38 @@ routeButtons.forEach((button) => {
 function slugify(text) {
   return text.toString().toLowerCase()
     .trim()
-    .replace(/\s+/g, '-')           // Заменяет пробелы на -
-    .replace(/[^\w\u0400-\u04FF\-]+/g, '') // Удаляет спецсимволы
-    .replace(/\-\-+/g, '-');        // Заменяет двойные дефисы
+    .replace(/\s+/g, '-')
+    .replace(/[^\w\u0400-\u04FF\-]+/g, '')
+    .replace(/\-\-+/g, '-');
+}
+
+// Вспомогательная функция: проверяет, открыто ли заведение прямо сейчас
+function isOpenNow(hoursString) {
+  if (!hoursString) return true;
+  if (hoursString === "00:00-24:00") return true;
+
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+  const [start, end] = hoursString.split('-');
+  const [startH, startM] = start.split(':').map(Number);
+  const [endH, endM] = end.split(':').map(Number);
+
+  const startMinutes = startH * 60 + startM;
+  let endMinutes = endH * 60 + endM;
+
+  if (endMinutes < startMinutes) {
+    endMinutes += 24 * 60;
+    if (currentMinutes < startMinutes) {
+      return (currentMinutes + 24 * 60) <= endMinutes;
+    }
+  }
+
+  return currentMinutes >= startMinutes && currentMinutes <= endMinutes;
 }
 
 // ==========================================
-// 2. ЗАГРУЗКА И ОТРИСОВКА ВСЕХ 800+ МЕСТ
+// 2. ЗАГРУЗКА И ОТРИСОВКА ВСЕХ МЕСТ
 // ==========================================
 async function loadPlaces() {
   try {
@@ -89,18 +114,18 @@ async function loadPlaces() {
     const container = document.getElementById('places-list');
     if (!container) return;
     
-    // Проходимся по всей базе: если ID нет, создаем его автоматически из имени
     globalPlaces = rawPlaces.map((p, index) => {
       const placeId = p.id || (p.name ? slugify(p.name) : `place-${index}`);
-      return { ...p, unique_id: placeId };
+      
+      // Авто-генерация ссылки на Яндекс Карты, если её нет вручную
+      const mapUrl = p.map_url || `https://yandex.ru/maps/?text=${encodeURIComponent(p.maps_query || p.name)}`;
+      
+      return { ...p, unique_id: placeId, map_url: mapUrl };
     });
 
-    // Отрисовываем абсолютно все карточки
     container.innerHTML = globalPlaces.map(p => {
-      // Если у места есть map_url, делаем заголовок ссылкой на карты
-      const nameHtml = p.map_url 
-        ? `<a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a>`
-        : p.name;
+      // Ссылка на Яндекс Карты
+      const nameHtml = `<a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a>`;
 
       const type = p.type ? p.type.toUpperCase() : 'МЕСТО';
       const price = p.price_level ? ` · ${p.price_level}` : '';
@@ -118,7 +143,6 @@ async function loadPlaces() {
       `;
     }).join('');
 
-    // Проверяем, перешел ли кто-то по ссылке вида ?place=ИМЯ
     checkUrlForPlace();
 
   } catch (e) {
@@ -164,7 +188,60 @@ function checkUrlForPlace() {
 }
 
 // ==========================================
-// 5. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
+// 5. ИНИЦИАЛИЗА РУЛЕТКИ И ФИЛЬТРА ЧАСОВ
+// ==========================================
+function initExtraFeatures() {
+  // Чекбокс "Открыто сейчас"
+  const openCheckbox = document.getElementById('open-now-checkbox');
+  if (openCheckbox) {
+    openCheckbox.addEventListener('change', () => {
+      const cards = document.querySelectorAll('.place-card');
+      
+      cards.forEach(card => {
+        const placeId = card.id.replace('card-', '');
+        const place = globalPlaces.find(p => p.unique_id === placeId);
+
+        if (openCheckbox.checked) {
+          if (place && !isOpenNow(place.hours)) {
+            card.style.display = 'none';
+          } else {
+            card.style.display = 'block';
+          }
+        } else {
+          card.style.display = 'block';
+        }
+      });
+    });
+  }
+
+  // Кнопка "Мне повезёт!"
+  const randomBtn = document.getElementById('random-place-btn');
+  if (randomBtn) {
+    randomBtn.addEventListener('click', () => {
+      if (!globalPlaces || globalPlaces.length === 0) return;
+
+      const randomIndex = Math.floor(Math.random() * globalPlaces.length);
+      const randomPlace = globalPlaces[randomIndex];
+
+      const cardElement = document.getElementById(`card-${randomPlace.unique_id}`);
+      if (cardElement) {
+        cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        cardElement.style.transition = 'all 0.3s ease';
+        cardElement.style.transform = 'scale(1.03)';
+        cardElement.style.outline = '3px solid #ff9900';
+        
+        setTimeout(() => {
+          cardElement.style.transform = 'scale(1)';
+          cardElement.style.outline = 'none';
+        }, 1200);
+      }
+    });
+  }
+}
+
+// ==========================================
+// 6. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
 // ==========================================
 window.currentRates = { USD: 12800, EUR: 13900 };
 
@@ -193,4 +270,5 @@ async function fetchRates() {
 document.addEventListener('DOMContentLoaded', () => {
   loadPlaces();
   fetchRates();
+  initExtraFeatures();
 });
