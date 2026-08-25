@@ -7,7 +7,187 @@ const routeCard = document.getElementById('route-card');
 let globalPlaces = [];
 
 // ==========================================
-// 1. ТЕКСТОВЫЕ БЛОКИ (RU / UZ / EN)
+// 1. ДАННЫЕ ВСЕХ МЕСТ (НОВЫЕ КАТЕГОРИИ ДОБАВЛЕНЫ)
+// ==========================================
+const placesData = [
+  // ===== СПА-САЛОНЫ =====
+  {
+    id: 'spa-1',
+    name: 'Asia Spa & Hammam',
+    type: 'СПА-салон',
+    price_level: '$$$',
+    rating: 4.9,
+    description: 'Традиционный восточный хаммам с массажем и уходом за телом.',
+    address: 'ул. Амира Темура, 45, Ташкент',
+    hours: '10:00-23:00',
+    map_url: 'https://yandex.ru/maps/?text=Asia+Spa+Ташкент'
+  },
+  {
+    id: 'spa-2',
+    name: 'Tashkent Palace Spa',
+    type: 'СПА-салон',
+    price_level: '$$$',
+    rating: 4.7,
+    description: 'Премиум-спа с бассейном, сауной и процедурами на любой вкус.',
+    address: 'ул. Шота Руставели, 12, Ташкент',
+    hours: '09:00-22:00',
+    map_url: 'https://yandex.ru/maps/?text=Tashkent+Palace+Spa'
+  },
+  {
+    id: 'spa-3',
+    name: 'Oriental Relax Spa',
+    type: 'СПА-салон',
+    price_level: '$$',
+    rating: 4.5,
+    description: 'Уютный спа-салон с тайским массажем и ароматерапией.',
+    address: 'ул. Мукимий, 78, Ташкент',
+    hours: '10:00-21:00',
+    map_url: 'https://yandex.ru/maps/?text=Oriental+Relax+Spa+Ташкент'
+  },
+
+  // ===== ТРЕНАЖЕРНЫЕ ЗАЛЫ =====
+  {
+    id: 'gym-1',
+    name: 'IronFit Gym',
+    type: 'Тренажерный зал',
+    price_level: '$$',
+    rating: 4.8,
+    description: 'Круглосуточный зал с новейшим оборудованием и зоной кроссфита.',
+    address: 'ул. Буюк Турон, 23, Ташкент',
+    hours: '00:00-24:00',
+    map_url: 'https://yandex.ru/maps/?text=IronFit+Gym+Ташкент'
+  },
+  {
+    id: 'gym-2',
+    name: 'BodyLab Fitness',
+    type: 'Тренажерный зал',
+    price_level: '$$$',
+    rating: 4.9,
+    description: 'Элитный фитнес-клуб с бассейном, сауной и групповыми тренировками.',
+    address: 'ул. Тараса Шевченко, 56, Ташкент',
+    hours: '06:00-23:00',
+    map_url: 'https://yandex.ru/maps/?text=BodyLab+Fitness+Ташкент'
+  },
+  {
+    id: 'gym-3',
+    name: 'Street Workout Park',
+    type: 'Тренажерный зал',
+    price_level: '$',
+    rating: 4.3,
+    description: 'Открытая площадка с турниками и брусьями для воркаута.',
+    address: 'парк им. Алишера Навои, Ташкент',
+    hours: '06:00-22:00',
+    map_url: 'https://yandex.ru/maps/?text=Street+Workout+Park+Ташкент'
+  },
+
+  // ===== ТОРГОВО-РАЗВЛЕКАТЕЛЬНЫЕ ЦЕНТРЫ =====
+  {
+    id: 'mall-1',
+    name: 'Next Mall',
+    type: 'ТРЦ',
+    price_level: '$$$',
+    rating: 4.7,
+    description: 'Современный ТРЦ с магазинами, кинотеатром и фуд-кортом.',
+    address: 'ул. Шахрисабзская, 5, Ташкент',
+    hours: '10:00-22:00',
+    map_url: 'https://yandex.ru/maps/?text=Next+Mall+Ташкент'
+  },
+  {
+    id: 'mall-2',
+    name: 'Samarkand Darvoza',
+    type: 'ТРЦ',
+    price_level: '$$',
+    rating: 4.5,
+    description: 'ТРЦ с восточным колоритом, бутиками и детским развлекательным центром.',
+    address: 'ул. Самарканд дарвоза, 1, Ташкент',
+    hours: '10:00-21:00',
+    map_url: 'https://yandex.ru/maps/?text=Samarkand+Darvoza+Ташкент'
+  },
+  {
+    id: 'mall-3',
+    name: 'Mega Planet',
+    type: 'ТРЦ',
+    price_level: '$$$',
+    rating: 4.8,
+    description: 'Крупнейший ТРЦ с ледовым катком, боулингом и зоной аттракционов.',
+    address: 'ул. Авиаторов, 12, Ташкент',
+    hours: '10:00-23:00',
+    map_url: 'https://yandex.ru/maps/?text=Mega+Planet+Ташкент'
+  },
+
+  // ===== ЧАСТНЫЕ ШКОЛЫ =====
+  {
+    id: 'school-1',
+    name: 'International School of Tashkent',
+    type: 'Частная школа',
+    price_level: '$$$$',
+    rating: 4.9,
+    description: 'Англоязычная школа с международным бакалавриатом (IB).',
+    address: 'ул. Тинчлик, 34, Ташкент',
+    hours: '08:00-17:00',
+    map_url: 'https://yandex.ru/maps/?text=International+School+of+Tashkent'
+  },
+  {
+    id: 'school-2',
+    name: 'EduSchool Uzbekistan',
+    type: 'Частная школа',
+    price_level: '$$$',
+    rating: 4.6,
+    description: 'Частная школа с углублённым изучением английского и IT.',
+    address: 'ул. Фараби, 2, Ташкент',
+    hours: '08:30-18:00',
+    map_url: 'https://yandex.ru/maps/?text=EduSchool+Uzbekistan+Ташкент'
+  },
+  {
+    id: 'school-3',
+    name: 'Alpha School',
+    type: 'Частная школа',
+    price_level: '$$$',
+    rating: 4.4,
+    description: 'Школа с фокусом на математику и естественные науки.',
+    address: 'ул. Катта Лаккун, 17, Ташкент',
+    hours: '08:00-17:30',
+    map_url: 'https://yandex.ru/maps/?text=Alpha+School+Ташкент'
+  },
+
+  // ===== УНИВЕРСИТЕТЫ =====
+  {
+    id: 'uni-1',
+    name: 'Westminster International University',
+    type: 'Университет',
+    price_level: '$$$$',
+    rating: 4.8,
+    description: 'Британский университет в Ташкенте, бакалавриат и магистратура.',
+    address: 'ул. Истикбол, 12, Ташкент',
+    hours: '08:30-18:00',
+    map_url: 'https://yandex.ru/maps/?text=Westminster+International+University+Ташкент'
+  },
+  {
+    id: 'uni-2',
+    name: 'Tashkent State University of Economics',
+    type: 'Университет',
+    price_level: '$',
+    rating: 4.2,
+    description: 'Государственный экономический университет, один из лучших в Узбекистане.',
+    address: 'ул. Ислама Каримова, 49, Ташкент',
+    hours: '08:00-17:00',
+    map_url: 'https://yandex.ru/maps/?text=Tashkent+State+University+of+Economics'
+  },
+  {
+    id: 'uni-3',
+    name: 'Inha University in Tashkent',
+    type: 'Университет',
+    price_level: '$$$$',
+    rating: 4.7,
+    description: 'Технический университет с программами на английском языке.',
+    address: 'ул. Амира Темура, 24, Ташкент',
+    hours: '08:30-18:00',
+    map_url: 'https://yandex.ru/maps/?text=Inha+University+in+Tashkent'
+  }
+];
+
+// ==========================================
+// 2. ТЕКСТОВЫЕ БЛОКИ (RU / UZ / EN)
 // ==========================================
 const detailContent = {
   places: {
@@ -103,59 +283,44 @@ function isOpenNow(hoursString) {
 }
 
 // ==========================================
-// 2. ЗАГРУЗКА И ОТРИСОВКА ВСЕХ МЕСТ
+// 3. ЗАГРУЗКА И ОТРИСОВКА ВСЕХ МЕСТ (ИЗ КОДА)
 // ==========================================
-async function loadPlaces() {
-  try {
-    const res = await fetch('data/places.json');
-    if (!res.ok) throw new Error('Failed to load places');
-    
-    const rawPlaces = await res.json();
-    const container = document.getElementById('places-list');
-    if (!container) return;
-    
-    globalPlaces = rawPlaces.map((p, index) => {
-      const placeId = p.id || (p.name ? slugify(p.name) : `place-${index}`);
-      
-      // Авто-генерация ссылки на Яндекс Карты, если её нет вручную
-      const mapUrl = p.map_url || `https://yandex.ru/maps/?text=${encodeURIComponent(p.maps_query || p.name)}`;
-      
-      return { ...p, unique_id: placeId, map_url: mapUrl };
-    });
+function loadPlaces() {
+  const container = document.getElementById('places-list');
+  if (!container) return;
 
-    container.innerHTML = globalPlaces.map(p => {
-      // Ссылка на Яндекс Карты
-      const nameHtml = `<a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a>`;
+  // Используем данные из кода (placesData)
+  globalPlaces = placesData.map((p, index) => {
+    const placeId = p.id || (p.name ? slugify(p.name) : `place-${index}`);
+    const mapUrl = p.map_url || `https://yandex.ru/maps/?text=${encodeURIComponent(p.maps_query || p.name)}`;
+    return { ...p, unique_id: placeId, map_url: mapUrl };
+  });
 
-      const type = p.type ? p.type.toUpperCase() : 'МЕСТО';
-      const price = p.price_level ? ` · ${p.price_level}` : '';
-      const rating = p.rating ? ` · ⭐ ${p.rating}` : '';
+  container.innerHTML = globalPlaces.map(p => {
+    const nameHtml = `<a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a>`;
+    const type = p.type ? p.type.toUpperCase() : 'МЕСТО';
+    const price = p.price_level ? ` · ${p.price_level}` : '';
+    const rating = p.rating ? ` · ⭐ ${p.rating}` : '';
 
-      return `
-        <article class="place-card" id="card-${p.unique_id}">
-           <h4>${nameHtml}</h4>
-           <p class="muted">${type}${price}${rating}</p>
-           <p>${p.description || ''}</p>
-           <p class="address">${p.address || ''}</p>
-           
-           <button class="share-btn" onclick="sharePlace('${p.unique_id}')">🔗 Поделиться</button>
-        </article>
-      `;
-    }).join('');
+    return `
+      <article class="place-card" id="card-${p.unique_id}">
+        <h4>${nameHtml}</h4>
+        <p class="muted">${type}${price}${rating}</p>
+        <p>${p.description || ''}</p>
+        <p class="address">${p.address || ''}</p>
+        <button class="share-btn" onclick="sharePlace('${p.unique_id}')">🔗 Поделиться</button>
+      </article>
+    `;
+  }).join('');
 
-    checkUrlForPlace();
-
-  } catch (e) {
-    console.error('Error loading places', e);
-  }
+  checkUrlForPlace();
 }
 
 // ==========================================
-// 3. ФУНКЦИЯ КОПИРОВАНИЯ ССЫЛКИ НА ТВОЙ САЙТ
+// 4. ФУНКЦИЯ КОПИРОВАНИЯ ССЫЛКИ
 // ==========================================
 function sharePlace(placeId) {
   const shareUrl = `${window.location.origin}${window.location.pathname}?place=${encodeURIComponent(placeId)}`;
-
   navigator.clipboard.writeText(shareUrl).then(() => {
     alert(`Ссылка на место скопирована!\n\n${shareUrl}`);
   }).catch(err => {
@@ -164,7 +329,7 @@ function sharePlace(placeId) {
 }
 
 // ==========================================
-// 4. ПОИСК МЕСТА ПО ССЫЛКЕ И АВТО-СКРОЛЛ
+// 5. ПОИСК МЕСТА ПО ССЫЛКЕ И АВТО-СКРОЛЛ
 // ==========================================
 function checkUrlForPlace() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -172,7 +337,6 @@ function checkUrlForPlace() {
 
   if (placeId) {
     const targetPlace = globalPlaces.find(p => p.unique_id === placeId);
-    
     if (targetPlace) {
       setTimeout(() => {
         const cardElement = document.getElementById(`card-${targetPlace.unique_id}`);
@@ -188,25 +352,18 @@ function checkUrlForPlace() {
 }
 
 // ==========================================
-// 5. ИНИЦИАЛИЗА РУЛЕТКИ И ФИЛЬТРА ЧАСОВ
+// 6. ИНИЦИАЛИЗАЦИЯ РУЛЕТКИ И ФИЛЬТРА
 // ==========================================
 function initExtraFeatures() {
-  // Чекбокс "Открыто сейчас"
   const openCheckbox = document.getElementById('open-now-checkbox');
   if (openCheckbox) {
     openCheckbox.addEventListener('change', () => {
       const cards = document.querySelectorAll('.place-card');
-      
       cards.forEach(card => {
         const placeId = card.id.replace('card-', '');
         const place = globalPlaces.find(p => p.unique_id === placeId);
-
         if (openCheckbox.checked) {
-          if (place && !isOpenNow(place.hours)) {
-            card.style.display = 'none';
-          } else {
-            card.style.display = 'block';
-          }
+          card.style.display = (place && !isOpenNow(place.hours)) ? 'none' : 'block';
         } else {
           card.style.display = 'block';
         }
@@ -214,23 +371,18 @@ function initExtraFeatures() {
     });
   }
 
-  // Кнопка "Мне повезёт!"
   const randomBtn = document.getElementById('random-place-btn');
   if (randomBtn) {
     randomBtn.addEventListener('click', () => {
       if (!globalPlaces || globalPlaces.length === 0) return;
-
       const randomIndex = Math.floor(Math.random() * globalPlaces.length);
       const randomPlace = globalPlaces[randomIndex];
-
       const cardElement = document.getElementById(`card-${randomPlace.unique_id}`);
       if (cardElement) {
         cardElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        
         cardElement.style.transition = 'all 0.3s ease';
         cardElement.style.transform = 'scale(1.03)';
         cardElement.style.outline = '3px solid #ff9900';
-        
         setTimeout(() => {
           cardElement.style.transform = 'scale(1)';
           cardElement.style.outline = 'none';
@@ -241,7 +393,7 @@ function initExtraFeatures() {
 }
 
 // ==========================================
-// 6. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
+// 7. АВТО-КУРС ВАЛЮТ (USD и EUR от ЦБ РУз)
 // ==========================================
 window.currentRates = { USD: 12800, EUR: 13900 };
 
@@ -249,16 +401,13 @@ async function fetchRates() {
   try {
     const response = await fetch('https://cbu.uz/ru/arkhiv-kursov-valyut/json/');
     const data = await response.json();
-
     const usdData = data.find(item => item.Ccy === 'USD');
     const eurData = data.find(item => item.Ccy === 'EUR');
-
     if (usdData) window.currentRates.USD = parseFloat(usdData.Rate);
     if (eurData) window.currentRates.EUR = parseFloat(eurData.Rate);
 
     const usdElem = document.getElementById('usd-rate-val');
     const eurElem = document.getElementById('eur-rate-val');
-
     if (usdElem) usdElem.textContent = `${window.currentRates.USD.toLocaleString()} UZS`;
     if (eurElem) eurElem.textContent = `${window.currentRates.EUR.toLocaleString()} UZS`;
   } catch (error) {
@@ -266,7 +415,9 @@ async function fetchRates() {
   }
 }
 
-// Запуск приложения
+// ==========================================
+// 8. ЗАПУСК
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
   loadPlaces();
   fetchRates();
