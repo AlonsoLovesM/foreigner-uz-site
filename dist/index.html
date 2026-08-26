@@ -16,6 +16,619 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    
+    <div class="page-shell">
+      <div class="container">
+        <!-- HERO -->
+        <section class="hero">
+          <div class="nav">
+            <a href="/" class="brand">Foreigner.uz</a>
+            <div class="nav-links">
+              <a href="#places">Места</a>
+              <a href="#routes">Маршруты</a>
+            </div>
+          </div>
+
+          <div class="hero-grid">
+            <div>
+              <div class="eyebrow">Умный гид</div>
+              <h1>Проведи день в <br />Узбекистане</h1>
+              <p class="lead">Где погулять, где вкусно поесть и куда пойти вечером — всё в одном месте.</p>
+              <div class="hero-actions">
+                <a href="#places" class="btn btn-primary">Смотреть места</a>
+                <a href="#routes" class="btn btn-secondary">Маршруты</a>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <ul>
+                <li>📍 Лучшие места рядом</li>
+                <li>🍽️ Где вкусно поесть</li>
+                <li>🌙 Куда пойти вечером</li>
+                <li>💆 СПА-салоны</li>
+                <li>🏋️ Тренажерные залы</li>
+                <li>🛍️ Торговые центры</li>
+                <li>🏫 Частные школы</li>
+                <li>🎓 Университеты</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- МЕСТА -->
+        <section id="places" class="section">
+          <div class="section-title">
+            <h2>Все места в Ташкенте</h2>
+          </div>
+
+          <!-- Фильтры -->
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+            <button id="filter-all" class="btn btn-primary" style="padding: 0.5rem 1rem;">Все</button>
+            <button id="filter-spa" class="btn btn-secondary" style="padding: 0.5rem 1rem;">💆 СПА</button>
+            <button id="filter-gym" class="btn btn-secondary" style="padding: 0.5rem 1rem;">🏋️ Спортзалы</button>
+            <button id="filter-mall" class="btn btn-secondary" style="padding: 0.5rem 1rem;">🛍️ ТРЦ</button>
+            <button id="filter-school" class="btn btn-secondary" style="padding: 0.5rem 1rem;">🏫 Школы</button>
+            <button id="filter-uni" class="btn btn-secondary" style="padding: 0.5rem 1rem;">🎓 Универы</button>
+          </div>
+
+          <div id="places-list" class="places-grid">
+            <!-- ТУТ БУДУТ ВСЕ МЕСТА -->
+          </div>
+        </section>
+
+        <!-- МАРШРУТЫ -->
+        <section id="routes" class="section section-alt">
+          <div class="section-title">
+            <h2>Маршруты на день и вечер</h2>
+          </div>
+          <div class="route-buttons">
+            <button class="route-btn active" data-route="day">☀️ На день</button>
+            <button class="route-btn" data-route="evening">🌙 На вечер</button>
+          </div>
+          <div id="route-card" class="route-card">
+            <h3>Маршрут на день</h3>
+            <p>От прогулки до вкусного обеда.</p>
+            <ul>
+              <li>Утро — кофе и уютная прогулка</li>
+              <li>День — культурные точки и фотолокации</li>
+              <li>Вечер — ужин и спокойный маршрут</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- КУРС ВАЛЮТ -->
+        <section class="section">
+          <div class="benefit-banner">
+            <div class="benefit-list">
+              <span>🇺🇸 USD: <span id="usd-rate-val">Загрузка...</span></span>
+              <span>🇪🇺 EUR: <span id="eur-rate-val">Загрузка...</span></span>
+            </div>
+            <div class="contact-actions">
+              <a href="https://t.me/acapelonso" class="btn btn-primary">📩 Связаться</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+        background: #07111f;
+        color: #f6f7fb;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #07111f 0%, #11263f 60%, #15324d 100%);
+      }
+      .container {
+        width: min(1120px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      .hero { padding: 1rem 0 3rem; }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0 2rem;
+      }
+      .brand {
+        font-weight: 800;
+        font-size: 1.2rem;
+        letter-spacing: 0.04em;
+        color: #fff;
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .nav-links a {
+        color: #c6d4e2;
+        text-decoration: none;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 1.5rem;
+        align-items: center;
+        padding-top: 1rem;
+      }
+      .eyebrow {
+        color: #5bd1ff;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+      }
+      h1 {
+        font-size: clamp(2.1rem, 4vw, 3.2rem);
+        line-height: 1.1;
+        margin: 0 0 1rem;
+      }
+      .lead {
+        color: #b5c4d4;
+        font-size: 1.05rem;
+        max-width: 650px;
+      }
+      .hero-actions {
+        display: flex;
+        gap: 0.9rem;
+        flex-wrap: wrap;
+        margin-top: 1.3rem;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.9rem 1.25rem;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+        transition: transform 0.2s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary {
+        background: linear-gradient(90deg, #5bd1ff, #4de3a8);
+        color: #04111f;
+      }
+      .btn-secondary {
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #f6f7fb;
+        background: rgba(255,255,255,0.05);
+      }
+      .hero-panel {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 22px;
+        padding: 1.2rem;
+        backdrop-filter: blur(12px);
+      }
+      .hero-panel ul {
+        color: #b5c4d4;
+        padding-left: 1rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .hero-panel li {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .section { padding: 2.5rem 0 3rem; }
+      .section-alt { padding-top: 1rem; }
+      .section-title h2 {
+        font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+        margin-top: 0;
+        max-width: 760px;
+      }
+      .places-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .place-card {
+        background: rgba(255,255,255,0.06);
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.1);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.14);
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      }
+      .place-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(91,209,255,0.3);
+        box-shadow: 0 24px 48px rgba(0,0,0,0.18);
+      }
+      .place-card h4 { margin: 0 0 8px 0; }
+      .place-card .muted { color: #cbd8e6; font-size: 0.95rem; margin-bottom: 10px; }
+      .place-card .address { font-size: 0.9rem; color: #b8c8d8; margin-top: 10px; }
+      .share-btn {
+        margin-top: 10px;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: rgba(91,209,255,0.15);
+        color: #5bd1ff;
+        border: 1px solid rgba(91,209,255,0.2);
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+      }
+      .share-btn:hover {
+        background: rgba(91,209,255,0.25);
+        transform: scale(1.05);
+      }
+      .route-buttons {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin: 1rem 0;
+      }
+      .route-btn {
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.06);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.12);
+        cursor: pointer;
+        font-size: 0.95rem;
+      }
+      .route-btn.active {
+        background: linear-gradient(90deg, #5bd1ff, #4de3a8);
+        color: #03111f;
+        border-color: transparent;
+      }
+      .route-card {
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 22px;
+        padding: 1.2rem;
+        backdrop-filter: blur(12px);
+      }
+      .route-card ul {
+        color: #b5c4d4;
+        padding-left: 1.2rem;
+      }
+      .benefit-banner {
+        padding: 1.4rem;
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(91, 209, 255, 0.16), rgba(77, 227, 168, 0.12));
+        border: 1px solid rgba(91, 209, 255, 0.26);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .benefit-list {
+        display: grid;
+        gap: 0.7rem;
+        color: #dce9f5;
+        font-weight: 600;
+      }
+      .contact-actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+      }
+      @media (max-width: 900px) {
+        .hero-grid { grid-template-columns: 1fr; }
+        .places-grid { grid-template-columns: 1fr 1fr; }
+      }
+      @media (max-width: 640px) {
+        .places-grid { grid-template-columns: 1fr; }
+        .nav { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+        .benefit-banner { flex-direction: column; align-items: flex-start; }
+      }
+    </style>
+
+    <script>
+      // ===== ВСЕ ДАННЫЕ С НОВЫМИ КАТЕГОРИЯМИ =====
+      const placesData = [
+        // СПА-салоны
+        {
+          id: 'spa-1',
+          name: 'Asia Spa & Hammam',
+          type: 'СПА-салон',
+          price_level: '$$$',
+          rating: 4.9,
+          description: 'Традиционный восточный хаммам с массажем и уходом за телом.',
+          address: 'ул. Амира Темура, 45, Ташкент',
+          hours: '10:00-23:00',
+          map_url: 'https://yandex.ru/maps/?text=Asia+Spa+Ташкент'
+        },
+        {
+          id: 'spa-2',
+          name: 'Tashkent Palace Spa',
+          type: 'СПА-салон',
+          price_level: '$$$',
+          rating: 4.7,
+          description: 'Премиум-спа с бассейном, сауной и процедурами на любой вкус.',
+          address: 'ул. Шота Руставели, 12, Ташкент',
+          hours: '09:00-22:00',
+          map_url: 'https://yandex.ru/maps/?text=Tashkent+Palace+Spa'
+        },
+        {
+          id: 'spa-3',
+          name: 'Oriental Relax Spa',
+          type: 'СПА-салон',
+          price_level: '$$',
+          rating: 4.5,
+          description: 'Уютный спа-салон с тайским массажем и ароматерапией.',
+          address: 'ул. Мукимий, 78, Ташкент',
+          hours: '10:00-21:00',
+          map_url: 'https://yandex.ru/maps/?text=Oriental+Relax+Spa+Ташкент'
+        },
+        // Тренажерные залы
+        {
+          id: 'gym-1',
+          name: 'IronFit Gym',
+          type: 'Тренажерный зал',
+          price_level: '$$',
+          rating: 4.8,
+          description: 'Круглосуточный зал с новейшим оборудованием и зоной кроссфита.',
+          address: 'ул. Буюк Турон, 23, Ташкент',
+          hours: '00:00-24:00',
+          map_url: 'https://yandex.ru/maps/?text=IronFit+Gym+Ташкент'
+        },
+        {
+          id: 'gym-2',
+          name: 'BodyLab Fitness',
+          type: 'Тренажерный зал',
+          price_level: '$$$',
+          rating: 4.9,
+          description: 'Элитный фитнес-клуб с бассейном, сауной и групповыми тренировками.',
+          address: 'ул. Тараса Шевченко, 56, Ташкент',
+          hours: '06:00-23:00',
+          map_url: 'https://yandex.ru/maps/?text=BodyLab+Fitness+Ташкент'
+        },
+        {
+          id: 'gym-3',
+          name: 'Street Workout Park',
+          type: 'Тренажерный зал',
+          price_level: '$',
+          rating: 4.3,
+          description: 'Открытая площадка с турниками и брусьями для воркаута.',
+          address: 'парк им. Алишера Навои, Ташкент',
+          hours: '06:00-22:00',
+          map_url: 'https://yandex.ru/maps/?text=Street+Workout+Park+Ташкент'
+        },
+        // ТРЦ
+        {
+          id: 'mall-1',
+          name: 'Next Mall',
+          type: 'ТРЦ',
+          price_level: '$$$',
+          rating: 4.7,
+          description: 'Современный ТРЦ с магазинами, кинотеатром и фуд-кортом.',
+          address: 'ул. Шахрисабзская, 5, Ташкент',
+          hours: '10:00-22:00',
+          map_url: 'https://yandex.ru/maps/?text=Next+Mall+Ташкент'
+        },
+        {
+          id: 'mall-2',
+          name: 'Samarkand Darvoza',
+          type: 'ТРЦ',
+          price_level: '$$',
+          rating: 4.5,
+          description: 'ТРЦ с восточным колоритом, бутиками и детским развлекательным центром.',
+          address: 'ул. Самарканд дарвоза, 1, Ташкент',
+          hours: '10:00-21:00',
+          map_url: 'https://yandex.ru/maps/?text=Samarkand+Darvoza+Ташкент'
+        },
+        {
+          id: 'mall-3',
+          name: 'Mega Planet',
+          type: 'ТРЦ',
+          price_level: '$$$',
+          rating: 4.8,
+          description: 'Крупнейший ТРЦ с ледовым катком, боулингом и зоной аттракционов.',
+          address: 'ул. Авиаторов, 12, Ташкент',
+          hours: '10:00-23:00',
+          map_url: 'https://yandex.ru/maps/?text=Mega+Planet+Ташкент'
+        },
+        // Частные школы
+        {
+          id: 'school-1',
+          name: 'International School of Tashkent',
+          type: 'Частная школа',
+          price_level: '$$$$',
+          rating: 4.9,
+          description: 'Англоязычная школа с международным бакалавриатом (IB).',
+          address: 'ул. Тинчлик, 34, Ташкент',
+          hours: '08:00-17:00',
+          map_url: 'https://yandex.ru/maps/?text=International+School+of+Tashkent'
+        },
+        {
+          id: 'school-2',
+          name: 'EduSchool Uzbekistan',
+          type: 'Частная школа',
+          price_level: '$$$',
+          rating: 4.6,
+          description: 'Частная школа с углублённым изучением английского и IT.',
+          address: 'ул. Фараби, 2, Ташкент',
+          hours: '08:30-18:00',
+          map_url: 'https://yandex.ru/maps/?text=EduSchool+Uzbekistan+Ташкент'
+        },
+        {
+          id: 'school-3',
+          name: 'Alpha School',
+          type: 'Частная школа',
+          price_level: '$$$',
+          rating: 4.4,
+          description: 'Школа с фокусом на математику и естественные науки.',
+          address: 'ул. Катта Лаккун, 17, Ташкент',
+          hours: '08:00-17:30',
+          map_url: 'https://yandex.ru/maps/?text=Alpha+School+Ташкент'
+        },
+        // Университеты
+        {
+          id: 'uni-1',
+          name: 'Westminster International University',
+          type: 'Университет',
+          price_level: '$$$$',
+          rating: 4.8,
+          description: 'Британский университет в Ташкенте, бакалавриат и магистратура.',
+          address: 'ул. Истикбол, 12, Ташкент',
+          hours: '08:30-18:00',
+          map_url: 'https://yandex.ru/maps/?text=Westminster+International+University+Ташкент'
+        },
+        {
+          id: 'uni-2',
+          name: 'Tashkent State University of Economics',
+          type: 'Университет',
+          price_level: '$',
+          rating: 4.2,
+          description: 'Государственный экономический университет, один из лучших в Узбекистане.',
+          address: 'ул. Ислама Каримова, 49, Ташкент',
+          hours: '08:00-17:00',
+          map_url: 'https://yandex.ru/maps/?text=Tashkent+State+University+of+Economics'
+        },
+        {
+          id: 'uni-3',
+          name: 'Inha University in Tashkent',
+          type: 'Университет',
+          price_level: '$$$$',
+          rating: 4.7,
+          description: 'Технический университет с программами на английском языке.',
+          address: 'ул. Амира Темура, 24, Ташкент',
+          hours: '08:30-18:00',
+          map_url: 'https://yandex.ru/maps/?text=Inha+University+in+Tashkent'
+        }
+      ];
+
+      // ===== ОТРИСОВКА КАРТОЧЕК =====
+      function renderPlaces(filterType = 'all') {
+        const container = document.getElementById('places-list');
+        if (!container) return;
+
+        const filtered = filterType === 'all' 
+          ? placesData 
+          : placesData.filter(p => p.type === filterType);
+
+        container.innerHTML = filtered.map(p => `
+          <article class="place-card" data-type="${p.type}">
+            <h4><a href="${p.map_url}" target="_blank" style="color: inherit; text-decoration: underline;">📍 ${p.name}</a></h4>
+            <p class="muted">${p.type} · ${p.price_level} · ⭐ ${p.rating}</p>
+            <p>${p.description}</p>
+            <p class="address">${p.address}</p>
+            <button class="share-btn" onclick="sharePlace('${p.id}')">🔗 Поделиться</button>
+          </article>
+        `).join('');
+      }
+
+      // ===== ПОДЕЛИТЬСЯ =====
+      function sharePlace(id) {
+        const place = placesData.find(p => p.id === id);
+        if (!place) return;
+        const shareUrl = `${window.location.origin}${window.location.pathname}?place=${encodeURIComponent(id)}`;
+        navigator.clipboard.writeText(`${place.name}\n${place.address}\n${shareUrl}`).then(() => {
+          alert('Ссылка на место скопирована!');
+        }).catch(() => {
+          alert('Ссылка: ' + shareUrl);
+        });
+      }
+
+      // ===== ФИЛЬТРЫ =====
+      document.addEventListener('DOMContentLoaded', () => {
+        renderPlaces('all');
+
+        const filters = {
+          'filter-all': 'all',
+          'filter-spa': 'СПА-салон',
+          'filter-gym': 'Тренажерный зал',
+          'filter-mall': 'ТРЦ',
+          'filter-school': 'Частная школа',
+          'filter-uni': 'Университет'
+        };
+
+        Object.keys(filters).forEach(id => {
+          const btn = document.getElementById(id);
+          if (btn) {
+            btn.addEventListener('click', () => {
+              // Обновляем стили кнопок
+              document.querySelectorAll('[id^="filter-"]').forEach(b => {
+                b.className = 'btn btn-secondary';
+                b.style.padding = '0.5rem 1rem';
+              });
+              btn.className = 'btn btn-primary';
+              btn.style.padding = '0.5rem 1rem';
+              
+              renderPlaces(filters[id]);
+            });
+          }
+        });
+
+        // Маршруты
+        const routeButtons = document.querySelectorAll('.route-btn');
+        const routeCard = document.getElementById('route-card');
+        const routeContent = {
+          day: {
+            title: 'Маршрут на день',
+            subtitle: 'От прогулки до вкусного обеда.',
+            items: ['Утро — кофе и уютная прогулка', 'День — культурные точки и фотолокации', 'Вечер — ужин и спокойный маршрут']
+          },
+          evening: {
+            title: 'Маршрут на вечер',
+            subtitle: 'Лёгкий, атмосферный и яркий.',
+            items: ['Светлые улицы и прогулка', 'Десерт или чай', 'Тёплая атмосфера в любимом месте']
+          }
+        };
+
+        routeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            routeButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const content = routeContent[btn.dataset.route];
+            if (content && routeCard) {
+              routeCard.innerHTML = `
+                <h3>${content.title}</h3>
+                <p>${content.subtitle}</p>
+                <ul>${content.items.map(item => `<li>${item}</li>`).join('')}</ul>
+              `;
+            }
+          });
+        });
+
+        // Курс валют
+        async function fetchRates() {
+          try {
+            const response = await fetch('https://cbu.uz/ru/arkhiv-kursov-valyut/json/');
+            const data = await response.json();
+            const usd = data.find(item => item.Ccy === 'USD');
+            const eur = data.find(item => item.Ccy === 'EUR');
+            if (usd) document.getElementById('usd-rate-val').textContent = `${parseFloat(usd.Rate).toLocaleString()} UZS`;
+            if (eur) document.getElementById('eur-rate-val').textContent = `${parseFloat(eur.Rate).toLocaleString()} UZS`;
+          } catch (e) {
+            document.getElementById('usd-rate-val').textContent = '12,800 UZS';
+            document.getElementById('eur-rate-val').textContent = '13,900 UZS';
+          }
+        }
+        fetchRates();
+
+        // Обработка ссылки с ?place=...
+        const urlParams = new URLSearchParams(window.location.search);
+        const placeId = urlParams.get('place');
+        if (placeId) {
+          setTimeout(() => {
+            const card = document.querySelector(`.place-card:has(a[href*="${placeId}"])`);
+            if (card) {
+              card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              card.style.outline = '3px solid #5bd1ff';
+              card.style.boxShadow = '0 0 30px rgba(91,209,255,0.3)';
+            }
+          }, 500);
+        }
+      });
+    </script>
   </body>
 </html>
