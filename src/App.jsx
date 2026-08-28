@@ -768,10 +768,13 @@ const categoryFilters = [
   { key: 'zoo', label: { ru: 'Зоопарки', en: 'Zoos', uz: 'Hayvonot bog\'lari', zh: '动物园' } },
   { key: 'gas', label: { ru: 'АЗС', en: 'Gas stations', uz: 'AYQSH', zh: '加油站' } },
   { key: 'sights', label: { ru: 'Достопримечательности', en: 'Sights', uz: 'Diqqatga sazovor joylar', zh: '景点' } },
+  { key: 'wellness', label: { ru: 'Спа и фитнес', en: 'Spa & fitness', uz: 'Spa va fitnes', zh: '水疗与健身' } },
+  { key: 'entertainment', label: { ru: 'ТРЦ', en: 'Malls & entertainment', uz: 'SKM', zh: '购物娱乐中心' } },
+  { key: 'education', label: { ru: 'Образование', en: 'Education', uz: 'Ta\'lim', zh: '教育' } },
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'foodmall', 'cyber', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight'],
+  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'foodmall', 'cyber', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight', 'spa', 'gym', 'trc', 'education'],
   hotels: ['hotel'],
   coffee: ['coffee'],
   food: ['restaurant', 'cafe', 'foodmall'],
@@ -784,6 +787,9 @@ const categoryGroups = {
   zoo: ['zoo'],
   gas: ['gas'],
   sights: ['sight'],
+  wellness: ['spa', 'gym'],
+  entertainment: ['trc'],
+  education: ['education'],
 };
 
 const typeLabels = {
@@ -804,6 +810,10 @@ const typeLabels = {
   zoo: { ru: 'Зоопарк', en: 'Zoo', uz: 'Hayvonot bog\'i', zh: '动物园' },
   gas: { ru: 'АЗС', en: 'Gas Station', uz: 'AYQSH', zh: '加油站' },
   sight: { ru: 'Достопримечательность', en: 'Sight', uz: 'Diqqatga sazovor joy', zh: '景点' },
+  spa: { ru: 'Спа-салон', en: 'Spa', uz: 'Spa-salon', zh: '水疗中心' },
+  gym: { ru: 'Тренажёрный зал', en: 'Gym', uz: 'Trenajyor zali', zh: '健身房' },
+  trc: { ru: 'ТРЦ', en: 'Mall & Entertainment', uz: 'Savdo-ko\'ngilochar markaz', zh: '购物娱乐中心' },
+  education: { ru: 'Образование', en: 'Education', uz: 'Ta\'lim', zh: '教育机构' },
 };
 
 // ПОЛНЫЙ СПИСОК ВСЕХ СТАНЦИЙ (ВКЛЮЧАЯ ПОЛНУЮ КОЛЬЦЕВУЮ ЛИНИЮ 1-14)
