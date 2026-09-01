@@ -771,10 +771,11 @@ const categoryFilters = [
   { key: 'wellness', label: { ru: 'Спа и фитнес', en: 'Spa & fitness', uz: 'Spa va fitnes', zh: '水疗与健身' } },
   { key: 'entertainment', label: { ru: 'ТРЦ', en: 'Malls & entertainment', uz: 'SKM', zh: '购物娱乐中心' } },
   { key: 'education', label: { ru: 'Образование', en: 'Education', uz: 'Ta\'lim', zh: '教育' } },
+  { key: 'sim', label: { ru: 'Связь / SIM', en: 'SIM & Connectivity', uz: 'Aloqa / SIM', zh: 'SIM卡与通讯' } },
 ];
 
 const categoryGroups = {
-  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'foodmall', 'cyber', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight', 'spa', 'gym', 'trc', 'education'],
+  all: ['hotel', 'coffee', 'restaurant', 'cafe', 'foodmall', 'cyber', 'bank', 'exchange', 'clinic', 'pharmacy', 'market', 'mall', 'park', 'aquapark', 'zoo', 'gas', 'sight', 'spa', 'gym', 'trc', 'education', 'sim'],
   hotels: ['hotel'],
   coffee: ['coffee'],
   food: ['restaurant', 'cafe', 'foodmall'],
@@ -790,6 +791,7 @@ const categoryGroups = {
   wellness: ['spa', 'gym'],
   entertainment: ['trc'],
   education: ['education'],
+  sim: ['sim'],
 };
 
 const typeLabels = {
@@ -814,6 +816,7 @@ const typeLabels = {
   gym: { ru: 'Тренажёрный зал', en: 'Gym', uz: 'Trenajyor zali', zh: '健身房' },
   trc: { ru: 'ТРЦ', en: 'Mall & Entertainment', uz: 'Savdo-ko\'ngilochar markaz', zh: '购物娱乐中心' },
   education: { ru: 'Образование', en: 'Education', uz: 'Ta\'lim', zh: '教育机构' },
+  sim: { ru: 'Связь / SIM', en: 'Mobile Operator', uz: 'Aloqa operatori', zh: '通讯运营商' },
 };
 
 // ПОЛНЫЙ СПИСОК ВСЕХ СТАНЦИЙ (ВКЛЮЧАЯ ПОЛНУЮ КОЛЬЦЕВУЮ ЛИНИЮ 1-14)
