@@ -753,6 +753,20 @@ const MUST_EAT_LIST = [
   }
 ];
 
+const INTEREST_OPTIONS = [
+  { key: 'culture', types: ['sight'], label: { ru: '🏛️ История и культура', en: '🏛️ History & culture', uz: "🏛️ Tarix va madaniyat", zh: '🏛️ 历史与文化' } },
+  { key: 'food', types: ['restaurant', 'cafe', 'coffee', 'foodmall'], label: { ru: '🍲 Еда и кофе', en: '🍲 Food & coffee', uz: '🍲 Taom va qahva', zh: '🍲 美食与咖啡' } },
+  { key: 'shopping', types: ['market', 'mall', 'trc'], label: { ru: '🛍️ Шопинг', en: '🛍️ Shopping', uz: '🛍️ Xarid', zh: '🛍️ 购物' } },
+  { key: 'active', types: ['park', 'aquapark', 'zoo', 'gym'], label: { ru: '🌳 Активный отдых', en: '🌳 Active & outdoors', uz: "🌳 Faol dam olish", zh: '🌳 户外活动' } },
+  { key: 'relax', types: ['spa'], label: { ru: '💆 Спа и релакс', en: '💆 Spa & relax', uz: '💆 Spa va dam olish', zh: '💆 水疗放松' } },
+];
+
+const TIME_OPTIONS = [
+  { key: 'short', count: 3, label: { ru: '2–3 часа', en: '2–3 hours', uz: '2–3 soat', zh: '2–3小时' } },
+  { key: 'full', count: 5, label: { ru: 'Целый день', en: 'Full day', uz: "To'liq kun", zh: '一整天' } },
+  { key: 'long', count: 7, label: { ru: 'Несколько дней', en: 'Several days', uz: 'Bir necha kun', zh: '多天' } },
+];
+
 const categoryFilters = [
   { key: 'all', label: { ru: 'Всё', en: 'All', uz: 'Barchasi', zh: '全部' } },
   { key: 'favorites', label: { ru: '❤️ Избранное', en: '❤️ Favorites', uz: '❤️ Tanlanganlar', zh: '❤️ 收藏' } },
@@ -979,7 +993,10 @@ export default function App() {
   const [activeRoute, setActiveRoute] = useState(routeCards[0].id);
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [plannerMode, setPlannerMode] = useState('full');
+  const [quizStep, setQuizStep] = useState('form');
+  const [quizInterests, setQuizInterests] = useState([]);
+  const [quizTime, setQuizTime] = useState('full');
+  const [quizSeed, setQuizSeed] = useState(0);
 
   const [usdRate, setUsdRate] = useState(null);
   const [eurRate, setEurRate] = useState(null);
@@ -1245,34 +1262,27 @@ export default function App() {
       : result.toFixed(2).toLocaleString('en-US');
   }, [calcAmount, calcFrom, calcTo, usdRate, eurRate, rubRate, cnyRate]);
 
-  const plannerItems = useMemo(() => {
-    const modeMap = {
-      quick: [
-        placesData.find((place) => place.id === 'tower-1'),
-        placesData.find((place) => place.id === 'rest-1'),
-        placesData.find((place) => place.id === 'market-1'),
-      ].filter(Boolean),
-      full: [
-        placesData.find((place) => place.id === 'tower-1'),
-        placesData.find((place) => place.id === 'sight-2'),
-        placesData.find((place) => place.id === 'mall-1'),
-        placesData.find((place) => place.id === 'rest-1'),
-        placesData.find((place) => place.id === 'market-1'),
-      ].filter(Boolean),
-      weekend: [
-        placesData.find((place) => place.id === 'tower-1'),
-        placesData.find((place) => place.id === 'magic-1'),
-        placesData.find((place) => place.id === 'mall-1'),
-        placesData.find((place) => place.id === 'rest-1'),
-        placesData.find((place) => place.id === 'shop-1'),
-      ].filter(Boolean),
-    };
+  const toggleInterest = (key) => {
+    setQuizInterests((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
+  };
 
-    return (modeMap[plannerMode] || modeMap.full).map((place, index) => ({
+  const regenerateQuiz = () => setQuizSeed((s) => s + 1);
+
+  const quizResults = useMemo(() => {
+    const selectedTypes = quizInterests.length > 0
+      ? INTEREST_OPTIONS.filter((o) => quizInterests.includes(o.key)).flatMap((o) => o.types)
+      : INTEREST_OPTIONS.flatMap((o) => o.types);
+
+    const pool = placesData.filter((place) => selectedTypes.includes(place.type));
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const timeConfig = TIME_OPTIONS.find((t) => t.key === quizTime) || TIME_OPTIONS[1];
+
+    return shuffled.slice(0, timeConfig.count).map((place, index) => ({
       ...place,
       step: index + 1,
     }));
-  }, [plannerMode]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [quizInterests, quizTime, quizSeed]);
 
   const routeItems = selectedRoute?.items || [];
 
@@ -1364,51 +1374,92 @@ export default function App() {
       <main>
         <section className="section container">
           <div className="section-title">
-            <p className="eyebrow">📱 SMART TRAVEL MODE</p>
+            <p className="eyebrow">🧭 SMART TRAVEL QUIZ</p>
             <h2>{t('planner.title')}</h2>
             <p style={{ color: '#aaa', marginTop: '4px' }}>{t('planner.subtitle')}</p>
           </div>
 
           <div className="detail-panel" style={{ background: 'rgba(15, 23, 42, 0.9)', border: '1px solid rgba(255,255,255,0.14)', padding: '20px', borderRadius: '20px' }}>
-            <div style={{ marginBottom: '16px' }}>
-              <div style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '8px' }}>{t('planner.vibeLabel')}</div>
-              <div className="category-buttons" style={{ justifyContent: 'flex-start' }}>
-                {Object.entries(t('planner.modes')).map(([key, label]) => (
-                  <button key={key}
-                    type="button"
-                    className={`category-btn ${plannerMode === key ? 'active' : ''}`}
-                    onClick={() => setPlannerMode(key)}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div style={{ marginBottom: '16px', background: 'rgba(251, 191, 36, 0.12)', padding: '12px 14px', borderRadius: '12px', color: '#fbbf24', fontSize: '0.95rem' }}>
-              <strong>{t('planner.resultTitle')}</strong> — {t('planner.resultDesc')}
-            </div>
-
-            <div className="card-grid">
-              {plannerItems.map((place) => (
-                <div key={place.id} className="detail-panel" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', padding: '16px', borderRadius: '16px' }}>
-                  <div style={{ color: '#fbbf24', fontWeight: 'bold', marginBottom: '8px' }}>{t('planner.stepLabel')} {place.step}</div>
-                  <h3 style={{ color: '#fff', margin: '0 0 8px', fontSize: '1.1rem' }}>{getPlaceField(place, 'name', language)}</h3>
-                  <p style={{ color: '#cbd5e1', margin: '0 0 10px', fontSize: '0.95rem' }}>{getPlaceField(place, 'description', language)}</p>
-                  <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary small" style={{ textDecoration: 'none', textAlign: 'center' }}>
-                      📍 {t('planner.maps')}
-                    </a>
-                    <a href={yandexTaxiUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-primary small" style={{ textDecoration: 'none', textAlign: 'center', background: '#f59e0b', color: '#000', fontWeight: 'bold', border: 'none' }}>
-                      🚖 {t('planner.taxi')}
-                    </a>
-                    <a href={`tel:${place.phone || '1173'}`} className="btn btn-secondary small" style={{ textDecoration: 'none', textAlign: 'center' }}>
-                      📞 {t('planner.call')}
-                    </a>
+            {quizStep === 'form' ? (
+              <>
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '8px' }}>
+                    {language === 'en' ? 'What interests you? (pick any, or leave blank for everything)' : language === 'uz' ? 'Sizni nima qiziqtiradi? (istalganini tanlang yoki bo\'sh qoldiring)' : language === 'zh' ? '您对什么感兴趣？(可多选，留空则包含全部)' : 'Что вам интереснее? (можно несколько, можно ничего не выбирать)'}
+                  </div>
+                  <div className="category-buttons" style={{ justifyContent: 'flex-start' }}>
+                    {INTEREST_OPTIONS.map((option) => (
+                      <button key={option.key}
+                        type="button"
+                        className={`category-btn ${quizInterests.includes(option.key) ? 'active' : ''}`}
+                        onClick={() => toggleInterest(option.key)}
+                      >
+                        {getTranslatedText(option.label, language)}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+
+                <div style={{ marginBottom: '20px' }}>
+                  <div style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '8px' }}>
+                    {language === 'en' ? 'How much time do you have?' : language === 'uz' ? 'Qancha vaqtingiz bor?' : language === 'zh' ? '您有多少时间？' : 'Сколько у вас времени?'}
+                  </div>
+                  <div className="category-buttons" style={{ justifyContent: 'flex-start' }}>
+                    {TIME_OPTIONS.map((option) => (
+                      <button key={option.key}
+                        type="button"
+                        className={`category-btn ${quizTime === option.key ? 'active' : ''}`}
+                        onClick={() => setQuizTime(option.key)}
+                      >
+                        {getTranslatedText(option.label, language)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <button type="button" className="btn btn-primary" onClick={() => setQuizStep('results')}>
+                  🧭 {language === 'en' ? 'Find places for me' : language === 'uz' ? 'Menga joy tanlang' : language === 'zh' ? '为我推荐地点' : 'Подобрать места'}
+                </button>
+              </>
+            ) : (
+              <>
+                <div style={{ marginBottom: '16px', background: 'rgba(251, 191, 36, 0.12)', padding: '12px 14px', borderRadius: '12px', color: '#fbbf24', fontSize: '0.95rem' }}>
+                  {language === 'en' ? 'Your personalized picks — tap the dice to try different ones.' : language === 'uz' ? 'Siz uchun tanlangan joylar — boshqasini ko\'rish uchun kubikni bosing.' : language === 'zh' ? '为您精选的地点 — 点击骰子换一批。' : 'Ваша подборка — нажмите на кубик, чтобы получить другие варианты.'}
+                </div>
+
+                {quizResults.length === 0 ? (
+                  <p style={{ color: '#abc0d7' }}>
+                    {language === 'en' ? 'Nothing matched, try different interests.' : language === 'uz' ? 'Hech narsa topilmadi, boshqa qiziqishlarni tanlang.' : language === 'zh' ? '未找到匹配项，请换个兴趣试试。' : 'Ничего не нашлось, попробуйте другие интересы.'}
+                  </p>
+                ) : (
+                  <div className="card-grid">
+                    {quizResults.map((place) => (
+                      <div key={place.id} className="detail-panel" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.12)', padding: '16px', borderRadius: '16px' }}>
+                        <div style={{ color: '#fbbf24', fontWeight: 'bold', marginBottom: '8px' }}>{t('planner.stepLabel')} {place.step}</div>
+                        <h3 style={{ color: '#fff', margin: '0 0 8px', fontSize: '1.1rem' }}>{getPlaceField(place, 'name', language)}</h3>
+                        <p style={{ color: '#cbd5e1', margin: '0 0 10px', fontSize: '0.95rem' }}>{getPlaceField(place, 'description', language)}</p>
+                        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                          <a href={mapsUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-secondary small" style={{ textDecoration: 'none', textAlign: 'center' }}>
+                            📍 {t('planner.maps')}
+                          </a>
+                          <a href={yandexTaxiUrl(place, language)} target="_blank" rel="noopener noreferrer" className="btn btn-primary small" style={{ textDecoration: 'none', textAlign: 'center', background: '#f59e0b', color: '#000', fontWeight: 'bold', border: 'none' }}>
+                            🚖 {t('planner.taxi')}
+                          </a>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div style={{ display: 'flex', gap: '10px', marginTop: '18px', flexWrap: 'wrap' }}>
+                  <button type="button" className="btn btn-primary" onClick={regenerateQuiz}>
+                    🎲 {language === 'en' ? 'Show different picks' : language === 'uz' ? 'Boshqasini ko\'rsat' : language === 'zh' ? '换一批' : 'Другие варианты'}
+                  </button>
+                  <button type="button" className="btn btn-secondary" onClick={() => setQuizStep('form')}>
+                    ✏️ {language === 'en' ? 'Change answers' : language === 'uz' ? 'Javoblarni o\'zgartirish' : language === 'zh' ? '修改回答' : 'Изменить ответы'}
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </section>
 
