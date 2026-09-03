@@ -941,6 +941,21 @@ function yandexTaxiUrl(place, language) {
 }
 
 // НАДЕЖНАЯ ОЗВУЧКА ЧЕРЕЗ GOOGLE TTS (Без искажения букв)
+// WMO weather code → эмодзи (см. таблицу open-meteo.com/en/docs)
+function weatherIcon(code) {
+  if (code === 0) return '☀️';
+  if (code === 1 || code === 2) return '🌤️';
+  if (code === 3) return '☁️';
+  if (code === 45 || code === 48) return '🌫️';
+  if (code >= 51 && code <= 57) return '🌦️';
+  if (code >= 61 && code <= 67) return '🌧️';
+  if (code >= 71 && code <= 77) return '❄️';
+  if (code >= 80 && code <= 82) return '🌦️';
+  if (code >= 85 && code <= 86) return '🌨️';
+  if (code >= 95) return '⛈️';
+  return '🌤️';
+}
+
 function speakText(text) {
   try {
     const encodedText = encodeURIComponent(text);
@@ -1190,13 +1205,14 @@ export default function App() {
 
   const fetchWeather = async () => {
     try {
-      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current_weather=true&hourly=relativehumidity_2m');
+      const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=41.2995&longitude=69.2401&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code&timezone=Asia%2FTashkent');
       const data = await res.json();
-      if (data?.current_weather) {
+      if (data?.current) {
         setWeatherData({
-          temp: Math.round(data.current_weather.temperature),
-          wind: data.current_weather.windspeed,
-          humidity: data.hourly?.relativehumidity_2m?.[0] || '45'
+          temp: Math.round(data.current.temperature_2m),
+          wind: Math.round(data.current.wind_speed_10m),
+          humidity: Math.round(data.current.relative_humidity_2m),
+          code: data.current.weather_code,
         });
       }
     } catch (e) {
@@ -1347,7 +1363,7 @@ export default function App() {
             <div style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255,255,255,0.15)', padding: '16px', borderRadius: '16px', marginBottom: '20px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h4 style={{ margin: 0, color: '#fbbf24', fontSize: '1rem' }}>{t('weather.title')}</h4>
-                <span style={{ fontSize: '1.4rem' }}>🌤️</span>
+                <span style={{ fontSize: '1.4rem' }}>{weatherData ? weatherIcon(weatherData.code) : '🌤️'}</span>
               </div>
               {weatherData ? (
                 <div style={{ display: 'flex', gap: '16px', marginTop: '10px', fontSize: '0.9rem', color: '#e2e8f0' }}>
